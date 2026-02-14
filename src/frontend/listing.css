@@ -567,6 +567,15 @@ a.btn {
     color: #3c4142;
 }
 
+.price-range {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.price-range .filter-input {
+    flex: 1;
+}
+
 .filters-form .btn {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;

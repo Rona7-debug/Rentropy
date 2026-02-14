@@ -164,29 +164,9 @@
             const form = document.querySelector('.checkout-form');
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                // Add cart items to rentals
-                const cart = JSON.parse(localStorage.getItem('cart')) || [];
-                const rentals = JSON.parse(localStorage.getItem('rentals')) || [];
-                const now = new Date();
-                const endDate = new Date(now);
-                endDate.setDate(now.getDate() + 3);
-                const dateOptions = { month: 'short', day: 'numeric', year: 'numeric' };
-                const dates = `${now.toLocaleDateString('en-US', dateOptions)} – ${endDate.toLocaleDateString('en-US', dateOptions)}`;
-                cart.forEach(item => {
-                    for (let i = 0; i < item.quantity; i++) {
-                        rentals.push({
-                            name: item.name,
-                            image: item.image,
-                            dates: dates,
-                            provider: 'RENTROPY',
-                            status: 'Active'
-                        });
-                    }
-                });
-                localStorage.setItem('rentals', JSON.stringify(rentals));
                 alert('Order confirmed successfully!');
                 localStorage.removeItem('cart'); // Clear the cart
-                window.location.href = 'dashboard.html#rentals'; // Redirect to dashboard rentals
+                window.location.href = 'listing.html'; // Redirect to listing
             });
         };
     </script>
