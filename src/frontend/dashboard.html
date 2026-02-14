@@ -106,7 +106,7 @@
                         </div>
                     </section>
 
-                    <!-- Saved Items Section: Stores reserved/favorited items for future rental consideration -->
+                    <!-- Saved Items Section: Stores reserved/favorited items for future rental consideration. Dynamically loaded from localStorage. -->
                     <section id="saved" class="dashboard-section">
                         <h2 class="dashboard-section-title">Saved items</h2>
                         <div class="listings-grid listings-grid--sm">
@@ -190,6 +190,37 @@
             } else {
                 showSection('profile');
             }
+        });
+
+        // Load saved items
+        function loadSavedItems() {
+            const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+            const savedContainer = document.querySelector('#saved .listings-grid');
+            savedContainer.innerHTML = '';
+            if (savedItems.length === 0) {
+                savedContainer.innerHTML = '<p>No saved items yet.</p>';
+                return;
+            }
+            savedItems.forEach(item => {
+                const card = document.createElement('a');
+                card.href = `product.html?id=${item.id}`;
+                card.className = 'listing-card';
+                card.innerHTML = `
+                    <div class="listing-card-image">
+                        <img src="${item.image}" alt="${item.name}" width="400" height="260">
+                    </div>
+                    <div class="listing-card-body">
+                        <h3 class="listing-card-title">${item.name}</h3>
+                        <p class="listing-card-price">Rent per day <strong>${item.price}</strong></p>
+                    </div>
+                `;
+                savedContainer.appendChild(card);
+            });
+        }
+
+        // Load saved items on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedItems();
         });
     </script>
 </body>
