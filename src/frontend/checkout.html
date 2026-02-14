@@ -63,22 +63,40 @@
                             </div>
                         </section>
 
-                        <section class="checkout-block">
+                        <section class="checkout-block checkout-block--payment">
                             <h2 class="checkout-block-title">Payment</h2>
-                            <p class="checkout-placeholder">Payment integration placeholder. Connect Stripe, PayPal, or your preferred provider here.</p>
-                            <div class="payment-placeholder">
+                            <div class="payment-methods">
+                                <label class="payment-option">
+                                    <input type="radio" name="payment_method" value="gcash" checked>
+                                    <span class="payment-option-label">GCash</span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment_method" value="paymaya">
+                                    <span class="payment-option-label">PayMaya</span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment_method" value="gotyme">
+                                    <span class="payment-option-label">GoTyme</span>
+                                </label>
+                                <label class="payment-option">
+                                    <input type="radio" name="payment_method" value="card">
+                                    <span class="payment-option-label">Credit card</span>
+                                </label>
+                            </div>
+                            <div class="payment-details payment-details--card">
+                                <p class="payment-details-hint">Enter your card details below.</p>
                                 <div class="form-row">
                                     <label class="form-label">Card number</label>
-                                    <input type="text" class="form-input" placeholder="4242 4242 4242 4242" disabled>
+                                    <input type="text" name="card_number" class="form-input" placeholder="4242 4242 4242 4242" maxlength="19">
                                 </div>
                                 <div class="form-row form-row--2">
                                     <div>
                                         <label class="form-label">Expiry</label>
-                                        <input type="text" class="form-input" placeholder="MM/YY" disabled>
+                                        <input type="text" name="card_expiry" class="form-input" placeholder="MM/YY" maxlength="5">
                                     </div>
                                     <div>
                                         <label class="form-label">CVC</label>
-                                        <input type="text" class="form-input" placeholder="123" disabled>
+                                        <input type="text" name="card_cvc" class="form-input" placeholder="123" maxlength="4">
                                     </div>
                                 </div>
                             </div>
