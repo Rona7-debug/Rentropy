@@ -28,6 +28,10 @@
     --shadow-hover: var(--neo-raised-hover);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -75,7 +79,7 @@ img {
     transition: opacity 0.2s ease;
 }
 
-body:not(.hero-page) .header {
+body:not(.hero-page):not(.no-nav-bg) .header {
     background: var(--neo-bg);
     box-shadow: var(--neo-raised);
 }
@@ -452,17 +456,19 @@ a.btn {
     gap: 1.5rem;
 }
 
+/* Neomorphism cards: Most Popular & Popular Categories */
 .listing-card {
     background: var(--neo-bg);
     border: none;
-    border-radius: 15px;
+    border-radius: var(--neo-radius-lg);
     overflow: hidden;
-    border: 1px solid #a3b1c6;
+    box-shadow: var(--neo-raised);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .listing-card:hover {
-    transform: scale(1.02);
-    transition: transform 0.3s ease;
+    transform: translateY(-2px);
+    box-shadow: var(--neo-raised-hover);
 }
 
 .listing-card-image {
@@ -470,6 +476,7 @@ a.btn {
     background: var(--neo-bg-alt);
     overflow: hidden;
     box-shadow: var(--neo-pressed);
+    border-radius: var(--neo-radius) var(--neo-radius) 0 0;
 }
 
 .listing-card-image img {
@@ -480,6 +487,7 @@ a.btn {
 
 .listing-card-body {
     padding: 1.25rem;
+    background: var(--neo-bg);
 }
 
 .listing-card-title {

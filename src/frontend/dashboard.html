@@ -121,6 +121,20 @@
                 </div>
             </div>
         </div>
+
+        <!-- Rental details modal -->
+        <div id="rental-details-modal" class="rental-modal" aria-hidden="true" role="dialog" aria-labelledby="rental-modal-title">
+            <div class="rental-modal-backdrop"></div>
+            <div class="rental-modal-content">
+                <div class="rental-modal-header">
+                    <h2 id="rental-modal-title" class="rental-modal-title">Rental details</h2>
+                    <button type="button" class="rental-modal-close" aria-label="Close">&times;</button>
+                </div>
+                <div class="rental-modal-body">
+                    <div id="rental-modal-details"></div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <footer class="footer">
@@ -206,16 +220,27 @@
             });
         }
 
-        // Load rentals
+        // Rentals appear in History only after the rental end date has passed
+        function isRentalEnded(rental) {
+            const endDate = rental.end_date;
+            if (!endDate) return false; // no end_date = legacy, keep in My Rentals
+            const end = new Date(endDate);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            end.setHours(0, 0, 0, 0);
+            return end < today;
+        }
+
         function loadRentals() {
-            const rentals = JSON.parse(localStorage.getItem('rentals')) || [];
+            const allRentals = JSON.parse(localStorage.getItem('rentals')) || [];
+            const activeRentals = allRentals.filter(r => !isRentalEnded(r));
             const rentalsContainer = document.querySelector('#rentals .dashboard-cards');
             rentalsContainer.innerHTML = '';
-            if (rentals.length === 0) {
-                rentalsContainer.innerHTML = '<p>No rentals yet.</p>';
+            if (activeRentals.length === 0) {
+                rentalsContainer.innerHTML = '<p>No active rentals.</p>';
                 return;
             }
-            rentals.forEach((rental, index) => {
+            activeRentals.forEach((rental) => {
                 const article = document.createElement('article');
                 article.className = 'dashboard-rental-card';
                 article.innerHTML = `
@@ -225,43 +250,33 @@
                     <div class="dashboard-rental-info">
                         <h3 class="dashboard-rental-title">${rental.name}</h3>
                         <p class="dashboard-rental-meta">${rental.dates} · ${rental.provider}</p>
-                        <span class="badge ${rental.status === 'Active' ? 'badge--active' : 'badge--done'}">${rental.status}</span>
+                        <span class="badge badge--active">Active</span>
                     </div>
                     <div>
-                        <a href="#" class="btn btn-signup btn-sm">View details</a>
-                        <button class="btn btn-primary btn-sm mark-completed" data-index="${index}">Item received</button>
+                        <button type="button" class="btn btn-signup btn-sm btn-view-details">View details</button>
                     </div>
                 `;
                 rentalsContainer.appendChild(article);
-            });
-
-            // Add event listeners for mark completed
-            document.querySelectorAll('.mark-completed').forEach(btn => {
-                btn.addEventListener('click', function() {
-                    const index = this.getAttribute('data-index');
-                    const rentals = JSON.parse(localStorage.getItem('rentals')) || [];
-                    const completedRental = rentals.splice(index, 1)[0];
-                    completedRental.status = 'Completed';
-                    const history = JSON.parse(localStorage.getItem('history')) || [];
-                    history.push(completedRental);
-                    localStorage.setItem('rentals', JSON.stringify(rentals));
-                    localStorage.setItem('history', JSON.stringify(history));
-                    loadRentals();
-                    loadHistory();
+                const btn = article.querySelector('.btn-view-details');
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showRentalDetails(rental);
                 });
             });
         }
 
-        // Load history
         function loadHistory() {
-            const history = JSON.parse(localStorage.getItem('history')) || [];
+            const allRentals = JSON.parse(localStorage.getItem('rentals')) || [];
+            const legacyHistory = JSON.parse(localStorage.getItem('history')) || [];
+            const endedRentals = allRentals.filter(isRentalEnded);
+            const historyItems = [...endedRentals, ...legacyHistory];
             const historyContainer = document.querySelector('#history .dashboard-cards');
             historyContainer.innerHTML = '';
-            if (history.length === 0) {
+            if (historyItems.length === 0) {
                 historyContainer.innerHTML = '<p>No past transactions yet.</p>';
                 return;
             }
-            history.forEach(transaction => {
+            historyItems.forEach((transaction) => {
                 const article = document.createElement('article');
                 article.className = 'dashboard-rental-card';
                 article.innerHTML = `
@@ -273,11 +288,66 @@
                         <p class="dashboard-rental-meta">${transaction.dates} · ${transaction.provider}</p>
                         <span class="badge badge--done">Completed</span>
                     </div>
-                    <a href="#" class="btn btn-signup btn-sm">View details</a>
+                    <button type="button" class="btn btn-signup btn-sm btn-view-details">View details</button>
                 `;
                 historyContainer.appendChild(article);
+                const btn = article.querySelector('.btn-view-details');
+                btn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    showRentalDetails(transaction);
+                });
             });
         }
+
+        const paymentMethodLabels = { gcash: 'GCash', paymaya: 'PayMaya', gotyme: 'GoTyme', card: 'Credit card' };
+
+        function formatPrice(amount) {
+            return '₱' + Number(amount).toLocaleString('en-PH');
+        }
+
+        function showRentalDetails(rental) {
+            const modal = document.getElementById('rental-details-modal');
+            const detailsEl = document.getElementById('rental-modal-details');
+            if (!modal || !detailsEl) return;
+            const paymentLabel = paymentMethodLabels[rental.payment_method] || rental.payment_method || '—';
+            const amountDisplay = rental.amount_paid != null ? formatPrice(rental.amount_paid) : '—';
+            detailsEl.innerHTML = `
+                <div class="rental-detail-block">
+                    <h3 class="rental-detail-heading">Rental</h3>
+                    <div class="rental-detail-product">
+                        <img src="${rental.image}" alt="${rental.name}" class="rental-detail-image" width="160" height="105">
+                        <div class="rental-detail-info">
+                            <p class="rental-detail-name">${rental.name}</p>
+                            <p class="rental-detail-dates"><strong>Period:</strong> ${rental.dates || '—'}</p>
+                            <p class="rental-detail-provider"><strong>Provider:</strong> ${rental.provider || 'RENTROPY'}</p>
+                            <span class="badge ${rental.status === 'Active' ? 'badge--active' : 'badge--done'}">${rental.status || '—'}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="rental-detail-block">
+                    <h3 class="rental-detail-heading">Payment</h3>
+                    <p class="rental-detail-payment"><strong>Method:</strong> ${paymentLabel}</p>
+                    <p class="rental-detail-payment"><strong>Amount paid:</strong> <span class="rental-detail-amount">${amountDisplay}</span></p>
+                </div>
+            `;
+            modal.classList.add('rental-modal--open');
+            modal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeRentalModal() {
+            const modal = document.getElementById('rental-details-modal');
+            if (!modal) return;
+            modal.classList.remove('rental-modal--open');
+            modal.setAttribute('aria-hidden', 'true');
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const modal = document.getElementById('rental-details-modal');
+            if (modal) {
+                modal.querySelector('.rental-modal-close').addEventListener('click', closeRentalModal);
+                modal.querySelector('.rental-modal-backdrop').addEventListener('click', closeRentalModal);
+            }
+        });
 
         // Load saved items on page load
         document.addEventListener('DOMContentLoaded', function() {

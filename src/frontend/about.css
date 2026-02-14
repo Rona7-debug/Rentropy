@@ -22,6 +22,10 @@
     --shadow-hover: var(--neo-raised-hover);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;

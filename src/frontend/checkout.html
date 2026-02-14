@@ -110,17 +110,10 @@
                     </div>
 
                     <aside class="checkout-order">
-                        <h2 class="checkout-order-title">Order summary</h2>
-                        <ul class="checkout-order-items">
-                        </ul>
-                        <dl class="checkout-order-totals">
-                            <dt>Subtotal</dt>
-                            <dd>₱0</dd>
-                            <dt>Service fee</dt>
-                            <dd>₱0</dd>
-                            <dt class="checkout-order-total">Total</dt>
-                            <dd class="checkout-order-total">₱0</dd>
-                        </dl>
+                        <h2 class="cart-summary-title">Order summary</h2>
+                        <div class="cart-summary-rental" id="checkout-summary-rental"></div>
+                        <div class="cart-summary-items" id="checkout-summary-items"></div>
+                        <dl class="cart-summary-totals" id="checkout-summary-totals"></dl>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Confirm order</button>
                     </aside>
                 </div>
@@ -129,34 +122,90 @@
     </main>
 
     <script>
+        function formatPrice(amount) {
+            return '₱' + Number(amount).toLocaleString('en-PH');
+        }
+
+        function formatDate(isoDate) {
+            if (!isoDate) return '';
+            const d = new Date(isoDate);
+            return d.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
+
         function loadOrderSummary() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const orderItems = document.querySelector('.checkout-order-items');
-            let total = 0;
+            const summaryRentalEl = document.getElementById('checkout-summary-rental');
+            const summaryItemsEl = document.getElementById('checkout-summary-items');
+            const summaryTotalsEl = document.getElementById('checkout-summary-totals');
 
-            orderItems.innerHTML = '';
+            if (summaryRentalEl) summaryRentalEl.innerHTML = '';
+            if (summaryItemsEl) summaryItemsEl.innerHTML = '';
+            if (summaryTotalsEl) summaryTotalsEl.innerHTML = '';
+
+            if (cart.length === 0) {
+                if (summaryTotalsEl) {
+                    summaryTotalsEl.innerHTML = `
+                        <div class="cart-summary-row cart-summary-grand-total">
+                            <dt>Total</dt>
+                            <dd>${formatPrice(0)}</dd>
+                        </div>
+                    `;
+                }
+                return;
+            }
+
+            let subtotal = 0;
+            let firstStart = null, firstEnd = null;
 
             cart.forEach((item) => {
-                // Ensure correct price
-                item.priceNum = parseInt(item.price.toString().replace(/[₱$,]/g, ''));
-                total += item.priceNum * item.quantity;
+                const days = item.rental_days != null ? item.rental_days : 1;
+                const pricePerDay = item.pricePerDay != null ? item.pricePerDay : parseInt(String(item.price || item.priceNum || '0').replace(/[₱$,]/g, ''), 10);
+                const qty = item.quantity || 1;
+                const itemTotal = pricePerDay * days * qty;
+                subtotal += itemTotal;
+                if (item.start_date) firstStart = firstStart || item.start_date;
+                if (item.end_date) firstEnd = firstEnd || item.end_date;
 
-                // Add to order summary
-                for (let i = 0; i < item.quantity; i++) {
-                    const li = document.createElement('li');
-                    li.innerHTML = `${item.name} <strong>₱${item.priceNum}</strong>`;
-                    orderItems.appendChild(li);
+                if (summaryItemsEl) {
+                    const row = document.createElement('div');
+                    row.className = 'cart-summary-item-row';
+                    row.innerHTML = `
+                        <span class="cart-summary-item-name">${item.name}${qty > 1 ? ' × ' + qty : ''}</span>
+                        <span class="cart-summary-item-value">${formatPrice(pricePerDay)}/day × ${days}d = ${formatPrice(itemTotal)}</span>
+                    `;
+                    summaryItemsEl.appendChild(row);
                 }
             });
 
-            const serviceFee = Math.round(total * 0.1); // 10% service fee
-            const finalTotal = total + serviceFee;
+            if (summaryRentalEl && (firstStart || firstEnd)) {
+                summaryRentalEl.innerHTML = `
+                    <div class="cart-summary-rental-block">
+                        <span class="cart-summary-rental-label">Rental period</span>
+                        <span class="cart-summary-rental-value">${formatDate(firstStart)} – ${formatDate(firstEnd)}</span>
+                        <span class="cart-summary-rental-days">${cart.reduce((acc, i) => acc + (i.rental_days || 1) * (i.quantity || 1), 0)} day total</span>
+                    </div>
+                `;
+            }
 
-            // Update totals
-            const totals = document.querySelector('.checkout-order-totals');
-            totals.querySelector('dd:nth-child(2)').textContent = `₱${total}`; // Subtotal
-            totals.querySelector('dd:nth-child(4)').textContent = `₱${serviceFee}`; // Service fee
-            totals.querySelector('dd:nth-child(6)').textContent = `₱${finalTotal}`; // Total
+            const serviceFee = Math.round(subtotal * 0.1);
+            const finalTotal = subtotal + serviceFee;
+
+            if (summaryTotalsEl) {
+                summaryTotalsEl.innerHTML = `
+                    <div class="cart-summary-row cart-summary-subtotal">
+                        <dt>Subtotal</dt>
+                        <dd>${formatPrice(subtotal)}</dd>
+                    </div>
+                    <div class="cart-summary-row cart-summary-fee">
+                        <dt>Service fee (10%)</dt>
+                        <dd>${formatPrice(serviceFee)}</dd>
+                    </div>
+                    <div class="cart-summary-row cart-summary-grand-total">
+                        <dt>Total</dt>
+                        <dd>${formatPrice(finalTotal)}</dd>
+                    </div>
+                `;
+            }
         }
 
         window.onload = function() {
@@ -164,22 +213,30 @@
             const form = document.querySelector('.checkout-form');
             form.addEventListener('submit', function(e) {
                 e.preventDefault();
-                // Add cart items to rentals
                 const cart = JSON.parse(localStorage.getItem('cart')) || [];
                 const rentals = JSON.parse(localStorage.getItem('rentals')) || [];
-                const now = new Date();
-                const endDate = new Date(now);
-                endDate.setDate(now.getDate() + 3);
+                const paymentMethod = (form.querySelector('input[name="payment_method"]:checked') || {}).value || 'gcash';
                 const dateOptions = { month: 'short', day: 'numeric', year: 'numeric' };
-                const dates = `${now.toLocaleDateString('en-US', dateOptions)} – ${endDate.toLocaleDateString('en-US', dateOptions)}`;
                 cart.forEach(item => {
-                    for (let i = 0; i < item.quantity; i++) {
+                    const startDate = item.start_date || new Date().toISOString().slice(0, 10);
+                    const endDate = item.end_date || item.start_date || new Date().toISOString().slice(0, 10);
+                    const start = new Date(startDate);
+                    const end = new Date(endDate);
+                    const datesStr = `${start.toLocaleDateString('en-US', dateOptions)} – ${end.toLocaleDateString('en-US', dateOptions)}`;
+                    const days = item.rental_days != null ? item.rental_days : Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1);
+                    const pricePerDay = item.pricePerDay != null ? item.pricePerDay : parseInt(String(item.price || item.priceNum || '0').replace(/[₱$,]/g, ''), 10);
+                    const amountPaid = pricePerDay * days;
+                    for (let i = 0; i < (item.quantity || 1); i++) {
                         rentals.push({
                             name: item.name,
                             image: item.image,
-                            dates: dates,
+                            dates: datesStr,
+                            start_date: startDate,
+                            end_date: endDate,
                             provider: 'RENTROPY',
-                            status: 'Active'
+                            status: 'Active',
+                            payment_method: paymentMethod,
+                            amount_paid: amountPaid
                         });
                     }
                 });
