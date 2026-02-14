@@ -143,7 +143,8 @@ body:not(.hero-page):not(.no-nav-bg) .header {
     gap: 0.75rem;
 }
 
-.header-cart {
+.header-cart,
+.header-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,8 +155,15 @@ body:not(.hero-page):not(.no-nav-bg) .header {
     box-shadow: var(--neo-raised);
 }
 
+.header-icon .header-icon-chat,
+.header-icon .header-icon-dashboard {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
 .header-cart:hover,
-.header-cart--active {
+.header-cart--active,
+.header-icon:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease;
 }
@@ -1869,4 +1877,143 @@ a.btn {
         padding: 0.45rem 1rem;
         font-size: 0.85rem;
     }
+}
+
+/* Chat modal (product inquire) */
+.chat-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+.chat-modal--open {
+    opacity: 1;
+    visibility: visible;
+}
+.chat-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+.chat-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    background: var(--neo-bg);
+    border-radius: var(--neo-radius-lg);
+    box-shadow: var(--neo-raised);
+    overflow: hidden;
+}
+.chat-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--neo-shadow-dark);
+    flex-shrink: 0;
+}
+.chat-modal-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chat-modal-close {
+    background: var(--neo-bg);
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--neo-radius);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--dark-text);
+    box-shadow: var(--neo-pressed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    flex-shrink: 0;
+}
+.chat-modal-close:hover {
+    box-shadow: var(--neo-raised);
+}
+.chat-modal-body {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    flex: 1;
+}
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    min-height: 200px;
+    max-height: 320px;
+}
+.chat-msg {
+    max-width: 85%;
+    padding: 0.6rem 0.85rem;
+    border-radius: var(--neo-radius);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+.chat-msg--user {
+    align-self: flex-end;
+    background: var(--primary-blue);
+    color: var(--light-text);
+    box-shadow: var(--neo-pressed);
+}
+.chat-msg--seller {
+    align-self: flex-start;
+    background: var(--neo-bg-alt);
+    color: var(--dark-text);
+    box-shadow: var(--neo-pressed);
+}
+.chat-msg-time {
+    display: block;
+    font-size: 0.7rem;
+    opacity: 0.85;
+    margin-top: 0.25rem;
+}
+.chat-input-wrap {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--neo-shadow-dark);
+    background: var(--neo-bg);
+    flex-shrink: 0;
+}
+.chat-input {
+    flex: 1;
+    padding: 0.6rem 0.85rem;
+    border: none;
+    border-radius: var(--neo-radius);
+    font-size: 0.95rem;
+    background: var(--neo-bg-alt);
+    box-shadow: var(--neo-pressed);
+    color: var(--dark-text);
+}
+.chat-input:focus {
+    outline: none;
+    box-shadow: var(--neo-pressed), 0 0 0 2px var(--primary-blue);
+}
+.chat-send {
+    flex-shrink: 0;
+    padding: 0.6rem 1rem;
 }

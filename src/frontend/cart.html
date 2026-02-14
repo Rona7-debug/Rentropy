@@ -24,6 +24,7 @@
         <div class="header-actions">
             <a href="login.html" class="btn btn-signup">Sign Up</a>
             <a href="login.html" class="btn btn-login">Login</a>
+            <a href="chat.html" class="header-icon header-chat" aria-label="Messages" title="Messages"><span class="header-icon-chat" aria-hidden="true">💬</span></a>
             <a href="cart.html" class="header-cart header-cart--active" aria-label="Cart">🛒</a>
         </div>
     </header>
@@ -282,12 +283,13 @@
                 // Add profile icon beside cart
                 const cartLink = document.querySelector('.header-cart');
                 if (cartLink) {
-                    const profileLink = document.createElement('a');
-                    profileLink.href = 'dashboard.html';
-                    profileLink.className = 'header-profile';
-                    profileLink.setAttribute('aria-label', 'Profile');
-                    profileLink.textContent = '👤';
-                    cartLink.insertAdjacentElement('afterend', profileLink);
+                    const dashboardLink = document.createElement('a');
+                    dashboardLink.href = 'dashboard.html';
+                    dashboardLink.className = 'header-icon header-dashboard';
+                    dashboardLink.setAttribute('aria-label', 'Dashboard');
+                    dashboardLink.setAttribute('title', 'Dashboard');
+                    dashboardLink.innerHTML = '<span class="header-icon-dashboard" aria-hidden="true">▦</span>';
+                    cartLink.insertAdjacentElement('beforebegin', dashboardLink);
                 }
             }
         });
