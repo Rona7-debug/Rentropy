@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="checkout.css">
-    <title>Checkout – RENTROPY</title>
+    <title> Checkout – RENTROPY</title>
 </head>
 <body>
     <header class="header">
@@ -18,10 +20,9 @@
             <a href="index.html" class="nav-link">Home</a>
             <a href="listing.html" class="nav-link">Listings</a>
             <a href="about.html" class="nav-link">About Us</a>
-            <a href="about.html#how-it-works" class="nav-link">How It Works</a>
         </nav>
         <div class="header-actions">
-            <a href="dashboard.html" class="btn btn-signup">Dashboard</a>
+            <a href="dashboard.html" class="btn btn-signup">Dashboard</a> 
             <a href="login.html" class="btn btn-login">Logout</a>
             <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
         </div>
@@ -29,7 +30,9 @@
 
     <main class="page-main checkout-page">
         <div class="container">
+
             <h1 class="page-title">Checkout</h1>
+
             <nav class="breadcrumb checkout-steps">
                 <span class="step step--done">Cart</span>
                 <span aria-hidden="true">→</span>
@@ -121,17 +124,6 @@
             </form>
         </div>
     </main>
-
-    <footer class="footer">
-        <div class="container footer-inner">
-            <nav class="footer-nav">
-                <a href="about.html" class="footer-link">About Us</a>
-                <a href="about.html#contact" class="footer-link">Contact</a>
-                <a href="#terms" class="footer-link">Terms of Service</a>
-            </nav>
-            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
-        </div>
-    </footer>
 
     <script>
         function loadOrderSummary() {
