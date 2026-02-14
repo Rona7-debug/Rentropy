@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Cart – RENTROPY</title>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
+        </a>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About Us</a>
+            <a href="about.html#how-it-works" class="nav-link">How It Works</a>
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn btn-signup">Sign Up</a>
+            <a href="login.html" class="btn btn-login">Login</a>
+            <a href="cart.html" class="header-cart header-cart--active" aria-label="Cart">🛒</a>
+        </div>
+    </header>
+
+    <main class="page-main cart-page">
+        <div class="container">
+            <h1 class="page-title">Your cart</h1>
+
+            <div class="cart-layout">
+                <div class="cart-items">
+                    <article class="cart-item">
+                        <div class="cart-item-image">
+                            <img src="https://placehold.co/160x120/7d8ba8/ffffff?text=Tent" alt="Camping Tent" width="160" height="120">
+                        </div>
+                        <div class="cart-item-details">
+                            <h2 class="cart-item-title"><a href="product.html?id=1">4-Person Camping Tent</a></h2>
+                            <p class="cart-item-brand">Green Outdoors Co.</p>
+                            <div class="cart-item-duration">
+                                <label>Duration</label>
+                                <select class="duration-select duration-select--sm">
+                                    <option value="1">1 day</option>
+                                    <option value="3" selected>3 days</option>
+                                    <option value="7">1 week</option>
+                                    <option value="14">2 weeks</option>
+                                </select>
+                            </div>
+                            <p class="cart-item-price">$32</p>
+                        </div>
+                        <a href="#" class="cart-item-remove" aria-label="Remove">×</a>
+                    </article>
+
+                    <article class="cart-item">
+                        <div class="cart-item-image">
+                            <img src="https://placehold.co/160x120/7d8ba8/ffffff?text=Drill" alt="Power Drill" width="160" height="120">
+                        </div>
+                        <div class="cart-item-details">
+                            <h2 class="cart-item-title"><a href="product.html?id=3">Cordless Power Drill</a></h2>
+                            <p class="cart-item-brand">ToolShare Local</p>
+                            <div class="cart-item-duration">
+                                <label>Duration</label>
+                                <select class="duration-select duration-select--sm">
+                                    <option value="1" selected>1 day</option>
+                                    <option value="3">3 days</option>
+                                    <option value="7">1 week</option>
+                                </select>
+                            </div>
+                            <p class="cart-item-price">$8</p>
+                        </div>
+                        <a href="#" class="cart-item-remove" aria-label="Remove">×</a>
+                    </article>
+                </div>
+
+                <aside class="cart-summary">
+                    <h2 class="cart-summary-title">Summary</h2>
+                    <dl class="cart-summary-rows">
+                        <dt>Subtotal (2 items)</dt>
+                        <dd>$40</dd>
+                        <dt>Service fee</dt>
+                        <dd>$4</dd>
+                        <dt class="cart-summary-total">Total</dt>
+                        <dd class="cart-summary-total">$44</dd>
+                    </dl>
+                    <a href="checkout.html" class="btn btn-primary btn-lg btn-block">Proceed to checkout</a>
+                    <a href="listing.html" class="cart-continue">Continue shopping</a>
+                </aside>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <nav class="footer-nav">
+                <a href="about.html" class="footer-link">About Us</a>
+                <a href="about.html#contact" class="footer-link">Contact</a>
+                <a href="#terms" class="footer-link">Terms of Service</a>
+            </nav>
+            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

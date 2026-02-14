@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Brand Dashboard – RENTROPY</title>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
+        </a>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About Us</a>
+            <a href="about.html#how-it-works" class="nav-link">How It Works</a>
+        </nav>
+        <div class="header-actions">
+            <a href="brand-dashboard.html" class="nav-link nav-link--active">Brand dashboard</a>
+            <a href="dashboard.html" class="btn btn-signup">User account</a>
+            <a href="login.html" class="btn btn-login">Logout</a>
+        </div>
+    </header>
+
+    <main class="page-main brand-dashboard-page">
+        <div class="container">
+            <h1 class="page-title">Brand dashboard</h1>
+            <p class="page-subtitle">Green Outdoors Co.</p>
+
+            <div class="dashboard-layout">
+                <aside class="dashboard-sidebar brand-sidebar">
+                    <nav class="dashboard-nav">
+                        <a href="#products" class="dashboard-nav-link active">Products</a>
+                        <a href="#add-product" class="dashboard-nav-link">Add product</a>
+                        <a href="#analytics" class="dashboard-nav-link">Analytics</a>
+                        <a href="#featured" class="dashboard-nav-link">Featured upgrade</a>
+                    </nav>
+                </aside>
+
+                <div class="dashboard-content">
+                    <section id="products" class="dashboard-section">
+                        <h2 class="dashboard-section-title">My products</h2>
+                        <div class="dashboard-table-wrap">
+                            <table class="dashboard-table">
+                                <thead>
+                                    <tr>
+                                        <th>Product</th>
+                                        <th>Category</th>
+                                        <th>Price/day</th>
+                                        <th>Status</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>4-Person Camping Tent</strong></td>
+                                        <td>Outdoor</td>
+                                        <td>$12</td>
+                                        <td><span class="badge badge--active">Active</span></td>
+                                        <td><a href="#" class="link-sm">Edit</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>2-Person Backpacking Tent</strong></td>
+                                        <td>Outdoor</td>
+                                        <td>$8</td>
+                                        <td><span class="badge badge--active">Active</span></td>
+                                        <td><a href="#" class="link-sm">Edit</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+                    <section id="add-product" class="dashboard-section">
+                        <h2 class="dashboard-section-title">Add product</h2>
+                        <form class="profile-form add-product-form">
+                            <div class="form-row">
+                                <label class="form-label">Product name</label>
+                                <input type="text" class="form-input" placeholder="e.g. 4-Person Camping Tent">
+                            </div>
+                            <div class="form-row">
+                                <label class="form-label">Category</label>
+                                <select class="form-input">
+                                    <option value="">Select category</option>
+                                    <option value="outdoor">Outdoor Gear</option>
+                                    <option value="fashion">Fashion</option>
+                                    <option value="tools">Tools</option>
+                                    <option value="electronics">Electronics</option>
+                                </select>
+                            </div>
+                            <div class="form-row form-row--2">
+                                <div>
+                                    <label class="form-label">Price per day ($)</label>
+                                    <input type="number" class="form-input" placeholder="12" min="0" step="0.01">
+                                </div>
+                                <div>
+                                    <label class="form-label">Location</label>
+                                    <input type="text" class="form-input" placeholder="City or area">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <label class="form-label">Description</label>
+                                <textarea class="form-input form-textarea" rows="4" placeholder="Describe your product..."></textarea>
+                            </div>
+                            <div class="form-row">
+                                <label class="form-label">Images</label>
+                                <div class="upload-placeholder">
+                                    <p>Drag and drop or click to upload product images</p>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Add product</button>
+                        </form>
+                    </section>
+
+                    <section id="analytics" class="dashboard-section">
+                        <h2 class="dashboard-section-title">Analytics</h2>
+                        <div class="analytics-cards">
+                            <div class="analytics-card">
+                                <p class="analytics-label">Total rentals (30 days)</p>
+                                <p class="analytics-value">24</p>
+                            </div>
+                            <div class="analytics-card">
+                                <p class="analytics-label">Revenue (30 days)</p>
+                                <p class="analytics-value">$428</p>
+                            </div>
+                            <div class="analytics-card">
+                                <p class="analytics-label">Views</p>
+                                <p class="analytics-value">312</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="featured" class="dashboard-section">
+                        <h2 class="dashboard-section-title">Featured upgrade</h2>
+                        <div class="featured-upgrade-card">
+                            <p>Get more visibility. Featured listings appear on the homepage and in priority search results.</p>
+                            <p class="featured-price">From $9.99/week per listing</p>
+                            <button type="button" class="btn btn-primary">Upgrade to featured</button>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <nav class="footer-nav">
+                <a href="about.html" class="footer-link">About Us</a>
+                <a href="about.html#contact" class="footer-link">Contact</a>
+                <a href="#terms" class="footer-link">Terms of Service</a>
+            </nav>
+            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

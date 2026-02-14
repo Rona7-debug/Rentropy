@@ -5,10 +5,183 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    <title> Rentropy </title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>RENTROPY – Rent Anything, Anywhere</title>
 </head>
 <body>
-    
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
+        </a>
+        <nav class="nav">
+            <a href="index.html" class="nav-link nav-link--active">Home</a>
+            <a href="about.html" class="nav-link">About Us</a>
+            <a href="about.html#how-it-works" class="nav-link">How It Works</a>
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn btn-signup">Sign Up</a>
+            <a href="login.html" class="btn btn-login">Login</a>
+            <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="hero-title-accent">Rent</span> Anything, Anywhere
+                </h1>
+                <p class="hero-tagline">
+                    Why Buy When You Can Rent? Access High-Quality Gear, Tools, And Equipment From People In Your Community At A Fraction Of The Cost.
+                </p>
+                <form class="search-bar" action="listing.html" method="get" role="search">
+                    <input type="search" name="q" class="search-input" placeholder="Search" aria-label="Search">
+                    <button type="submit" class="search-btn" aria-label="Search">
+                        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="featured-section">
+            <div class="container">
+                <h2 class="section-title">Featured Products</h2>
+                <div class="listings-grid">
+                    <a href="product.html?id=1" class="listing-card">
+                        <div class="listing-card-image">
+                            <img src="https://placehold.co/400x260/7d8ba8/ffffff?text=Camping+Tent" alt="Camping Tent" width="400" height="260">
+                        </div>
+                        <div class="listing-card-body">
+                            <h3 class="listing-card-title">4-Person Camping Tent</h3>
+                            <p class="listing-card-price">Rent per day <strong>from $12</strong></p>
+                        </div>
+                    </a>
+                    <a href="product.html?id=2" class="listing-card">
+                        <div class="listing-card-image">
+                            <img src="https://placehold.co/400x260/7d8ba8/ffffff?text=Camera" alt="Camera" width="400" height="260">
+                        </div>
+                        <div class="listing-card-body">
+                            <h3 class="listing-card-title">DSLR Camera Kit</h3>
+                            <p class="listing-card-price">Rent per day <strong>from $25</strong></p>
+                        </div>
+                    </a>
+                    <a href="product.html?id=3" class="listing-card">
+                        <div class="listing-card-image">
+                            <img src="https://placehold.co/400x260/7d8ba8/ffffff?text=Power+Drill" alt="Power Drill" width="400" height="260">
+                        </div>
+                        <div class="listing-card-body">
+                            <h3 class="listing-card-title">Cordless Power Drill</h3>
+                            <p class="listing-card-price">Rent per day <strong>from $8</strong></p>
+                        </div>
+                    </a>
+                    <a href="product.html?id=4" class="listing-card">
+                        <div class="listing-card-image">
+                            <img src="https://placehold.co/400x260/7d8ba8/ffffff?text=Designer+Bag" alt="Designer Bag" width="400" height="260">
+                        </div>
+                        <div class="listing-card-body">
+                            <h3 class="listing-card-title">Designer Handbag</h3>
+                            <p class="listing-card-price">Rent per day <strong>from $15</strong></p>
+                        </div>
+                    </a>
+                </div>
+                <p class="section-cta-wrap"><a href="listing.html" class="btn btn-primary">View all listings</a></p>
+            </div>
+        </section>
+
+        <section class="listings-section">
+            <div class="container">
+                <h2 class="section-title">Popular Categories</h2>
+                <div class="listings-grid">
+                    <a href="listing.html?category=outdoor" class="listing-card">
+                        <div class="listing-card-image">
+                            <img src="https://placehold.co/400x260/7d8ba8/ffffff?text=Outdoor+Gear" alt="Outdoor Gear" width="400" height="260">
+                        </div>
+                        <div class="listing-card-body">
+                            <h3 class="listing-card-title">Outdoor Gear</h3>
+                            <p class="listing-card-price">Rent per day <strong>from $12</strong></p>
+                        </div>
+                    </a>
+                    <a href="listing.html?category=fashion" class="listing-card">
+                        <div class="listing-card-image">
+                            <img src="https://placehold.co/400x260/7d8ba8/ffffff?text=Fashion" alt="Fashion" width="400" height="260">
+                        </div>
+                        <div class="listing-card-body">
+                            <h3 class="listing-card-title">Fashion</h3>
+                            <p class="listing-card-price">Rent per day <strong>from $8</strong></p>
+                        </div>
+                    </a>
+                    <a href="listing.html?category=tools" class="listing-card">
+                        <div class="listing-card-image">
+                            <img src="https://placehold.co/400x260/7d8ba8/ffffff?text=Tools" alt="Tools" width="400" height="260">
+                        </div>
+                        <div class="listing-card-body">
+                            <h3 class="listing-card-title">Tools</h3>
+                            <p class="listing-card-price">Rent per day <strong>from $15</strong></p>
+                        </div>
+                    </a>
+                    <a href="listing.html?category=electronics" class="listing-card">
+                        <div class="listing-card-image">
+                            <img src="https://placehold.co/400x260/7d8ba8/ffffff?text=Electronics" alt="Electronics" width="400" height="260">
+                        </div>
+                        <div class="listing-card-body">
+                            <h3 class="listing-card-title">Electronics</h3>
+                            <p class="listing-card-price">Rent per day <strong>from $20</strong></p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section class="sdg-section">
+            <div class="container">
+                <h2 class="section-title">Our SDG Impact</h2>
+                <p class="sdg-intro">RENTROPY aligns with the United Nations Sustainable Development Goals to drive responsible consumption and stronger communities.</p>
+                <div class="sdg-grid">
+                    <div class="sdg-card">
+                        <span class="sdg-badge">SDG 12</span>
+                        <h3 class="sdg-card-title">Responsible Consumption & Production</h3>
+                        <p>Renting extends product life, reduces overproduction, and lowers waste. Every rental is a step toward a circular economy.</p>
+                    </div>
+                    <div class="sdg-card">
+                        <span class="sdg-badge">SDG 11</span>
+                        <h3 class="sdg-card-title">Sustainable Cities & Communities</h3>
+                        <p>Local sharing strengthens community ties and reduces the environmental footprint of ownership.</p>
+                    </div>
+                    <div class="sdg-card">
+                        <span class="sdg-badge">SDG 13</span>
+                        <h3 class="sdg-card-title">Climate Action</h3>
+                        <p>Fewer new goods mean less manufacturing emissions. Share more, buy less.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section">
+            <div class="container cta-content">
+                <h2 class="cta-title">Ready to rent?</h2>
+                <p class="cta-text">Join the circular economy. List your gear or find what you need in your community.</p>
+                <div class="cta-buttons">
+                    <a href="login.html" class="btn btn-primary btn-lg">Get started</a>
+                    <a href="listing.html" class="btn btn-outline btn-lg">Browse listings</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <nav class="footer-nav">
+                <a href="about.html" class="footer-link">About Us</a>
+                <a href="about.html#contact" class="footer-link">Contact</a>
+                <a href="#terms" class="footer-link">Terms of Service</a>
+            </nav>
+            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
+        </div>
+    </footer>
 </body>
 </html>
