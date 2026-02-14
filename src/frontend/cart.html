@@ -114,8 +114,7 @@
                         <h2 class="cart-item-title"><a href="product.html?id=${item.id}">${item.name}</a></h2>
                         <p class="cart-item-brand">${item.brand}</p>
                         <p class="cart-item-price">₱${itemTotal}</p>
-                        <button onclick="duplicateItem(${index})">Duplicate</button>
-                        <button class="cart-item-remove" onclick="removeItem(${index})">Remove</button>
+                        <button class="cart-item-remove" onclick="removeItem(${index})" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Remove</button>
                     </div>
                 `;
                 cartItems.appendChild(cartItem);
@@ -155,13 +154,6 @@
         function updateDuration(index, newDuration) {
             const cart = JSON.parse(localStorage.getItem('cart'));
             cart[index].duration = parseInt(newDuration);
-            localStorage.setItem('cart', JSON.stringify(cart));
-            loadCart();
-        }
-
-        function duplicateItem(index) {
-            const cart = JSON.parse(localStorage.getItem('cart'));
-            cart[index].quantity += 1;
             localStorage.setItem('cart', JSON.stringify(cart));
             loadCart();
         }

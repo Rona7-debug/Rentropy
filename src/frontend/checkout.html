@@ -106,16 +106,14 @@
                     <aside class="checkout-order">
                         <h2 class="checkout-order-title">Order summary</h2>
                         <ul class="checkout-order-items">
-                            <li>4-Person Camping Tent · 3 days <strong>$32</strong></li>
-                            <li>Cordless Power Drill · 1 day <strong>$8</strong></li>
                         </ul>
                         <dl class="checkout-order-totals">
                             <dt>Subtotal</dt>
-                            <dd>$40</dd>
+                            <dd>₱0</dd>
                             <dt>Service fee</dt>
-                            <dd>$4</dd>
+                            <dd>₱0</dd>
                             <dt class="checkout-order-total">Total</dt>
-                            <dd class="checkout-order-total">$44</dd>
+                            <dd class="checkout-order-total">₱0</dd>
                         </dl>
                         <button type="submit" class="btn btn-primary btn-lg btn-block">Confirm order</button>
                     </aside>
@@ -134,5 +132,48 @@
             <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        function loadOrderSummary() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const orderItems = document.querySelector('.checkout-order-items');
+            let total = 0;
+
+            orderItems.innerHTML = '';
+
+            cart.forEach((item) => {
+                // Ensure correct price
+                item.priceNum = parseInt(item.price.toString().replace(/[₱$,]/g, ''));
+                total += item.priceNum * item.quantity;
+
+                // Add to order summary
+                for (let i = 0; i < item.quantity; i++) {
+                    const li = document.createElement('li');
+                    li.innerHTML = `${item.name} <strong>₱${item.priceNum}</strong>`;
+                    orderItems.appendChild(li);
+                }
+            });
+
+            const serviceFee = Math.round(total * 0.1); // 10% service fee
+            const finalTotal = total + serviceFee;
+
+            // Update totals
+            const totals = document.querySelector('.checkout-order-totals');
+            totals.querySelector('dd:nth-child(2)').textContent = `₱${total}`; // Subtotal
+            totals.querySelector('dd:nth-child(4)').textContent = `₱${serviceFee}`; // Service fee
+            totals.querySelector('dd:nth-child(6)').textContent = `₱${finalTotal}`; // Total
+        }
+
+        window.onload = function() {
+            loadOrderSummary();
+            const form = document.querySelector('.checkout-form');
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                alert('Order confirmed successfully!');
+                localStorage.removeItem('cart'); // Clear the cart
+                window.location.href = 'listing.html'; // Redirect to listing
+            });
+        };
+    </script>
 </body>
 </html>
