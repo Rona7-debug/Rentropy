@@ -10,6 +10,18 @@
     <title>My Dashboard – RENTROPY</title>
 </head>
 <body>
+    <!--
+    Dashboard Documentation:
+    - This page serves as the user dashboard for RENTROPY, displaying personal information and rental activities.
+    - Header: Contains logo, dashboard link, cart, and logout button. Navigation links (Home, Listings, etc.) have been removed for a cleaner dashboard view.
+    - Sidebar: Sticky navigation with user profile info and links to sections. Stretches full height for better layout.
+    - Sections: Tabbed interface controlled by JavaScript. Only one section visible at a time.
+      - Profile: Editable user information (name, email, phone).
+      - My Rentals: Displays current rented items with status (Active/Completed), dates, and provider.
+      - Saved Items: Shows reserved/favorited items for future rental consideration.
+    - JavaScript: Handles section switching, URL hash updates, and default display (Profile on load).
+    - Footer: Standard site footer with links and copyright.
+    -->
     <header class="header">
         <a href="index.html" class="logo">
             <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
@@ -40,6 +52,7 @@
                 </aside>
 
                 <div class="dashboard-content">
+                    <!-- Profile Section: Displays and allows editing of user personal information -->
                     <section id="profile" class="dashboard-section">
                         <h2 class="dashboard-section-title">Profile</h2>
                         <form class="profile-form">
@@ -59,6 +72,7 @@
                         </form>
                     </section>
 
+                    <!-- My Rentals Section: Displays current rented items with rental details and status -->
                     <section id="rentals" class="dashboard-section">
                         <h2 class="dashboard-section-title">My rentals</h2>
                         <div class="dashboard-cards">
@@ -87,6 +101,7 @@
                         </div>
                     </section>
 
+                    <!-- Saved Items Section: Stores reserved/favorited items for future rental consideration -->
                     <section id="saved" class="dashboard-section">
                         <h2 class="dashboard-section-title">Saved items</h2>
                         <div class="listings-grid listings-grid--sm">
@@ -125,5 +140,52 @@
             <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        // Function to show a section and update active link
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+            // Update active link
+            document.querySelectorAll('.dashboard-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`a[href="#${sectionId}"]`).classList.add('active');
+        }
+
+        // Add event listeners to sidebar links
+        document.querySelectorAll('.dashboard-nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                showSection(targetId);
+                // Update URL hash without scrolling
+                history.pushState(null, null, `#${targetId}`);
+            });
+        });
+
+        // On page load, check hash or default to profile
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            } else {
+                showSection('profile');
+            }
+        });
+
+        // Handle back/forward navigation
+        window.addEventListener('popstate', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            } else {
+                showSection('profile');
+            }
+        });
+    </script>
 </body>
 </html>
