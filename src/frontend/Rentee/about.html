@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="about.css">
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>About Us </title>
+</head>
+<body class="no-nav-bg">
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
+        </a>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="listing.html" class="nav-link">Listings</a>
+            <a href="about.html" class="nav-link nav-link--active">About Us</a>
+            
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn btn-signup">Sign Up</a>
+            <a href="login.html" class="btn btn-login">Login</a>
+            <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
+        </div>
+    </header>
+
+    <main class="page-main about-page">
+        <div class="container">
+            <h1 class="page-title"> About RENTROPY </h1>
+
+            <section class="about-hero">
+
+                <h2 class="about-section-title">Our mission</h2>
+
+                <p class="about-lead"> We believe in a world where access matters more than ownership. RENTROPY connects people who have gear, tools, and equipment with people who need them—reducing waste, strengthening communities, and supporting the circular economy. </p>
+
+            </section>
+
+            <section id="how-it-works" class="about-section">
+
+                <h2 class="about-section-title">How it works</h2>
+
+                <p class="about-subtitle">
+                    Use → Return → Reuse </p>
+
+                <div class="flow-cards">
+
+                    <div class="flow-card">
+                        <span class="flow-number">1</span>
+
+                        <h3 class="flow-title"> Use </h3>
+
+                        <p> Browse listings, choose your rental duration, and book. Pick up or get delivery—use the item for your project, trip, or occasion. </p>
+
+                    </div>
+
+                    <div class="flow-card">
+
+                        <span class="flow-number">2</span>
+
+                        <h3 class="flow-title">Return</h3>
+
+                        <p>When you’re done, return the item in the same condition. Simple drop-off or pickup keeps the cycle moving.</p>
+
+                    </div>
+
+                    <div class="flow-card">
+
+                        <span class="flow-number">3</span>
+
+                        <h3 class="flow-title">Reuse</h3>
+
+                        <p>That same item goes back into the pool for the next person. Every reuse means less manufacturing and less waste.</p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section class="about-section sdg-section sdg-section--page">
+
+                <h2 class="about-section-title"> SDG alignment </h2>
+
+                <p class="about-intro"> Our platform directly supports the United Nations Sustainable Development Goals. </p>
+
+                <div class="sdg-grid">
+
+                    <div class="sdg-card">
+                        <span class="sdg-badge"> SDG 12 </span>
+                        <h3 class="sdg-card-title"> Responsible Consumption & Production </h3>
+                        <p> Renting extends product life and lowers overproduction. We align with SDG 12 by promoting sustainable consumption patterns. </p>
+                    </div>
+
+                    <div class="sdg-card">
+                        <span class="sdg-badge">SDG 11</span>
+                        <h3 class="sdg-card-title">Sustainable Cities & Communities</h3>
+                        <p>Local sharing builds stronger, more resilient communities and reduces the environmental cost of ownership.</p>
+                    </div>
+
+                    <div class="sdg-card">
+                        <span class="sdg-badge">SDG 13</span>
+                        <h3 class="sdg-card-title">Climate Action</h3>
+                        <p>Fewer new goods mean lower emissions from manufacturing and logistics. Share more, buy less.</p>
+                    </div>
+
+                </div>
+
+            </section>
+
+            <section id="contact" class="about-section contact-section">
+                
+                <h2 class="about-section-title"> Get in touch </h2>
+                
+                <p class="about-intro"> Questions, partnerships, or feedback? We’d love to hear from you. </p>
+
+                <div class="contact-info">
+                    
+                    <p><strong>Email:</strong> hello@rentropy.com</p>
+
+                    <p><strong>Support:</strong> support@rentropy.com</p>
+
+                </div>
+
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <nav class="footer-nav">
+
+                <a href="index.html" class="footer-link">Home</a>
+                <a href="listing.html" class="footer-link">Listings</a>
+                <a href="about.html" class="footer-link">About Us</a>
+            </nav>
+
+            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        (function () {
+            var header = document.querySelector('.header');
+            var fadeDistance = 400;
+            function updateNavOpacity() {
+                var opacity = 1 - window.scrollY / fadeDistance;
+                header.style.opacity = Math.max(0, Math.min(1, opacity));
+            }
+            window.addEventListener('scroll', updateNavOpacity, { passive: true });
+            updateNavOpacity();
+        })();
+
+        // Check login status and hide/show buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = localStorage.getItem('currentUser');
+            const signUpBtn = document.querySelector('.btn-signup');
+            const loginBtn = document.querySelector('.btn-login');
+            const headerActions = document.querySelector('.header-actions');
+            if (currentUser) {
+                // User is logged in, hide login and signup buttons, add profile icon
+                if (signUpBtn) signUpBtn.style.display = 'none';
+                if (loginBtn) loginBtn.style.display = 'none';
+                // Add profile icon beside cart
+                const cartLink = document.querySelector('.header-cart');
+                if (cartLink) {
+                    const profileLink = document.createElement('a');
+                    profileLink.href = 'dashboard.html';
+                    profileLink.className = 'header-profile';
+                    profileLink.setAttribute('aria-label', 'Profile');
+                    profileLink.textContent = '👤';
+                    cartLink.insertAdjacentElement('afterend', profileLink);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

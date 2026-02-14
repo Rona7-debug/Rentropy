@@ -53,6 +53,7 @@
                         <a href="#profile" class="dashboard-nav-link active">Profile</a>
                         <a href="#rentals" class="dashboard-nav-link">My rentals</a>
                         <a href="#saved" class="dashboard-nav-link">Saved items</a>
+                        <a href="#history" class="dashboard-nav-link">History</a>
                     </nav>
                 </aside>
 
@@ -81,28 +82,7 @@
                     <section id="rentals" class="dashboard-section">
                         <h2 class="dashboard-section-title">My rentals</h2>
                         <div class="dashboard-cards">
-                            <article class="dashboard-rental-card">
-                                <div class="dashboard-rental-image">
-                                    <img src="https://placehold.co/120x90/7d8ba8/ffffff?text=Tent" alt="" width="120" height="90">
-                                </div>
-                                <div class="dashboard-rental-info">
-                                    <h3 class="dashboard-rental-title">4-Person Camping Tent</h3>
-                                    <p class="dashboard-rental-meta">Mar 1 – Mar 4, 2025 · Green Outdoors Co.</p>
-                                    <span class="badge badge--active">Active</span>
-                                </div>
-                                <a href="#" class="btn btn-signup btn-sm">View details</a>
-                            </article>
-                            <article class="dashboard-rental-card">
-                                <div class="dashboard-rental-image">
-                                    <img src="https://placehold.co/120x90/7d8ba8/ffffff?text=Drill" alt="" width="120" height="90">
-                                </div>
-                                <div class="dashboard-rental-info">
-                                    <h3 class="dashboard-rental-title">Cordless Power Drill</h3>
-                                    <p class="dashboard-rental-meta">Feb 10 – Feb 11, 2025 · ToolShare Local</p>
-                                    <span class="badge badge--done">Completed</span>
-                                </div>
-                                <a href="#" class="btn btn-signup btn-sm">View details</a>
-                            </article>
+                            <!-- Rentals will be loaded dynamically -->
                         </div>
                     </section>
 
@@ -128,6 +108,14 @@
                                     <p class="listing-card-price">Rent per day <strong>from $22</strong></p>
                                 </div>
                             </a>
+                        </div>
+                    </section>
+
+                    <!-- History Section: Displays past transactions -->
+                    <section id="history" class="dashboard-section">
+                        <h2 class="dashboard-section-title">History</h2>
+                        <div class="dashboard-cards">
+                            <!-- Past transactions will be loaded dynamically -->
                         </div>
                     </section>
                 </div>
@@ -218,9 +206,84 @@
             });
         }
 
+        // Load rentals
+        function loadRentals() {
+            const rentals = JSON.parse(localStorage.getItem('rentals')) || [];
+            const rentalsContainer = document.querySelector('#rentals .dashboard-cards');
+            rentalsContainer.innerHTML = '';
+            if (rentals.length === 0) {
+                rentalsContainer.innerHTML = '<p>No rentals yet.</p>';
+                return;
+            }
+            rentals.forEach((rental, index) => {
+                const article = document.createElement('article');
+                article.className = 'dashboard-rental-card';
+                article.innerHTML = `
+                    <div class="dashboard-rental-image">
+                        <img src="${rental.image}" alt="${rental.name}" width="120" height="90">
+                    </div>
+                    <div class="dashboard-rental-info">
+                        <h3 class="dashboard-rental-title">${rental.name}</h3>
+                        <p class="dashboard-rental-meta">${rental.dates} · ${rental.provider}</p>
+                        <span class="badge ${rental.status === 'Active' ? 'badge--active' : 'badge--done'}">${rental.status}</span>
+                    </div>
+                    <div>
+                        <a href="#" class="btn btn-signup btn-sm">View details</a>
+                        <button class="btn btn-primary btn-sm mark-completed" data-index="${index}">Item received</button>
+                    </div>
+                `;
+                rentalsContainer.appendChild(article);
+            });
+
+            // Add event listeners for mark completed
+            document.querySelectorAll('.mark-completed').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    const rentals = JSON.parse(localStorage.getItem('rentals')) || [];
+                    const completedRental = rentals.splice(index, 1)[0];
+                    completedRental.status = 'Completed';
+                    const history = JSON.parse(localStorage.getItem('history')) || [];
+                    history.push(completedRental);
+                    localStorage.setItem('rentals', JSON.stringify(rentals));
+                    localStorage.setItem('history', JSON.stringify(history));
+                    loadRentals();
+                    loadHistory();
+                });
+            });
+        }
+
+        // Load history
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem('history')) || [];
+            const historyContainer = document.querySelector('#history .dashboard-cards');
+            historyContainer.innerHTML = '';
+            if (history.length === 0) {
+                historyContainer.innerHTML = '<p>No past transactions yet.</p>';
+                return;
+            }
+            history.forEach(transaction => {
+                const article = document.createElement('article');
+                article.className = 'dashboard-rental-card';
+                article.innerHTML = `
+                    <div class="dashboard-rental-image">
+                        <img src="${transaction.image}" alt="${transaction.name}" width="120" height="90">
+                    </div>
+                    <div class="dashboard-rental-info">
+                        <h3 class="dashboard-rental-title">${transaction.name}</h3>
+                        <p class="dashboard-rental-meta">${transaction.dates} · ${transaction.provider}</p>
+                        <span class="badge badge--done">Completed</span>
+                    </div>
+                    <a href="#" class="btn btn-signup btn-sm">View details</a>
+                `;
+                historyContainer.appendChild(article);
+            });
+        }
+
         // Load saved items on page load
         document.addEventListener('DOMContentLoaded', function() {
             loadSavedItems();
+            loadRentals();
+            loadHistory();
         });
     </script>
 </body>
