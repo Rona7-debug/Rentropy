@@ -143,7 +143,8 @@ body:not(.hero-page):not(.no-nav-bg) .header {
     gap: 0.75rem;
 }
 
-.header-cart {
+.header-cart,
+.header-icon {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -154,8 +155,15 @@ body:not(.hero-page):not(.no-nav-bg) .header {
     box-shadow: var(--neo-raised);
 }
 
+.header-icon .header-icon-chat,
+.header-icon .header-icon-dashboard {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
 .header-cart:hover,
-.header-cart--active {
+.header-cart--active,
+.header-icon:hover {
     transform: scale(1.05);
     transition: transform 0.2s ease;
 }

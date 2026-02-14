@@ -24,6 +24,7 @@
         <div class="header-actions">
             <a href="login.html" class="btn btn-signup">Sign Up</a>
             <a href="login.html" class="btn btn-login">Login</a>
+            <a href="chat.html" class="header-icon header-chat" aria-label="Messages" title="Messages"><span class="header-icon-chat" aria-hidden="true">💬</span></a>
             <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
         </div>
     </header>
@@ -94,11 +95,13 @@
                         <form action="cart.html" method="get" class="add-to-cart-form">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Add to cart</button>
                         </form>
-                        <button type="button" class="btn btn-signup btn-block">Save</button>
+                        <a href="#" class="btn btn-signup btn-block" id="product-ask-seller">Inquire</a>
+                        <button type="button" class="btn btn-signup btn-block" id="product-save-btn">Save</button>
                     </div>
                 </div>
             </div>
         </div>
+
     </main>
 
     <script>
@@ -195,7 +198,8 @@
         }
 
         function updateSaveButton(isSaved) {
-            const button = document.querySelector('.product-actions .btn-signup');
+            const button = document.getElementById('product-save-btn');
+            if (!button) return;
             if (isSaved) {
                 button.textContent = 'Unsave';
                 button.onclick = unsave;
@@ -318,7 +322,15 @@
                 // Check if item is saved and update button
                 const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
                 updateSaveButton(savedItems.some(s => s.id === itemId));
+                const askBtn = document.getElementById('product-ask-seller');
+                if (askBtn) askBtn.onclick = function(e) { e.preventDefault(); openProductChat(item); };
             }
+        }
+
+        function openProductChat(item) {
+            const threadId = 'product_' + item.id;
+            const title = 'Inquire: ' + (item.name || 'Product');
+            window.location.href = 'chat.html?thread=' + encodeURIComponent(threadId) + '&title=' + encodeURIComponent(title);
         }
 
         // Check login status and hide/show buttons
@@ -334,12 +346,13 @@
                 // Add profile icon beside cart
                 const cartLink = document.querySelector('.header-cart');
                 if (cartLink) {
-                    const profileLink = document.createElement('a');
-                    profileLink.href = 'dashboard.html';
-                    profileLink.className = 'header-profile';
-                    profileLink.setAttribute('aria-label', 'Profile');
-                    profileLink.textContent = '👤';
-                    cartLink.insertAdjacentElement('afterend', profileLink);
+                    const dashboardLink = document.createElement('a');
+                    dashboardLink.href = 'dashboard.html';
+                    dashboardLink.className = 'header-icon header-dashboard';
+                    dashboardLink.setAttribute('aria-label', 'Dashboard');
+                    dashboardLink.setAttribute('title', 'Dashboard');
+                    dashboardLink.innerHTML = '<span class="header-icon-dashboard" aria-hidden="true">▦</span>';
+                    cartLink.insertAdjacentElement('beforebegin', dashboardLink);
                 }
             }
         });

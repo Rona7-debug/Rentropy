@@ -23,7 +23,8 @@
             <a href="about.html" class="nav-link">About Us</a>
         </nav>
         <div class="header-actions">
-            <a href="dashboard.html" class="nav-link nav-link--active">Dashboard</a>
+            <a href="dashboard.html" class="header-icon header-dashboard nav-link--active" aria-label="Dashboard" title="Dashboard"><span class="header-icon-dashboard" aria-hidden="true">▦</span></a>
+            <a href="chat.html" class="header-icon header-chat" aria-label="Messages" title="Messages"><span class="header-icon-chat" aria-hidden="true">💬</span></a>
             <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
             <a href="login.html" class="btn btn-signup">Logout</a>
         </div>
@@ -116,6 +117,9 @@
                 </div>
                 <div class="rental-modal-body">
                     <div id="rental-modal-details"></div>
+                    <div class="rental-modal-chat-wrap">
+                        <a href="#" id="rental-details-chat-btn" class="btn btn-primary btn-sm">Chat with seller</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -237,8 +241,9 @@
                         <p class="dashboard-rental-meta">${rental.dates} · ${rental.provider}</p>
                         <span class="badge badge--active">Active</span>
                     </div>
-                    <div>
+                    <div class="dashboard-rental-actions">
                         <button type="button" class="btn btn-signup btn-sm btn-view-details">View details</button>
+                        <button type="button" class="btn btn-primary btn-sm btn-chat-seller">Chat</button>
                     </div>
                 `;
                 rentalsContainer.appendChild(article);
@@ -247,6 +252,8 @@
                     e.preventDefault();
                     showRentalDetails(rental);
                 });
+                const chatBtn = article.querySelector('.btn-chat-seller');
+                if (chatBtn) chatBtn.addEventListener('click', function(e) { e.preventDefault(); openRentalChat(rental); });
             });
         }
 
@@ -273,7 +280,10 @@
                         <p class="dashboard-rental-meta">${transaction.dates} · ${transaction.provider}</p>
                         <span class="badge badge--done">Completed</span>
                     </div>
-                    <button type="button" class="btn btn-signup btn-sm btn-view-details">View details</button>
+                    <div class="dashboard-rental-actions">
+                        <button type="button" class="btn btn-signup btn-sm btn-view-details">View details</button>
+                        <button type="button" class="btn btn-primary btn-sm btn-chat-seller">Chat</button>
+                    </div>
                 `;
                 historyContainer.appendChild(article);
                 const btn = article.querySelector('.btn-view-details');
@@ -281,6 +291,8 @@
                     e.preventDefault();
                     showRentalDetails(transaction);
                 });
+                const chatBtn = article.querySelector('.btn-chat-seller');
+                if (chatBtn) chatBtn.addEventListener('click', function(e) { e.preventDefault(); openRentalChat(transaction); });
             });
         }
 
@@ -290,7 +302,10 @@
             return '₱' + Number(amount).toLocaleString('en-PH');
         }
 
+        let currentRentalInModal = null;
+
         function showRentalDetails(rental) {
+            currentRentalInModal = rental;
             const modal = document.getElementById('rental-details-modal');
             const detailsEl = document.getElementById('rental-modal-details');
             if (!modal || !detailsEl) return;
@@ -332,7 +347,22 @@
                 modal.querySelector('.rental-modal-close').addEventListener('click', closeRentalModal);
                 modal.querySelector('.rental-modal-backdrop').addEventListener('click', closeRentalModal);
             }
+            const chatBtnInModal = document.getElementById('rental-details-chat-btn');
+            if (chatBtnInModal) chatBtnInModal.addEventListener('click', function(e) {
+                e.preventDefault();
+                if (currentRentalInModal) openRentalChat(currentRentalInModal);
+            });
         });
+
+        function getChatThreadIdForRental(rental) {
+            return 'rental_' + (rental.name || '').replace(/\s+/g, '_') + '_' + (rental.start_date || '') + '_' + (rental.end_date || '');
+        }
+
+        function openRentalChat(rental) {
+            const threadId = getChatThreadIdForRental(rental);
+            const title = 'Chat with ' + (rental.provider || 'RENTROPY') + ' – ' + (rental.name || 'Rental');
+            window.location.href = 'chat.html?thread=' + encodeURIComponent(threadId) + '&title=' + encodeURIComponent(title);
+        }
 
         // Load saved items on page load
         document.addEventListener('DOMContentLoaded', function() {

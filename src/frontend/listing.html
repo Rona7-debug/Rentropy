@@ -26,6 +26,7 @@
         <div class="header-actions">
             <a href="login.html" class="btn btn-signup">Sign Up</a>
             <a href="login.html" class="btn btn-login">Login</a>
+            <a href="chat.html" class="header-icon header-chat" aria-label="Messages" title="Messages"><span class="header-icon-chat" aria-hidden="true">💬</span></a>
             <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
         </div>
 
@@ -57,6 +58,29 @@
             <h1 class="listing-page-title"> All product listings </h1>
 
             <aside class="filters-sidebar">
+
+                <div class="where-when-cards">
+                    <div class="filter-card">
+                        <h3 class="filter-card-title">Where</h3>
+                        <div class="filter-group">
+                            <label class="filter-label" for="where-location">Location</label>
+                            <input type="text" id="where-location" name="location_search" class="filter-input" placeholder="City or area">
+                        </div>
+                    </div>
+                    <div class="filter-card">
+                        <h3 class="filter-card-title">When</h3>
+                        <div class="date-range-fields">
+                            <div class="filter-group">
+                                <label class="filter-label" for="when-start">Start date</label>
+                                <input type="date" id="when-start" name="date_from" class="filter-input">
+                            </div>
+                            <div class="filter-group">
+                                <label class="filter-label" for="when-end">End date</label>
+                                <input type="date" id="when-end" name="date_to" class="filter-input">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <h2 class="filters-title">Filters</h2>
 
@@ -152,6 +176,7 @@
                 </div>
             </div>
         </div>
+
     </main>
 
     <footer class="footer">
@@ -190,6 +215,31 @@
             { id: '18', name: 'Circular Saw', category: 'tools', price: '₱8,500', image: '../assets/circular saw.webp', brand: 'Tool Co.' }
         ];
 
+        function parseDailyRate(priceStr) {
+            return parseInt(String(priceStr).replace(/[₱$,]/g, ''), 10) || 0;
+        }
+
+        function formatPrice(num) {
+            return '₱' + Number(num).toLocaleString();
+        }
+
+        function getDaysSelected() {
+            const startEl = document.querySelector('input[name="date_from"]');
+            const endEl = document.querySelector('input[name="date_to"]');
+            if (!startEl || !endEl || !startEl.value || !endEl.value) return 0;
+            const start = new Date(startEl.value);
+            const end = new Date(endEl.value);
+            if (end < start) return 0;
+            const days = Math.ceil((end - start) / (24 * 60 * 60 * 1000)) + 1;
+            return Math.max(1, days);
+        }
+
+        function getDisplayPrice(item, days) {
+            const dailyRate = parseDailyRate(item.price);
+            if (days >= 1) return { total: dailyRate * days, daily: dailyRate, days };
+            return { total: dailyRate, daily: dailyRate, days: 0 };
+        }
+
         function renderListings(filteredItems) {
             const grid = document.querySelector('.listings-grid');
             grid.innerHTML = '';
@@ -197,7 +247,13 @@
                 grid.innerHTML = '<p>No listings found.</p>';
                 return;
             }
+            const days = getDaysSelected();
             filteredItems.forEach(item => {
+                const { total, daily, days: d } = getDisplayPrice(item, days);
+                let priceLabel = formatPrice(total);
+                if (d >= 2) priceLabel += ` for ${d} days`;
+                else if (d === 1) priceLabel += ' (1 day)';
+                else priceLabel += '/day';
                 const card = document.createElement('a');
                 card.href = `product.html?id=${item.id}`;
                 card.className = 'listing-card';
@@ -208,10 +264,20 @@
                     <div class="listing-card-body">
                         <h3 class="listing-card-title">${item.name}</h3>
                         <p class="listing-card-meta">${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</p>
-                        <p class="listing-card-price">Price <strong>${item.price}</strong></p>
+                        <p class="listing-card-price">Price <strong>${priceLabel}</strong></p>
+                        <button type="button" class="btn btn-inquire-listing">Inquire</button>
                     </div>
                 `;
                 grid.appendChild(card);
+                const inquireBtn = card.querySelector('.btn-inquire-listing');
+                if (inquireBtn) {
+                    inquireBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        var title = 'Inquire: ' + (item.name || 'Product');
+                        window.location.href = 'chat.html?thread=' + encodeURIComponent('product_' + item.id) + '&title=' + encodeURIComponent(title);
+                    });
+                }
             });
         }
 
@@ -250,13 +316,18 @@
             document.querySelector('input[name="price_to"]').value = urlParams.get('price_to') || '';
             document.querySelector('input[name="location"]').value = urlParams.get('location') || '';
             document.querySelector('input[name="q"]').value = urlParams.get('q') || '';
+            const dateFromEl = document.querySelector('input[name="date_from"]');
+            const dateToEl = document.querySelector('input[name="date_to"]');
+            if (dateFromEl) dateFromEl.value = urlParams.get('date_from') || '';
+            if (dateToEl) dateToEl.value = urlParams.get('date_to') || '';
 
-            
             document.querySelector('select[name="category"]').addEventListener('change', updateFilters);
             document.querySelector('input[name="price_from"]').addEventListener('input', updateFilters);
             document.querySelector('input[name="price_to"]').addEventListener('input', updateFilters);
             document.querySelector('input[name="location"]').addEventListener('input', updateFilters);
             document.querySelector('input[name="q"]').addEventListener('input', updateFilters);
+            if (dateFromEl) dateFromEl.addEventListener('change', updateFilters);
+            if (dateToEl) dateToEl.addEventListener('change', updateFilters);
         });
 
         function updateFilters() {
@@ -265,20 +336,23 @@
             const priceTo = document.querySelector('input[name="price_to"]').value;
             const location = document.querySelector('input[name="location"]').value;
             const q = document.querySelector('input[name="q"]').value;
+            const dateFromEl = document.querySelector('input[name="date_from"]');
+            const dateToEl = document.querySelector('input[name="date_to"]');
+            const dateFrom = dateFromEl ? dateFromEl.value : '';
+            const dateTo = dateToEl ? dateToEl.value : '';
 
-            
             const params = new URLSearchParams();
             if (category) params.set('category', category);
             if (priceFrom) params.set('price_from', priceFrom);
             if (priceTo) params.set('price_to', priceTo);
             if (location) params.set('location', location);
             if (q) params.set('q', q);
+            if (dateFrom) params.set('date_from', dateFrom);
+            if (dateTo) params.set('date_to', dateTo);
 
-            
             const newUrl = params.toString() ? `listing.html?${params.toString()}` : 'listing.html';
             window.history.pushState({}, '', newUrl);
 
-            
             filterItems();
         }
 
@@ -311,7 +385,6 @@
             updateSearchBubble();
         })();
 
-        
         document.addEventListener('DOMContentLoaded', function() {
             const currentUser = localStorage.getItem('currentUser');
             const signUpBtn = document.querySelector('.btn-signup');
@@ -324,12 +397,13 @@
 
                 const cartLink = document.querySelector('.header-cart');
                 if (cartLink) {
-                    const profileLink = document.createElement('a');
-                    profileLink.href = 'dashboard.html';
-                    profileLink.className = 'header-profile';
-                    profileLink.setAttribute('aria-label', 'Profile');
-                    profileLink.textContent = '👤';
-                    cartLink.insertAdjacentElement('afterend', profileLink);
+                    const dashboardLink = document.createElement('a');
+                    dashboardLink.href = 'dashboard.html';
+                    dashboardLink.className = 'header-icon header-dashboard';
+                    dashboardLink.setAttribute('aria-label', 'Dashboard');
+                    dashboardLink.setAttribute('title', 'Dashboard');
+                    dashboardLink.innerHTML = '<span class="header-icon-dashboard" aria-hidden="true">▦</span>';
+                    cartLink.insertAdjacentElement('beforebegin', dashboardLink);
                 }
             }
         });

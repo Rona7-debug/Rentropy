@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="chat.css">
+    <title>Messages – RENTROPY</title>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
+        </a>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="listing.html" class="nav-link">Listings</a>
+            <a href="about.html" class="nav-link">About Us</a>
+        </nav>
+        <div class="header-actions">
+            <a href="dashboard.html" class="header-icon header-dashboard" aria-label="Dashboard" title="Dashboard"><span class="header-icon-dashboard" aria-hidden="true">▦</span></a>
+            <a href="chat.html" class="header-icon header-chat nav-link--active" aria-label="Messages" title="Messages"><span class="header-icon-chat" aria-hidden="true">💬</span></a>
+            <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
+            <a href="login.html" class="btn btn-signup">Logout</a>
+        </div>
+    </header>
+
+    <main class="chat-page-main">
+        <div class="chat-layout">
+            <aside class="chat-sidebar">
+                <div class="chat-sidebar-header">
+                    <h1 class="chat-sidebar-title">Messages</h1>
+                </div>
+                <div id="chat-conversation-list" class="chat-conversation-list"></div>
+                <div id="chat-empty-list" class="chat-empty-list">
+                    <p>No conversations yet.</p>
+                    <p class="chat-empty-hint">Start a chat from a product page (Inquire) or from your dashboard (Chat with seller).</p>
+                </div>
+            </aside>
+            <section id="chat-thread-panel" class="chat-thread-panel">
+                <div id="chat-thread-placeholder" class="chat-thread-placeholder">
+                    <div class="chat-placeholder-icon">💬</div>
+                    <p>Select a conversation or start a new chat from a product or your dashboard.</p>
+                </div>
+                <div id="chat-thread-view" class="chat-thread-view" aria-hidden="true">
+                    <div class="chat-thread-header">
+                        <h2 id="chat-thread-title" class="chat-thread-title"></h2>
+                    </div>
+                    <div id="chat-messages" class="chat-messages"></div>
+                    <div class="chat-input-wrap">
+                        <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..." maxlength="500" aria-label="Message">
+                        <button type="button" id="chat-send" class="btn btn-primary chat-send">Send</button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <nav class="footer-nav">
+                <a href="index.html" class="footer-link">Home</a>
+                <a href="listing.html" class="footer-link">Listings</a>
+                <a href="about.html" class="footer-link">About Us</a>
+            </nav>
+            <p class="footer-copyright">&copy; 2026 RENTROPY. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function getChatConversations() {
+            try { return JSON.parse(localStorage.getItem('chat_conversations') || '{}'); } catch (_) { return {}; }
+        }
+        function saveChatConversation(threadId, data) {
+            const all = getChatConversations();
+            all[threadId] = data;
+            localStorage.setItem('chat_conversations', JSON.stringify(all));
+        }
+        function getLastMessageTime(thread) {
+            const ms = thread.messages && thread.messages.length ? thread.messages[thread.messages.length - 1].time : null;
+            return ms ? new Date(ms).getTime() : 0;
+        }
+        function getConversationsSorted() {
+            const all = getChatConversations();
+            return Object.keys(all).map(function(id) { return all[id]; }).sort(function(a, b) {
+                return getLastMessageTime(b) - getLastMessageTime(a);
+            });
+        }
+        function formatChatTime(iso) {
+            if (!iso) return '';
+            const d = new Date(iso);
+            const now = new Date();
+            const sameDay = d.toDateString() === now.toDateString();
+            return sameDay ? d.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' }) : d.toLocaleDateString();
+        }
+        function escapeHtml(s) {
+            const div = document.createElement('div');
+            div.textContent = s;
+            return div.innerHTML;
+        }
+        function getLastPreview(thread) {
+            if (!thread.messages || !thread.messages.length) return 'No messages yet';
+            const m = thread.messages[thread.messages.length - 1];
+            const text = m.text.length > 45 ? m.text.slice(0, 42) + '...' : m.text;
+            return (m.from === 'user' ? 'You: ' : '') + text;
+        }
+
+        let currentThreadId = null;
+
+        function renderConversationList() {
+            const list = document.getElementById('chat-conversation-list');
+            const empty = document.getElementById('chat-empty-list');
+            const conversations = getConversationsSorted();
+            if (conversations.length === 0) {
+                list.innerHTML = '';
+                if (empty) empty.style.display = 'block';
+                return;
+            }
+            if (empty) empty.style.display = 'none';
+            list.innerHTML = conversations.map(function(thread) {
+                const lastTime = thread.messages && thread.messages.length ? thread.messages[thread.messages.length - 1].time : null;
+                const preview = getLastPreview(thread);
+                const active = thread.threadId === currentThreadId ? ' chat-conv-item--active' : '';
+                return '<button type="button" class="chat-conv-item' + active + '" data-thread-id="' + escapeHtml(thread.threadId) + '">' +
+                    '<span class="chat-conv-title">' + escapeHtml(thread.title || 'Chat') + '</span>' +
+                    '<span class="chat-conv-preview">' + escapeHtml(preview) + '</span>' +
+                    '<span class="chat-conv-time">' + formatChatTime(lastTime) + '</span>' +
+                    '</button>';
+            }).join('');
+            list.querySelectorAll('.chat-conv-item').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    selectThread(btn.getAttribute('data-thread-id'));
+                });
+            });
+        }
+
+        function selectThread(threadId) {
+            currentThreadId = threadId;
+            window.history.replaceState({}, '', 'chat.html?thread=' + encodeURIComponent(threadId));
+            const conversations = getChatConversations();
+            let thread = conversations[threadId];
+            if (!thread) {
+                const params = new URLSearchParams(window.location.search);
+                const title = params.get('title') || 'Chat';
+                thread = { threadId: threadId, title: title, messages: [] };
+                saveChatConversation(threadId, thread);
+            }
+            const panel = document.getElementById('chat-thread-panel');
+            const placeholder = document.getElementById('chat-thread-placeholder');
+            const threadView = document.getElementById('chat-thread-view');
+            if (panel) panel.classList.add('chat-thread-panel--active');
+            if (placeholder) placeholder.setAttribute('aria-hidden', 'true');
+            if (threadView) { threadView.removeAttribute('aria-hidden'); threadView.classList.add('chat-thread-view--visible'); }
+            document.getElementById('chat-thread-title').textContent = thread.title || 'Chat';
+            renderMessages(thread.messages);
+            document.getElementById('chat-input').value = '';
+            document.getElementById('chat-input').focus();
+            renderConversationList();
+        }
+
+        function renderMessages(messages) {
+            const container = document.getElementById('chat-messages');
+            if (!container) return;
+            container.innerHTML = (messages || []).map(function(m) {
+                const isUser = m.from === 'user';
+                return '<div class="chat-msg chat-msg--' + (isUser ? 'user' : 'seller') + '">' +
+                    '<span class="chat-msg-text">' + escapeHtml(m.text) + '</span>' +
+                    '<span class="chat-msg-time">' + formatChatTime(m.time) + '</span></div>';
+            }).join('');
+            container.scrollTop = container.scrollHeight;
+        }
+
+        function sendMessage() {
+            const threadId = currentThreadId;
+            const input = document.getElementById('chat-input');
+            if (!threadId || !input) return;
+            const text = (input.value || '').trim();
+            if (!text) return;
+            const conversations = getChatConversations();
+            let thread = conversations[threadId] || { threadId: threadId, title: document.getElementById('chat-thread-title').textContent, messages: [] };
+            const time = new Date().toISOString();
+            thread.messages.push({ from: 'user', text: text, time: time });
+            thread.messages.push({ from: 'seller', text: 'Thanks for your message. We\'ll get back to you shortly.', time: new Date(Date.now() + 1000).toISOString() });
+            saveChatConversation(threadId, thread);
+            renderMessages(thread.messages);
+            input.value = '';
+            renderConversationList();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const threadParam = params.get('thread');
+            const titleParam = params.get('title');
+            renderConversationList();
+            if (threadParam) {
+                if (!getChatConversations()[threadParam] && titleParam) {
+                    const thread = { threadId: threadParam, title: decodeURIComponent(titleParam), messages: [] };
+                    saveChatConversation(threadParam, thread);
+                }
+                selectThread(threadParam);
+            } else {
+                const conversations = getConversationsSorted();
+                if (conversations.length > 0) {
+                    selectThread(conversations[0].threadId);
+                }
+            }
+            document.getElementById('chat-send').addEventListener('click', sendMessage);
+            document.getElementById('chat-input').addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') { e.preventDefault(); sendMessage(); }
+            });
+        });
+    </script>
+</body>
+</html>
