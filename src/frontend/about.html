@@ -6,7 +6,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="about.css">
     <title>About Us – RENTROPY</title>
 </head>
 <body>
@@ -16,6 +16,7 @@
         </a>
         <nav class="nav">
             <a href="index.html" class="nav-link">Home</a>
+            <a href="listing.html" class="nav-link">Listings</a>
             <a href="about.html" class="nav-link nav-link--active">About Us</a>
             <a href="about.html#how-it-works" class="nav-link">How It Works</a>
         </nav>
@@ -100,5 +101,17 @@
             <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        (function () {
+            var header = document.querySelector('.header');
+            var fadeDistance = 400;
+            function updateNavOpacity() {
+                var opacity = 1 - window.scrollY / fadeDistance;
+                header.style.opacity = Math.max(0, Math.min(1, opacity));
+            }
+            window.addEventListener('scroll', updateNavOpacity, { passive: true });
+            updateNavOpacity();
+        })();
+    </script>
 </body>
 </html>
