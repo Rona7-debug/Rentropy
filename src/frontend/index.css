@@ -1688,9 +1688,7 @@ a.btn {
     opacity: 0.9;
 }
 
-/* ============================================
-   Responsive
-   ============================================ */
+/* responsive */
 @media (max-width: 992px) {
     .value-cards {
         grid-template-columns: 1fr;

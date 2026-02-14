@@ -1,15 +1,10 @@
-/* ============================================
-   RENTROPY – Neomorphism UI + Color Palette
-   ============================================ */
 :root {
-    /* Brand palette (unchanged) */
     --primary-blue: #1a2b75;
     --accent-blue: #007bff;
     --dark-text: #333333;
     --light-text: #ffffff;
     --hero-gradient-start: #0D2E9B;
     --hero-gradient-end: #ffffff;
-    /* Neomorphism */
     --neo-bg: #e0e5ec;
     --neo-bg-alt: #d1d9e6;
     --neo-shadow-light: #ffffff;
@@ -19,7 +14,6 @@
     --neo-pressed: inset 4px 4px 8px var(--neo-shadow-dark), inset -4px -4px 8px var(--neo-shadow-light);
     --neo-radius: 1rem;
     --neo-radius-lg: 1.25rem;
-    /* Legacy aliases for compatibility */
     --main-bg: var(--neo-bg);
     --search-bg: var(--neo-bg);
     --signup-btn-bg: var(--neo-bg);
@@ -61,9 +55,8 @@ img {
     padding: 0 1.5rem;
 }
 
-/* ============================================
-   Header / Navigation (neomorphism)
-   ============================================ */
+/* header */
+
 .header {
     position: fixed;
     top: 0;
@@ -112,7 +105,7 @@ body:not(.hero-page):not(.no-nav-bg) .header {
 
 .logo-img {
     display: block;
-    height: 3.5rem;
+    height: 3.9rem;
     width: auto;
 }
 
@@ -126,9 +119,10 @@ body:not(.hero-page):not(.no-nav-bg) .header {
 }
 
 .nav-link {
-    color: var(--dark-text);
-    font-weight: 500;
-    font-size: 0.95rem;
+    color: #3c4142;
+    font-weight: regular;
+    font-size: 1.1rem;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .nav-link:hover {
@@ -148,65 +142,64 @@ body:not(.hero-page):not(.no-nav-bg) .header {
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1.25rem;
-    color: var(--dark-text);
-    border-radius: var(--neo-radius);
-    background: var(--neo-bg);
+    border-radius: 10px;
     box-shadow: var(--neo-raised);
-    transition: box-shadow 0.2s, color 0.2s;
 }
 
 .header-cart:hover,
 .header-cart--active {
-    box-shadow: var(--neo-pressed);
-    color: var(--primary-blue);
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
 }
 
 .nav-link--active {
-    color: var(--primary-blue);
-    font-weight: 600;
+    color: #142EBD;
+    font-weight: regular;
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 1.1rem;
 }
 
 .btn {
     padding: 0.5rem 1.25rem;
-    border-radius: var(--neo-radius);
     font-family: inherit;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     border: none;
+    border-radius: 10px;
+    font-family: "Lexend Deca", sans-serif;
     transition: box-shadow 0.2s, transform 0.15s, filter 0.2s;
 }
 
 .btn-signup {
-    background: var(--neo-bg);
-    color: var(--dark-text);
-    box-shadow: var(--neo-raised);
+    background: #A7AFC2;
+    color: #0D0C0C;
 }
 
 .btn-signup:hover {
-    box-shadow: var(--neo-pressed);
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
 }
 
 .btn-login {
-    background: var(--primary-blue);
-    color: var(--light-text);
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -2px -2px 6px rgba(255, 255, 255, 0.1);
+    background: #142EBD;
+    color: #E6E6E6;
 }
 
 .btn-login:hover {
-    filter: brightness(1.1);
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.25), -2px -2px 8px rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .btn-primary {
-    background: var(--primary-blue);
-    color: var(--light-text);
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -2px -2px 6px rgba(255, 255, 255, 0.1);
+    background: #0D2E9B;
+    color: #FFFFFF;
 }
 
 .btn-primary:hover {
-    filter: brightness(1.1);
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.25), -2px -2px 8px rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
 a.btn {
@@ -507,9 +500,8 @@ a.btn {
     margin-bottom: 0.35rem;
 }
 
-/* ============================================
-   SDG Impact Section
-   ============================================ */
+/* sdg */
+
 .sdg-section {
     padding: 4rem 0;
     background: var(--neo-bg);
@@ -520,7 +512,10 @@ a.btn {
     text-align: center;
     max-width: 36rem;
     margin: 0 auto 2rem;
-    color: var(--dark-text);
+    color: #3c4142;
+    font-weight: medium;
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 1.1rem;
 }
 
 .sdg-grid {
@@ -532,34 +527,40 @@ a.btn {
 .sdg-card {
     background: var(--neo-bg);
     border: none;
-    border-radius: var(--neo-radius-lg);
+    border-radius: 20px;
     padding: 1.5rem;
     box-shadow: var(--neo-raised);
 }
 
+.sdg-card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
 .sdg-badge {
     display: inline-block;
-    background: var(--primary-blue);
-    color: var(--light-text);
+    background: #0D2E9B;
+    color: #ffffff;
     font-size: 0.75rem;
     font-weight: 600;
     padding: 0.25rem 0.5rem;
-    border-radius: var(--neo-radius);
+    border-radius: 20px;
     margin-bottom: 0.75rem;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .sdg-card-title {
     font-size: 1rem;
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 0.5rem;
-    color: var(--dark-text);
+    color: #3c4142;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .sdg-card p {
     font-size: 0.9rem;
     line-height: 1.55;
-    color: var(--dark-text);
+    color: #3c4142;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 /* ============================================
@@ -593,9 +594,8 @@ a.btn {
     justify-content: center;
 }
 
-/* ============================================
-   Page shell (listing, product, cart, etc.)
-   ============================================ */
+/* page shell (listing, product, cart, etc.) */
+
 .page-main {
     padding: 5rem 0 4rem;
     min-height: 60vh;
@@ -604,8 +604,10 @@ a.btn {
 .page-title {
     font-size: clamp(1.5rem, 3vw, 2rem);
     font-weight: 700;
-    color: var(--dark-text);
+    color: #000;
     margin-bottom: 0.5rem;
+    font-family: "Lexend Deca", sans-serif;
+    text-align: center;
 }
 
 .page-subtitle {
@@ -1439,24 +1441,26 @@ a.btn {
     margin-top: 0.5rem;
 }
 
-/* ============================================
-   About page
-   ============================================ */
+/* about */
+
 .about-hero {
     margin-bottom: 3rem;
+    margin-top: 3rem;
 }
 
 .about-section-title {
-    font-size: 1.5rem;
+    font-size: 1.8rem;
     font-weight: 700;
-    color: var(--dark-text);
+    color: #000;
     margin-bottom: 0.5rem;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .about-lead {
     font-size: 1.1rem;
     line-height: 1.65;
-    color: var(--dark-text);
+    color: #3c4142;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .about-section {
@@ -1465,9 +1469,10 @@ a.btn {
 
 .about-subtitle {
     font-size: 1rem;
-    color: var(--primary-blue);
+    color: #0D2E9B;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    margin-bottom: 3rem;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .flow-cards {
@@ -1477,11 +1482,16 @@ a.btn {
 }
 
 .flow-card {
-    border: none;
-    border-radius: var(--neo-radius-lg);
-    padding: 1.5rem;
     background: var(--neo-bg);
+    border: none;
+    border-radius: 20px;
+    padding: 1.5rem;
     box-shadow: var(--neo-raised);
+}
+
+.flow-card:hover {
+    transform: translateY(-2px);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .flow-number {
@@ -1491,24 +1501,26 @@ a.btn {
     width: 2rem;
     height: 2rem;
     border-radius: 50%;
-    background: var(--primary-blue);
-    color: var(--light-text);
+    background: #0D2E9B;
+    color: #ffffff;
     font-weight: 700;
     font-size: 0.9rem;
     margin-bottom: 0.75rem;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2), -2px -2px 4px rgba(255, 255, 255, 0.1);
 }
 
 .flow-title {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1rem;
+    font-weight: 500;
     margin-bottom: 0.5rem;
+    color: #3c4142;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .flow-card p {
     font-size: 0.9rem;
     line-height: 1.55;
-    color: var(--dark-text);
+    color: #3c4142;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .sdg-section--page .sdg-grid {
@@ -1521,11 +1533,11 @@ a.btn {
 
 .contact-info p {
     margin-bottom: 0.5rem;
+    font-family: "Lexend Deca", sans-serif;
+    color: #000000;
 }
 
-/* ============================================
-   Login / Sign up (Auth)
-   ============================================ */
+/* login */
 .auth-page {
     display: flex;
     align-items: center;
@@ -1637,14 +1649,11 @@ a.btn {
     border-top: 1px solid var(--neo-shadow-dark);
 }
 
-/* ============================================
-   Footer
-   ============================================ */
+/* footer */
 .footer {
-    background: var(--primary-blue);
-    color: var(--light-text);
+    background: #0D2E9B;
+    color: #ffffff;
     padding: 2rem 0;
-    box-shadow: 0 -8px 24px var(--neo-shadow-dark);
 }
 
 .footer-inner {
@@ -1663,12 +1672,15 @@ a.btn {
 }
 
 .footer-link {
-    color: var(--light-text);
+    color: #ffffff;
     font-size: 0.9rem;
+    font-family: "Lexend Deca", sans-serif;
+    font-weight: 500;
 }
 
 .footer-link:hover {
-    text-decoration: underline;
+    text-decoration: none;
+    color: #a3b1c6;
 }
 
 .footer-copyright {
@@ -1676,9 +1688,7 @@ a.btn {
     opacity: 0.9;
 }
 
-/* ============================================
-   Responsive
-   ============================================ */
+/* for responsive purposes */
 @media (max-width: 992px) {
     .value-cards {
         grid-template-columns: 1fr;
