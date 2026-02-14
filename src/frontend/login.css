@@ -13,7 +13,7 @@
     --neo-bg: #e0e5ec;
     --neo-bg-alt: #d1d9e6;
     --neo-shadow-light: #ffffff;
-    --neo-shadow-dark: #a3b1c6;
+    --neo-shadow-dark: #b3bbca;
     --neo-raised: 8px 8px 16px var(--neo-shadow-dark), -8px -8px 16px var(--neo-shadow-light);
     --neo-raised-hover: 12px 12px 24px var(--neo-shadow-dark), -12px -12px 24px var(--neo-shadow-light);
     --neo-pressed: inset 4px 4px 8px var(--neo-shadow-dark), inset -4px -4px 8px var(--neo-shadow-light);
@@ -220,8 +220,8 @@ a.btn {
 }
 
 .btn-lg {
-    padding: 0.75rem 1.5rem;
-    font-size: 1rem;
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
 }
 
 .btn-block {
@@ -1098,11 +1098,11 @@ a.btn {
 
 .form-input {
     width: 100%;
-    padding: 0.6rem 0.75rem;
+    padding: 0.5rem 0.6rem;
     border: none;
     border-radius: var(--neo-radius);
     font-family: inherit;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     background: var(--neo-bg);
     box-shadow: var(--neo-pressed);
 }
@@ -1535,14 +1535,34 @@ a.btn {
     align-items: center;
     justify-content: center;
     padding: 6rem 1rem 4rem;
+    position: relative;
+}
+
+.auth-back-link {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: var(--primary-blue);
+    font-size: 1rem;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: var(--neo-radius);
+    background: var(--neo-bg);
+    box-shadow: var(--neo-raised);
+    transition: box-shadow 0.2s ease;
+}
+
+.auth-back-link:hover {
+    box-shadow: var(--neo-raised-hover);
 }
 
 .auth-container {
     width: 100%;
-    max-width: 420px;
+    max-width: 340px;
     border: none;
     border-radius: var(--neo-radius-lg);
-    padding: 2rem;
+    padding: 1rem;
     background: var(--neo-bg);
     box-shadow: var(--neo-raised);
 }
@@ -1571,7 +1591,7 @@ a.btn {
 
 .auth-tab[href*="#login"] {
     color: var(--primary-blue);
-    border-bottom: 2px solid var(--primary-blue);
+    border-bottom: px solid var(--primary-blue);
     margin-bottom: -1px;
 }
 
@@ -1615,7 +1635,7 @@ a.btn {
 }
 
 .auth-form .form-row {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
 }
 
 .auth-forgot {
@@ -1630,7 +1650,7 @@ a.btn {
 }
 
 .auth-form .btn {
-    margin-top: 0.5rem;
+    margin-top: 0.25rem;
 }
 
 .auth-note {

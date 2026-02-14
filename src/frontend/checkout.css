@@ -1,16 +1,9 @@
-/* ============================================
-   RENTROPY – Neomorphism UI + Color Palette
-   ============================================ */
-:root {
-    /* Brand palette (unchanged) */
-    --primary-blue: #1a2b75;
+:root {    --primary-blue: #1a2b75;
     --accent-blue: #007bff;
     --dark-text: #333333;
     --light-text: #ffffff;
     --hero-gradient-start: #0D2E9B;
-    --hero-gradient-end: #ffffff;
-    /* Neomorphism */
-    --neo-bg: #e0e5ec;
+    --hero-gradient-end: #ffffff;    --neo-bg: #e0e5ec;
     --neo-bg-alt: #d1d9e6;
     --neo-shadow-light: #ffffff;
     --neo-shadow-dark: #a3b1c6;
@@ -19,7 +12,6 @@
     --neo-pressed: inset 4px 4px 8px var(--neo-shadow-dark), inset -4px -4px 8px var(--neo-shadow-light);
     --neo-radius: 1rem;
     --neo-radius-lg: 1.25rem;
-    /* Legacy aliases for compatibility */
     --main-bg: var(--neo-bg);
     --search-bg: var(--neo-bg);
     --signup-btn-bg: var(--neo-bg);
@@ -65,9 +57,6 @@ img {
     padding: 0 1.5rem;
 }
 
-/* ============================================
-   Header / Navigation (neomorphism)
-   ============================================ */
 .header {
     position: fixed;
     top: 0;
@@ -82,7 +71,7 @@ img {
     transition: opacity 0.2s ease;
 }
 
-body:not(.hero-page):not(.no-nav-bg) .header {
+body:not(.hero-page) .header {
     background: var(--neo-bg);
     box-shadow: var(--neo-raised);
 }
@@ -116,7 +105,7 @@ body:not(.hero-page):not(.no-nav-bg) .header {
 
 .logo-img {
     display: block;
-    height: 3.5rem;
+    height: 3.9rem;
     width: auto;
 }
 
@@ -130,9 +119,10 @@ body:not(.hero-page):not(.no-nav-bg) .header {
 }
 
 .nav-link {
-    color: var(--dark-text);
-    font-weight: 500;
-    font-size: 0.95rem;
+    color: #3c4142;
+    font-weight: regular;
+    font-size: 1.1rem;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .nav-link:hover {
@@ -152,65 +142,64 @@ body:not(.hero-page):not(.no-nav-bg) .header {
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1.25rem;
-    color: var(--dark-text);
-    border-radius: var(--neo-radius);
-    background: var(--neo-bg);
+    border-radius: 10px;
     box-shadow: var(--neo-raised);
-    transition: box-shadow 0.2s, color 0.2s;
 }
 
 .header-cart:hover,
 .header-cart--active {
-    box-shadow: var(--neo-pressed);
-    color: var(--primary-blue);
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
 }
 
 .nav-link--active {
-    color: var(--primary-blue);
-    font-weight: 600;
+    color: #142EBD;
+    font-weight: regular;
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 1.1rem;
 }
 
 .btn {
     padding: 0.5rem 1.25rem;
-    border-radius: var(--neo-radius);
     font-family: inherit;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     border: none;
+    border-radius: 10px;
+    font-family: "Lexend Deca", sans-serif;
     transition: box-shadow 0.2s, transform 0.15s, filter 0.2s;
 }
 
 .btn-signup {
-    background: var(--neo-bg);
-    color: var(--dark-text);
-    box-shadow: var(--neo-raised);
+    background: #A7AFC2;
+    color: #0D0C0C;
 }
 
 .btn-signup:hover {
-    box-shadow: var(--neo-pressed);
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
 }
 
 .btn-login {
-    background: var(--primary-blue);
-    color: var(--light-text);
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -2px -2px 6px rgba(255, 255, 255, 0.1);
+    background: #142EBD;
+    color: #E6E6E6;
 }
 
 .btn-login:hover {
-    filter: brightness(1.1);
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.25), -2px -2px 8px rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .btn-primary {
-    background: var(--primary-blue);
-    color: var(--light-text);
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -2px -2px 6px rgba(255, 255, 255, 0.1);
+    background: #0D2E9B;
+    color: #FFFFFF;
 }
 
 .btn-primary:hover {
-    filter: brightness(1.1);
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.25), -2px -2px 8px rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
 a.btn {
@@ -234,19 +223,16 @@ a.btn {
 }
 
 .btn-outline {
-    background: var(--neo-bg);
-    color: var(--primary-blue);
+    color: #0D2E9B;
     border: none;
     box-shadow: var(--neo-raised);
 }
 
 .btn-outline:hover {
-    box-shadow: var(--neo-pressed);
+    transform: scale(1.05);
 }
 
-/* ============================================
-   Hero Section – semi-circular gradient
-   ============================================ */
+/* hero */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -597,29 +583,27 @@ a.btn {
     justify-content: center;
 }
 
-/* ============================================
-   Page shell (listing, product, cart, etc.)
-   ============================================ */
+/* page shell */
 .page-main {
     padding: 5rem 0 4rem;
     min-height: 60vh;
 }
 
 .page-title {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: 2rem;
     font-weight: 700;
-    color: var(--dark-text);
+    color: #000000;
     margin-bottom: 0.5rem;
+    font-family: "Lexend Deca", sans-serif;
+    margin-top: 2rem;
 }
 
 .page-subtitle {
-    color: #666;
+    color: #3c4142;
     margin-bottom: 2rem;
 }
 
-/* ============================================
-   Listing page (filters, toolbar, grid/list)
-   ============================================ */
+/* listing page */
 .listing-page-title {
     grid-column: 1 / -1;
     font-size: 1.5rem;
@@ -1053,12 +1037,14 @@ a.btn {
 }
 
 .step--current {
-    color: var(--primary-blue);
+    color: #0D2E9B;
     font-weight: 600;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .step--done {
-    color: #666;
+    color: #3c4142;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .checkout-layout {
@@ -1075,7 +1061,9 @@ a.btn {
 .checkout-block-title {
     font-size: 1.1rem;
     font-weight: 600;
-    margin-bottom: 1rem;
+    margin-bottom: 1.2rem;
+    color: #000;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .form-row {
@@ -1092,19 +1080,20 @@ a.btn {
     display: block;
     font-size: 0.9rem;
     font-weight: 500;
-    margin-bottom: 0.35rem;
-    color: var(--dark-text);
+    margin-bottom: 0.40 rem;
+    color: #3c4142;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .form-input {
     width: 100%;
     padding: 0.6rem 0.75rem;
     border: none;
-    border-radius: var(--neo-radius);
+    border-radius: 20px;
     font-family: inherit;
     font-size: 0.95rem;
-    background: var(--neo-bg);
-    box-shadow: var(--neo-pressed);
+    font-family: "Lexend Deca", sans-serif;
+    font-weight: 400;
 }
 
 .form-input:focus {
@@ -1127,6 +1116,7 @@ a.btn {
     font-size: 0.9rem;
     color: #666;
     margin-bottom: 1rem;
+    
 }
 
 .payment-methods {
@@ -1134,6 +1124,8 @@ a.btn {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     margin-bottom: 1rem;
+    font-family: "Lexend Deca", sans-serif;
+    color: #3c4142;
 }
 
 .payment-option {
@@ -1141,15 +1133,9 @@ a.btn {
     align-items: center;
     gap: 0.5rem;
     padding: 0.75rem 1rem;
-    border-radius: var(--neo-radius);
-    background: var(--neo-bg);
+    border-radius: 20px;
     box-shadow: var(--neo-pressed);
     cursor: pointer;
-    transition: box-shadow 0.2s, background 0.2s;
-}
-
-.payment-option:hover {
-    box-shadow: var(--neo-raised);
 }
 
 .payment-option input[type="radio"] {
@@ -1159,7 +1145,7 @@ a.btn {
 
 .payment-option input[type="radio"]:checked + .payment-option-label {
     font-weight: 600;
-    color: var(--primary-blue);
+    color: #0D2E9B;
 }
 
 .payment-option-label {
@@ -1231,9 +1217,7 @@ a.btn {
     font-weight: 700;
 }
 
-/* ============================================
-   User dashboard
-   ============================================ */
+/* user dashboard */
 .dashboard-layout {
     display: grid;
     grid-template-columns: 240px 1fr;

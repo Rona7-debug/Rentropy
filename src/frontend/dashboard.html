@@ -10,6 +10,18 @@
     <title>My Dashboard – RENTROPY</title>
 </head>
 <body>
+    <!--
+    Dashboard Documentation:
+    - This page serves as the user dashboard for RENTROPY, displaying personal information and rental activities.
+    - Header: Contains logo, dashboard link, cart, and logout button. Navigation links (Home, Listings, etc.) have been removed for a cleaner dashboard view.
+    - Sidebar: Sticky navigation with user profile info and links to sections. Stretches full height for better layout.
+    - Sections: Tabbed interface controlled by JavaScript. Only one section visible at a time.
+      - Profile: Editable user information (name, email, phone).
+      - My Rentals: Displays current rented items with status (Active/Completed), dates, and provider.
+      - Saved Items: Shows reserved/favorited items for future rental consideration.
+    - JavaScript: Handles section switching, URL hash updates, and default display (Profile on load).
+    - Footer: Standard site footer with links and copyright.
+    -->
     <header class="header">
         <a href="index.html" class="logo">
             <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
@@ -18,7 +30,6 @@
             <a href="index.html" class="nav-link">Home</a>
             <a href="listing.html" class="nav-link">Listings</a>
             <a href="about.html" class="nav-link">About Us</a>
-            <a href="about.html#how-it-works" class="nav-link">How It Works</a>
         </nav>
         <div class="header-actions">
             <a href="dashboard.html" class="nav-link nav-link--active">Dashboard</a>
@@ -29,7 +40,7 @@
 
     <main class="page-main dashboard-page">
         <div class="container">
-            <h1 class="page-title">My dashboard</h1>
+            <h1 class="page-title" style="margin-top: 0.5rem;">My dashboard</h1>
 
             <div class="dashboard-layout">
                 <aside class="dashboard-sidebar">
@@ -42,10 +53,12 @@
                         <a href="#profile" class="dashboard-nav-link active">Profile</a>
                         <a href="#rentals" class="dashboard-nav-link">My rentals</a>
                         <a href="#saved" class="dashboard-nav-link">Saved items</a>
+                        <a href="#history" class="dashboard-nav-link">History</a>
                     </nav>
                 </aside>
 
                 <div class="dashboard-content">
+                    <!-- Profile Section: Displays and allows editing of user personal information -->
                     <section id="profile" class="dashboard-section">
                         <h2 class="dashboard-section-title">Profile</h2>
                         <form class="profile-form">
@@ -65,34 +78,15 @@
                         </form>
                     </section>
 
+                    <!-- My Rentals Section: Displays current rented items with rental details and status -->
                     <section id="rentals" class="dashboard-section">
                         <h2 class="dashboard-section-title">My rentals</h2>
                         <div class="dashboard-cards">
-                            <article class="dashboard-rental-card">
-                                <div class="dashboard-rental-image">
-                                    <img src="https://placehold.co/120x90/7d8ba8/ffffff?text=Tent" alt="" width="120" height="90">
-                                </div>
-                                <div class="dashboard-rental-info">
-                                    <h3 class="dashboard-rental-title">4-Person Camping Tent</h3>
-                                    <p class="dashboard-rental-meta">Mar 1 – Mar 4, 2025 · Green Outdoors Co.</p>
-                                    <span class="badge badge--active">Active</span>
-                                </div>
-                                <a href="#" class="btn btn-signup btn-sm">View details</a>
-                            </article>
-                            <article class="dashboard-rental-card">
-                                <div class="dashboard-rental-image">
-                                    <img src="https://placehold.co/120x90/7d8ba8/ffffff?text=Drill" alt="" width="120" height="90">
-                                </div>
-                                <div class="dashboard-rental-info">
-                                    <h3 class="dashboard-rental-title">Cordless Power Drill</h3>
-                                    <p class="dashboard-rental-meta">Feb 10 – Feb 11, 2025 · ToolShare Local</p>
-                                    <span class="badge badge--done">Completed</span>
-                                </div>
-                                <a href="#" class="btn btn-signup btn-sm">View details</a>
-                            </article>
+                            <!-- Rentals will be loaded dynamically -->
                         </div>
                     </section>
 
+                    <!-- Saved Items Section: Stores reserved/favorited items for future rental consideration. Dynamically loaded from localStorage. -->
                     <section id="saved" class="dashboard-section">
                         <h2 class="dashboard-section-title">Saved items</h2>
                         <div class="listings-grid listings-grid--sm">
@@ -116,6 +110,14 @@
                             </a>
                         </div>
                     </section>
+
+                    <!-- History Section: Displays past transactions -->
+                    <section id="history" class="dashboard-section">
+                        <h2 class="dashboard-section-title">History</h2>
+                        <div class="dashboard-cards">
+                            <!-- Past transactions will be loaded dynamically -->
+                        </div>
+                    </section>
                 </div>
             </div>
         </div>
@@ -131,5 +133,158 @@
             <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
         </div>
     </footer>
+    <script>
+        // Function to show a section and update active link
+        function showSection(sectionId) {
+            // Hide all sections
+            document.querySelectorAll('.dashboard-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            // Show the selected section
+            document.getElementById(sectionId).style.display = 'block';
+            // Update active link
+            document.querySelectorAll('.dashboard-nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            document.querySelector(`a[href="#${sectionId}"]`).classList.add('active');
+        }
+
+        // Add event listeners to sidebar links
+        document.querySelectorAll('.dashboard-nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                showSection(targetId);
+                // Update URL hash without scrolling
+                history.pushState(null, null, `#${targetId}`);
+            });
+        });
+
+        // On page load, check hash or default to profile
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            } else {
+                showSection('profile');
+            }
+        });
+
+        // Handle back/forward navigation
+        window.addEventListener('popstate', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            } else {
+                showSection('profile');
+            }
+        });
+
+        // Load saved items
+        function loadSavedItems() {
+            const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+            const savedContainer = document.querySelector('#saved .listings-grid');
+            savedContainer.innerHTML = '';
+            if (savedItems.length === 0) {
+                savedContainer.innerHTML = '<p>No saved items yet.</p>';
+                return;
+            }
+            savedItems.forEach(item => {
+                const card = document.createElement('a');
+                card.href = `product.html?id=${item.id}`;
+                card.className = 'listing-card';
+                card.innerHTML = `
+                    <div class="listing-card-image">
+                        <img src="${item.image}" alt="${item.name}" width="400" height="260">
+                    </div>
+                    <div class="listing-card-body">
+                        <h3 class="listing-card-title">${item.name}</h3>
+                        <p class="listing-card-price">Rent per day <strong>${item.price}</strong></p>
+                    </div>
+                `;
+                savedContainer.appendChild(card);
+            });
+        }
+
+        // Load rentals
+        function loadRentals() {
+            const rentals = JSON.parse(localStorage.getItem('rentals')) || [];
+            const rentalsContainer = document.querySelector('#rentals .dashboard-cards');
+            rentalsContainer.innerHTML = '';
+            if (rentals.length === 0) {
+                rentalsContainer.innerHTML = '<p>No rentals yet.</p>';
+                return;
+            }
+            rentals.forEach((rental, index) => {
+                const article = document.createElement('article');
+                article.className = 'dashboard-rental-card';
+                article.innerHTML = `
+                    <div class="dashboard-rental-image">
+                        <img src="${rental.image}" alt="${rental.name}" width="120" height="90">
+                    </div>
+                    <div class="dashboard-rental-info">
+                        <h3 class="dashboard-rental-title">${rental.name}</h3>
+                        <p class="dashboard-rental-meta">${rental.dates} · ${rental.provider}</p>
+                        <span class="badge ${rental.status === 'Active' ? 'badge--active' : 'badge--done'}">${rental.status}</span>
+                    </div>
+                    <div>
+                        <a href="#" class="btn btn-signup btn-sm">View details</a>
+                        <button class="btn btn-primary btn-sm mark-completed" data-index="${index}">Item received</button>
+                    </div>
+                `;
+                rentalsContainer.appendChild(article);
+            });
+
+            // Add event listeners for mark completed
+            document.querySelectorAll('.mark-completed').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const index = this.getAttribute('data-index');
+                    const rentals = JSON.parse(localStorage.getItem('rentals')) || [];
+                    const completedRental = rentals.splice(index, 1)[0];
+                    completedRental.status = 'Completed';
+                    const history = JSON.parse(localStorage.getItem('history')) || [];
+                    history.push(completedRental);
+                    localStorage.setItem('rentals', JSON.stringify(rentals));
+                    localStorage.setItem('history', JSON.stringify(history));
+                    loadRentals();
+                    loadHistory();
+                });
+            });
+        }
+
+        // Load history
+        function loadHistory() {
+            const history = JSON.parse(localStorage.getItem('history')) || [];
+            const historyContainer = document.querySelector('#history .dashboard-cards');
+            historyContainer.innerHTML = '';
+            if (history.length === 0) {
+                historyContainer.innerHTML = '<p>No past transactions yet.</p>';
+                return;
+            }
+            history.forEach(transaction => {
+                const article = document.createElement('article');
+                article.className = 'dashboard-rental-card';
+                article.innerHTML = `
+                    <div class="dashboard-rental-image">
+                        <img src="${transaction.image}" alt="${transaction.name}" width="120" height="90">
+                    </div>
+                    <div class="dashboard-rental-info">
+                        <h3 class="dashboard-rental-title">${transaction.name}</h3>
+                        <p class="dashboard-rental-meta">${transaction.dates} · ${transaction.provider}</p>
+                        <span class="badge badge--done">Completed</span>
+                    </div>
+                    <a href="#" class="btn btn-signup btn-sm">View details</a>
+                `;
+                historyContainer.appendChild(article);
+            });
+        }
+
+        // Load saved items on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedItems();
+            loadRentals();
+            loadHistory();
+        });
+    </script>
 </body>
 </html>

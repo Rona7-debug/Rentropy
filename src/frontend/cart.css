@@ -1,15 +1,10 @@
-/* ============================================
-   RENTROPY – Neomorphism UI + Color Palette
-   ============================================ */
 :root {
-    /* Brand palette (unchanged) */
     --primary-blue: #1a2b75;
     --accent-blue: #007bff;
     --dark-text: #333333;
     --light-text: #ffffff;
     --hero-gradient-start: #0D2E9B;
     --hero-gradient-end: #ffffff;
-    /* Neomorphism */
     --neo-bg: #e0e5ec;
     --neo-bg-alt: #d1d9e6;
     --neo-shadow-light: #ffffff;
@@ -19,7 +14,6 @@
     --neo-pressed: inset 4px 4px 8px var(--neo-shadow-dark), inset -4px -4px 8px var(--neo-shadow-light);
     --neo-radius: 1rem;
     --neo-radius-lg: 1.25rem;
-    /* Legacy aliases for compatibility */
     --main-bg: var(--neo-bg);
     --search-bg: var(--neo-bg);
     --signup-btn-bg: var(--neo-bg);
@@ -65,9 +59,6 @@ img {
     padding: 0 1.5rem;
 }
 
-/* ============================================
-   Header / Navigation (neomorphism)
-   ============================================ */
 .header {
     position: fixed;
     top: 0;
@@ -116,7 +107,7 @@ body:not(.hero-page):not(.no-nav-bg) .header {
 
 .logo-img {
     display: block;
-    height: 3.5rem;
+    height: 3.9rem;
     width: auto;
 }
 
@@ -130,9 +121,10 @@ body:not(.hero-page):not(.no-nav-bg) .header {
 }
 
 .nav-link {
-    color: var(--dark-text);
-    font-weight: 500;
-    font-size: 0.95rem;
+    color: #3c4142;
+    font-weight: regular;
+    font-size: 1.1rem;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .nav-link:hover {
@@ -152,65 +144,64 @@ body:not(.hero-page):not(.no-nav-bg) .header {
     width: 2.5rem;
     height: 2.5rem;
     font-size: 1.25rem;
-    color: var(--dark-text);
-    border-radius: var(--neo-radius);
-    background: var(--neo-bg);
+    border-radius: 10px;
     box-shadow: var(--neo-raised);
-    transition: box-shadow 0.2s, color 0.2s;
 }
 
 .header-cart:hover,
 .header-cart--active {
-    box-shadow: var(--neo-pressed);
-    color: var(--primary-blue);
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
 }
 
 .nav-link--active {
-    color: var(--primary-blue);
-    font-weight: 600;
+    color: #142EBD;
+    font-weight: regular;
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 1.1rem;
 }
 
 .btn {
     padding: 0.5rem 1.25rem;
-    border-radius: var(--neo-radius);
     font-family: inherit;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     border: none;
+    border-radius: 10px;
+    font-family: "Lexend Deca", sans-serif;
     transition: box-shadow 0.2s, transform 0.15s, filter 0.2s;
 }
 
 .btn-signup {
-    background: var(--neo-bg);
-    color: var(--dark-text);
-    box-shadow: var(--neo-raised);
+    background: #A7AFC2;
+    color: #0D0C0C;
 }
 
 .btn-signup:hover {
-    box-shadow: var(--neo-pressed);
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
 }
 
 .btn-login {
-    background: var(--primary-blue);
-    color: var(--light-text);
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -2px -2px 6px rgba(255, 255, 255, 0.1);
+    background: #142EBD;
+    color: #E6E6E6;
 }
 
 .btn-login:hover {
-    filter: brightness(1.1);
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.25), -2px -2px 8px rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+    transition: transform 0.2s ease;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .btn-primary {
-    background: var(--primary-blue);
-    color: var(--light-text);
-    box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.2), -2px -2px 6px rgba(255, 255, 255, 0.1);
+    background: #0D2E9B;
+    color: #FFFFFF;
 }
 
 .btn-primary:hover {
-    filter: brightness(1.1);
-    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.25), -2px -2px 8px rgba(255, 255, 255, 0.15);
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
 }
 
 a.btn {
@@ -244,9 +235,7 @@ a.btn {
     box-shadow: var(--neo-pressed);
 }
 
-/* ============================================
-   Hero Section – semi-circular gradient
-   ============================================ */
+/* hero */
 .hero {
     position: relative;
     min-height: 100vh;
@@ -597,19 +586,20 @@ a.btn {
     justify-content: center;
 }
 
-/* ============================================
-   Page shell (listing, product, cart, etc.)
-   ============================================ */
+/* Page shell (listing, product, cart, etc.) */
+
 .page-main {
     padding: 5rem 0 4rem;
     min-height: 60vh;
 }
 
 .page-title {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-size: 2rem;
     font-weight: 700;
-    color: var(--dark-text);
+    color: #000;
     margin-bottom: 0.5rem;
+    margin-top: 3rem;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .page-subtitle {
@@ -987,12 +977,21 @@ a.btn {
 }
 
 .cart-item-remove {
-    font-size: 1.5rem;
-    color: #999;
-    line-height: 1;
+    background: var(--neo-bg);
+    border: none;
+    border-radius: var(--neo-radius);
+    padding: 0.5rem 1rem;
+    box-shadow: var(--neo-raised);
+    color: var(--dark-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, color 0.2s ease;
+    margin-top: 0.5rem;
 }
 
 .cart-item-remove:hover {
+    box-shadow: var(--neo-raised-hover);
     color: #c00;
 }
 
@@ -1007,9 +1006,10 @@ a.btn {
 }
 
 .cart-summary-title {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .cart-summary-rows {
@@ -1029,6 +1029,17 @@ a.btn {
     font-weight: 700;
     padding-top: 0.5rem;
     border-top: 1px solid var(--neo-shadow-dark);
+}
+
+.btn-primary {
+    margin-top: 1rem;
+    background: #0D2E9B;
+    color: #FFFFFF;
+}
+
+.btn-primary:hover {
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
 }
 
 .cart-continue {
@@ -1076,6 +1087,7 @@ a.btn {
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .form-row {
@@ -1101,7 +1113,7 @@ a.btn {
     padding: 0.6rem 0.75rem;
     border: none;
     border-radius: var(--neo-radius);
-    font-family: inherit;
+    font-family: "Lexend Deca", sans-serif;
     font-size: 0.95rem;
     background: var(--neo-bg);
     box-shadow: var(--neo-pressed);
@@ -1158,7 +1170,9 @@ a.btn {
     display: flex;
     justify-content: space-between;
     padding: 0.35rem 0;
-    font-size: 0.9rem;
+    font-weight: 500;
+    font-size: 1rem;
+    font-family: "Lexend Deca", sans-serif;
 }
 
 .checkout-order-totals {
@@ -1179,9 +1193,8 @@ a.btn {
     font-weight: 700;
 }
 
-/* ============================================
-   User dashboard
-   ============================================ */
+/* user dashboard */
+
 .dashboard-layout {
     display: grid;
     grid-template-columns: 240px 1fr;
@@ -1337,9 +1350,7 @@ a.btn {
     grid-template-columns: repeat(2, 1fr);
 }
 
-/* ============================================
-   Brand dashboard
-   ============================================ */
+/* brand dashboard */
 .dashboard-table-wrap {
     overflow-x: auto;
     border-radius: var(--neo-radius-lg);
@@ -1641,48 +1652,7 @@ a.btn {
     border-top: 1px solid var(--neo-shadow-dark);
 }
 
-/* ============================================
-   Footer
-   ============================================ */
-.footer {
-    background: var(--primary-blue);
-    color: var(--light-text);
-    padding: 2rem 0;
-    box-shadow: 0 -8px 24px var(--neo-shadow-dark);
-}
-
-.footer-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1rem;
-    text-align: center;
-}
-
-.footer-nav {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-}
-
-.footer-link {
-    color: var(--light-text);
-    font-size: 0.9rem;
-}
-
-.footer-link:hover {
-    text-decoration: underline;
-}
-
-.footer-copyright {
-    font-size: 0.85rem;
-    opacity: 0.9;
-}
-
-/* ============================================
-   Responsive
-   ============================================ */
+/* responsive */
 @media (max-width: 992px) {
     .value-cards {
         grid-template-columns: 1fr;
@@ -1797,6 +1767,11 @@ a.btn {
         grid-column: 2;
         grid-row: 1;
         justify-self: end;
+        background: #000;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
     }
 
     .form-row--2 {
