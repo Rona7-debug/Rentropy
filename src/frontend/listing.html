@@ -27,6 +27,20 @@
         </div>
     </header>
 
+    <div class="search-bubble-overlay" id="search-bubble" aria-hidden="true">
+        <form class="search-bubble-form" action="listing.html" method="get">
+            <div class="search-bubble">
+                <input type="search" name="q" class="search-bubble-input" placeholder="Search listings..." aria-label="Search">
+                <button type="submit" class="search-bubble-btn" aria-label="Search">
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                </button>
+            </div>
+        </form>
+    </div>
+
     <main class="page-main">
         <div class="container page-layout">
             <h1 class="listing-page-title">All product listings</h1>
@@ -659,13 +673,31 @@
     <script>
         (function () {
             var header = document.querySelector('.header');
+            var searchBubble = document.getElementById('search-bubble');
             var fadeDistance = 400;
+            var bubbleShowScroll = 180;
+
             function updateNavOpacity() {
                 var opacity = 1 - window.scrollY / fadeDistance;
                 header.style.opacity = Math.max(0, Math.min(1, opacity));
             }
-            window.addEventListener('scroll', updateNavOpacity, { passive: true });
+
+            function updateSearchBubble() {
+                if (window.scrollY > bubbleShowScroll) {
+                    searchBubble.classList.add('search-bubble-overlay--visible');
+                    searchBubble.setAttribute('aria-hidden', 'false');
+                } else {
+                    searchBubble.classList.remove('search-bubble-overlay--visible');
+                    searchBubble.setAttribute('aria-hidden', 'true');
+                }
+            }
+
+            window.addEventListener('scroll', function () {
+                updateNavOpacity();
+                updateSearchBubble();
+            }, { passive: true });
             updateNavOpacity();
+            updateSearchBubble();
         })();
     </script>
 </body>
