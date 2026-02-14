@@ -10,21 +10,6 @@
     <title>Login / Sign up – RENTROPY</title>
 </head>
 <body>
-    <header class="header">
-        <a href="index.html" class="logo">
-            <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
-        </a>
-        <nav class="nav">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="listing.html" class="nav-link">Listings</a>
-            <a href="about.html" class="nav-link">About Us</a>
-            <a href="about.html#how-it-works" class="nav-link">How It Works</a>
-        </nav>
-        <div class="header-actions">
-            <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
-        </div>
-    </header>
-
     <main class="page-main auth-page">
         <div class="auth-container">
             <div class="auth-tabs">
@@ -47,17 +32,12 @@
                     <a href="#" class="auth-forgot">Forgot password?</a>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Log in</button>
                 </form>
-                <p class="auth-note">Placeholder for Firebase Auth or your auth provider. Wire form submit to your backend or Firebase Auth UI.</p>
             </div>
 
             <div id="signup" class="auth-panel auth-panel--signup">
                 <h1 class="auth-title">Create an account</h1>
                 <p class="auth-subtitle">Join RENTROPY to rent or list gear in your community.</p>
                 <form class="auth-form" action="#" method="post">
-                    <div class="form-row">
-                        <label class="form-label" for="signup-name">Full name</label>
-                        <input type="text" id="signup-name" name="name" class="form-input" placeholder="Jane Doe" required autocomplete="name">
-                    </div>
                     <div class="form-row">
                         <label class="form-label" for="signup-email">Email</label>
                         <input type="email" id="signup-email" name="email" class="form-input" placeholder="you@example.com" required autocomplete="email">
@@ -68,20 +48,8 @@
                     </div>
                     <button type="submit" class="btn btn-primary btn-lg btn-block">Sign up</button>
                 </form>
-                <p class="auth-note">Replace with Firebase Auth UI (e.g. firebase.auth()) or your custom backend. This is a static form placeholder.</p>
             </div>
         </div>
     </main>
-
-    <footer class="footer">
-        <div class="container footer-inner">
-            <nav class="footer-nav">
-                <a href="about.html" class="footer-link">About Us</a>
-                <a href="about.html#contact" class="footer-link">Contact</a>
-                <a href="#terms" class="footer-link">Terms of Service</a>
-            </nav>
-            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 </html>
