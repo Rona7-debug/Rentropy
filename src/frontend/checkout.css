@@ -78,7 +78,7 @@ img {
     transition: opacity 0.2s ease;
 }
 
-body:not(.hero-page) .header {
+body:not(.hero-page):not(.no-nav-bg) .header {
     background: var(--neo-bg);
     box-shadow: var(--neo-raised);
 }
@@ -1125,8 +1125,60 @@ a.btn {
     margin-bottom: 1rem;
 }
 
-.payment-placeholder {
-    opacity: 0.8;
+.payment-methods {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.payment-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--neo-radius);
+    background: var(--neo-bg);
+    box-shadow: var(--neo-pressed);
+    cursor: pointer;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+
+.payment-option:hover {
+    box-shadow: var(--neo-raised);
+}
+
+.payment-option input[type="radio"] {
+    margin: 0;
+    accent-color: var(--primary-blue);
+}
+
+.payment-option input[type="radio"]:checked + .payment-option-label {
+    font-weight: 600;
+    color: var(--primary-blue);
+}
+
+.payment-option-label {
+    font-size: 0.95rem;
+}
+
+.payment-details {
+    margin-top: 1rem;
+}
+
+.payment-details-hint {
+    font-size: 0.9rem;
+    color: var(--muted-text, #666);
+    margin-bottom: 0.75rem;
+}
+
+.payment-details--card {
+    display: none;
+    padding-top: 0.5rem;
+}
+
+.checkout-block--payment:has(input[value="card"]:checked) .payment-details--card {
+    display: block;
 }
 
 .checkout-order {
@@ -1796,6 +1848,10 @@ a.btn {
     }
 
     .form-row--2 {
+        grid-template-columns: 1fr;
+    }
+
+    .payment-methods {
         grid-template-columns: 1fr;
     }
 }
