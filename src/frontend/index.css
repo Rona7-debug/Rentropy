@@ -159,8 +159,10 @@ body:not(.hero-page) .header {
 }
 
 .nav-link--active {
-    color: var(--primary-blue);
-    font-weight: 600;
+    color: #142EBD;
+    font-weight: regular;
+    font-family: "Lexend Deca", sans-serif;
+    font-size: 1.1rem;
 }
 
 .btn {
