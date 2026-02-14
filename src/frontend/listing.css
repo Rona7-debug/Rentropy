@@ -78,7 +78,7 @@ img {
     transition: opacity 0.2s ease;
 }
 
-body:not(.hero-page) .header {
+body:not(.hero-page):not(.no-nav-bg) .header {
     background: var(--neo-bg);
     box-shadow: var(--neo-raised);
 }
