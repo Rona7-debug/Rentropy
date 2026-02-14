@@ -83,20 +83,12 @@
 
                     <div class="filter-group">
 
-                        <label class="filter-label">Price per day</label>
+                        <label class="filter-label">Price range</label>
 
-                        <select name="price" class="filter-select">
-
-                            <option value="">Any</option>
-                            
-                            <option value="0-10">₱0 – ₱100</option>
-
-                            <option value="10-25">₱100– ₱250</option>
-
-                            <option value="25-50">₱250 – ₱500</option>
-
-                            <option value="50+">₱500+</option>
-                        </select>
+                        <div class="price-range">
+                            <input type="number" name="price_from" class="filter-input" placeholder="From ₱" min="0">
+                            <input type="number" name="price_to" class="filter-input" placeholder="To ₱" min="0">
+                        </div>
 
                     </div>
 
@@ -137,186 +129,6 @@
                 </form>
 
                 <div class="listings-grid listings-grid--page" data-view="grid">
-                    <a href="product.html?id=1" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/camping tent.jpg" alt="Camping Tent" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">4-Person Camping Tent</h3>
-                            <p class="listing-card-meta">Outdoor </p>
-                            <p class="listing-card-price">Price <strong>from ₱200</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=2" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/camera.webp" alt="Camera" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">DSLR Camera Kit</h3>
-                            <p class="listing-card-meta">Electronics</p>
-                            <p class="listing-card-price">Price <strong>from ₱1,200</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=3" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/istockphoto-184639599-612x612.jpg" alt="Power Drill" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Cordless Power Drill</h3>
-                            <p class="listing-card-meta">Tools</p>
-                            <p class="listing-card-price">Price <strong>from ₱800</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=4" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/designer bag.jpg" alt="Designer Bag" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Designer Handbag</h3>
-                            <p class="listing-card-meta">Fashion</p>
-                            <p class="listing-card-price">Price <strong>from ₱2,500</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=5" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/road bike.jpg" alt="Road Bike" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Road Bike</h3>
-                            <p class="listing-card-meta">Outdoor</p>
-                            <p class="listing-card-price">Price <strong>from ₱1,800</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=6" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/projector.jpg" alt="Projector" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">HD Projector</h3>
-                            <p class="listing-card-meta">Electronics</p>
-                            <p class="listing-card-price">Price <strong>from ₱1,500</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=7" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/kayak.jpg" alt="Kayak" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">2-Person Kayak</h3>
-                            <p class="listing-card-meta">Outdoor</p>
-                            <p class="listing-card-price">Price <strong>from ₱3,500</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=8" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/sleeping bag.webp" alt="Sleeping Bag" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Winter Sleeping Bag</h3>
-                            <p class="listing-card-meta">Outdoor</p>
-                            <p class="listing-card-price">Price <strong>from ₱1,200</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=9" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/blazer.jpg" alt="Blazer" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Men's Wool Blazer</h3>
-                            <p class="listing-card-meta">Fashion</p>
-                            <p class="listing-card-price">Price <strong>from ₱2,800</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=10" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/lawn mower.jpg" alt="Lawn Mower" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Electric Lawn Mower</h3>
-                            <p class="listing-card-meta">Tools</p>
-                            <p class="listing-card-price">Price <strong>from ₱800</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=11" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/gimbal.jpg" alt="Gimbal" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Camera Gimbal Stabilizer</h3>
-                            <p class="listing-card-meta">Electronics</p>
-                            <p class="listing-card-price">Price <strong>from ₱1,500</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=12" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/backpack.jpg" alt="Backpack" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">60L Hiking Backpack</h3>
-                            <p class="listing-card-meta">Outdoor</p>
-                            <p class="listing-card-price">Price <strong>from ₱1,200</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=13" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/evening gown.jpg" alt="Evening Gown" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Evening Gown</h3>
-                            <p class="listing-card-meta">Fashion</p>
-                            <p class="listing-card-price">Price <strong>from ₱2,800</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=14" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/pressure washer.webp" alt="Pressure Washer" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Pressure Washer</h3>
-                            <p class="listing-card-meta">Tools</p>
-                            <p class="listing-card-price">Price <strong>from ₱8,500</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=15" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/monitor.webp" alt="Monitor" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">27" 4K Monitor</h3>
-                            <p class="listing-card-meta">Electronics</p>
-                            <p class="listing-card-price">Price <strong>from ₱15,000</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=16" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/camping stove.jpg" alt="Camping Stove" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Portable Camping Stove</h3>
-                            <p class="listing-card-meta">Outdoor</p>
-                            <p class="listing-card-price">Price <strong>from ₱1,200</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=17" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/suit.png" alt="Suit" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Formal Suit</h3>
-                            <p class="listing-card-meta">Fashion</p>
-                            <p class="listing-card-price">Price <strong>from ₱2,800</strong></p>
-                        </div>
-                    </a>
-                    <a href="product.html?id=18" class="listing-card">
-                        <div class="listing-card-image">
-                            <img src="../assets/circular saw.webp" alt="Circular Saw" width="400" height="260">
-                        </div>
-                        <div class="listing-card-body">
-                            <h3 class="listing-card-title">Circular Saw</h3>
-                            <p class="listing-card-meta">Tools</p>
-                            <p class="listing-card-price">Price <strong>from ₱8,500</strong></p>
-                        </div>
-                    </a>
                 </div>
             </div>
         </div>
@@ -336,6 +148,120 @@
     </footer>
     
     <script>
+        // Items data
+        const items = [
+            { id: '1', name: '4-Person Camping Tent', category: 'outdoor', price: '₱200', image: '../assets/camping tent.jpg', brand: 'Green Outdoors Co.' },
+            { id: '2', name: 'DSLR Camera Kit', category: 'electronics', price: '₱1,200', image: '../assets/camera.webp', brand: 'Camera Brand' },
+            { id: '3', name: 'Cordless Power Drill', category: 'tools', price: '₱800', image: '../assets/istockphoto-184639599-612x612.jpg', brand: 'Tool Co.' },
+            { id: '4', name: 'Designer Handbag', category: 'fashion', price: '₱2,500', image: '../assets/designer bag.jpg', brand: 'Fashion Brand' },
+            { id: '5', name: 'Road Bike', category: 'outdoor', price: '₱1,800', image: '../assets/road bike.jpg', brand: 'Bike Co.' },
+            { id: '6', name: 'HD Projector', category: 'electronics', price: '₱1,500', image: '../assets/projector.jpg', brand: 'Projector Brand' },
+            { id: '7', name: '2-Person Kayak', category: 'outdoor', price: '₱3,500', image: '../assets/kayak.jpg', brand: 'Kayak Co.' },
+            { id: '8', name: 'Winter Sleeping Bag', category: 'outdoor', price: '₱1,200', image: '../assets/sleeping bag.webp', brand: 'Outdoor Gear' },
+            { id: '9', name: 'Men\'s Wool Blazer', category: 'fashion', price: '₱2,800', image: '../assets/blazer.jpg', brand: 'Fashion Co.' },
+            { id: '10', name: 'Electric Lawn Mower', category: 'tools', price: '₱800', image: '../assets/lawn mower.jpg', brand: 'Tool Brand' },
+            { id: '11', name: 'Camera Gimbal Stabilizer', category: 'electronics', price: '₱1,500', image: '../assets/gimbal.jpg', brand: 'Gimbal Co.' },
+            { id: '12', name: '60L Hiking Backpack', category: 'outdoor', price: '₱1,200', image: '../assets/backpack.jpg', brand: 'Backpack Brand' },
+            { id: '13', name: 'Evening Gown', category: 'fashion', price: '₱2,800', image: '../assets/evening gown.jpg', brand: 'Fashion Brand' },
+            { id: '14', name: 'Pressure Washer', category: 'tools', price: '₱8,500', image: '../assets/pressure washer.webp', brand: 'Tool Co.' },
+            { id: '15', name: '27" 4K Monitor', category: 'electronics', price: '₱15,000', image: '../assets/monitor.webp', brand: 'Monitor Brand' },
+            { id: '16', name: 'Portable Camping Stove', category: 'outdoor', price: '₱1,200', image: '../assets/camping stove.jpg', brand: 'Camping Gear' },
+            { id: '17', name: 'Formal Suit', category: 'fashion', price: '₱2,800', image: '../assets/suit.png', brand: 'Suit Brand' },
+            { id: '18', name: 'Circular Saw', category: 'tools', price: '₱8,500', image: '../assets/circular saw.webp', brand: 'Tool Co.' }
+        ];
+
+        function renderListings(filteredItems) {
+            const grid = document.querySelector('.listings-grid');
+            grid.innerHTML = '';
+            if (filteredItems.length === 0) {
+                grid.innerHTML = '<p>No listings found.</p>';
+                return;
+            }
+            filteredItems.forEach(item => {
+                const card = document.createElement('a');
+                card.href = `product.html?id=${item.id}`;
+                card.className = 'listing-card';
+                card.innerHTML = `
+                    <div class="listing-card-image">
+                        <img src="${item.image}" alt="${item.name}" width="400" height="260">
+                    </div>
+                    <div class="listing-card-body">
+                        <h3 class="listing-card-title">${item.name}</h3>
+                        <p class="listing-card-meta">${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</p>
+                        <p class="listing-card-price">Price <strong>${item.price}</strong></p>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterItems() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category') || '';
+            const priceFrom = parseInt(urlParams.get('price_from')) || 0;
+            const priceTo = parseInt(urlParams.get('price_to')) || Infinity;
+            const location = urlParams.get('location') || '';
+            const q = urlParams.get('q') || '';
+
+            let filtered = items;
+
+            if (category) {
+                filtered = filtered.filter(item => item.category === category);
+            }
+
+            filtered = filtered.filter(item => {
+                const itemPrice = parseInt(item.price.replace(/[₱$,]/g, '').replace(/,/g, ''));
+                return itemPrice >= priceFrom && itemPrice <= priceTo;
+            });
+
+            if (q) {
+                filtered = filtered.filter(item => item.name.toLowerCase().includes(q.toLowerCase()) || item.brand.toLowerCase().includes(q.toLowerCase()));
+            }
+
+            renderListings(filtered);
+        }
+
+        // On load, filter and render
+        document.addEventListener('DOMContentLoaded', function() {
+            filterItems();
+            // Set filter values from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            document.querySelector('select[name="category"]').value = urlParams.get('category') || '';
+            document.querySelector('input[name="price_from"]').value = urlParams.get('price_from') || '';
+            document.querySelector('input[name="price_to"]').value = urlParams.get('price_to') || '';
+            document.querySelector('input[name="location"]').value = urlParams.get('location') || '';
+            document.querySelector('input[name="q"]').value = urlParams.get('q') || '';
+
+            // Add event listeners for real-time filtering
+            document.querySelector('select[name="category"]').addEventListener('change', updateFilters);
+            document.querySelector('input[name="price_from"]').addEventListener('input', updateFilters);
+            document.querySelector('input[name="price_to"]').addEventListener('input', updateFilters);
+            document.querySelector('input[name="location"]').addEventListener('input', updateFilters);
+        });
+
+        function updateFilters() {
+            const category = document.querySelector('select[name="category"]').value;
+            const priceFrom = document.querySelector('input[name="price_from"]').value;
+            const priceTo = document.querySelector('input[name="price_to"]').value;
+            const location = document.querySelector('input[name="location"]').value;
+            const q = document.querySelector('input[name="q"]').value;
+
+            // Build URL
+            const params = new URLSearchParams();
+            if (category) params.set('category', category);
+            if (priceFrom) params.set('price_from', priceFrom);
+            if (priceTo) params.set('price_to', priceTo);
+            if (location) params.set('location', location);
+            if (q) params.set('q', q);
+
+            // Update URL without reload
+            const newUrl = params.toString() ? `listing.html?${params.toString()}` : 'listing.html';
+            window.history.pushState({}, '', newUrl);
+
+            // Filter and render
+            filterItems();
+        }
+
         (function () {
             var header = document.querySelector('.header');
             var searchBubble = document.getElementById('search-bubble');
