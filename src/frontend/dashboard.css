@@ -1334,6 +1334,139 @@ a.btn {
     box-shadow: var(--neo-pressed);
 }
 
+/* Rental details modal */
+.rental-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.rental-modal--open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.rental-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.rental-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    max-height: 90vh;
+    overflow: auto;
+    background: var(--neo-bg);
+    border-radius: var(--neo-radius-lg);
+    box-shadow: var(--neo-raised);
+    padding: 0;
+}
+
+.rental-modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--neo-shadow-dark);
+}
+
+.rental-modal-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin: 0;
+}
+
+.rental-modal-close {
+    background: var(--neo-bg);
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    border-radius: var(--neo-radius);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    color: var(--dark-text);
+    box-shadow: var(--neo-pressed);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.rental-modal-close:hover {
+    box-shadow: var(--neo-raised);
+}
+
+.rental-modal-body {
+    padding: 1.25rem;
+}
+
+.rental-detail-block {
+    margin-bottom: 1.25rem;
+}
+
+.rental-detail-block:last-child {
+    margin-bottom: 0;
+}
+
+.rental-detail-heading {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary-blue);
+    margin: 0 0 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.rental-detail-product {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+}
+
+.rental-detail-image {
+    width: 120px;
+    height: auto;
+    aspect-ratio: 160/105;
+    object-fit: cover;
+    border-radius: var(--neo-radius);
+    box-shadow: var(--neo-pressed);
+}
+
+.rental-detail-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.rental-detail-name {
+    font-weight: 600;
+    color: var(--dark-text);
+    margin: 0 0 0.5rem;
+}
+
+.rental-detail-dates,
+.rental-detail-provider {
+    font-size: 0.9rem;
+    color: var(--dark-text);
+    margin: 0 0 0.35rem;
+}
+
+.rental-detail-payment {
+    font-size: 0.95rem;
+    color: var(--dark-text);
+    margin: 0;
+}
+
 .listings-grid--sm {
     grid-template-columns: repeat(2, 1fr);
 }

@@ -1181,40 +1181,117 @@ a.btn {
     box-shadow: var(--neo-raised);
 }
 
-.checkout-order-title {
-    font-size: 1.1rem;
+/* Order summary – same structure and look as cart page */
+.checkout-order .cart-summary-title {
+    font-size: 1.2rem;
     font-weight: 600;
     margin-bottom: 1rem;
+    color: var(--primary-blue);
+    font-family: "Lexend Deca", sans-serif;
 }
 
-.checkout-order-items {
-    list-style: none;
+.checkout-order .cart-summary-rental {
     margin-bottom: 1rem;
 }
 
-.checkout-order-items li {
+.checkout-order .cart-summary-rental-block {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 0.75rem 1rem;
+    background: rgba(26, 43, 117, 0.08);
+    border-radius: var(--neo-radius);
+    border-left: 4px solid var(--primary-blue);
+}
+
+.checkout-order .cart-summary-rental-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary-blue);
+}
+
+.checkout-order .cart-summary-rental-value {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--dark-text);
+}
+
+.checkout-order .cart-summary-rental-days {
+    font-size: 0.85rem;
+    color: var(--dark-text);
+}
+
+.checkout-order .cart-summary-items {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    max-height: 180px;
+    overflow-y: auto;
+}
+
+.checkout-order .cart-summary-item-row {
     display: flex;
     justify-content: space-between;
-    padding: 0.35rem 0;
+    align-items: flex-start;
+    gap: 0.5rem;
     font-size: 0.9rem;
 }
 
-.checkout-order-totals {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 0.5rem 1.5rem;
+.checkout-order .cart-summary-item-name {
+    color: var(--dark-text);
+    flex: 1;
+    min-width: 0;
+}
+
+.checkout-order .cart-summary-item-value {
+    color: var(--primary-blue);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.checkout-order .cart-summary-totals {
+    margin: 0 0 1rem;
+    padding-top: 1rem;
+    border-top: 2px solid var(--neo-shadow-dark);
+}
+
+.checkout-order .cart-summary-totals .cart-summary-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.35rem 0;
+}
+
+.checkout-order .cart-summary-totals dt,
+.checkout-order .cart-summary-totals dd {
+    margin: 0;
+    font-size: 0.95rem;
+}
+
+.checkout-order .cart-summary-totals .cart-summary-subtotal dt,
+.checkout-order .cart-summary-totals .cart-summary-subtotal dd {
+    color: var(--dark-text);
+}
+
+.checkout-order .cart-summary-totals .cart-summary-fee dt,
+.checkout-order .cart-summary-totals .cart-summary-fee dd {
+    color: var(--dark-text);
+}
+
+.checkout-order .cart-summary-totals .cart-summary-grand-total {
+    margin-top: 0.5rem;
     padding-top: 0.75rem;
     border-top: 1px solid var(--neo-shadow-dark);
 }
 
-.checkout-order-totals dt,
-.checkout-order-totals dd {
-    margin: 0;
-}
-
-.checkout-order-total {
-    font-size: 1.1rem;
+.checkout-order .cart-summary-totals .cart-summary-grand-total dt,
+.checkout-order .cart-summary-totals .cart-summary-grand-total dd {
+    font-size: 1.15rem;
     font-weight: 700;
+    color: var(--primary-blue);
 }
 
 /* user dashboard */

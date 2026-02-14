@@ -58,6 +58,27 @@
 
             <aside class="filters-sidebar">
 
+                <div class="where-when-cards">
+                    <div class="filter-card where-card">
+                        <h2 class="filter-card-title">Where</h2>
+                        <label class="filter-label" for="where-location">Location</label>
+                        <input type="text" id="where-location" name="location" class="filter-input" placeholder="City or area" aria-label="Where do you need it?">
+                    </div>
+                    <div class="filter-card when-card">
+                        <h2 class="filter-card-title">When</h2>
+                        <div class="date-range-fields">
+                            <div class="filter-group">
+                                <label class="filter-label" for="start-date">Start date</label>
+                                <input type="date" id="start-date" name="start_date" class="filter-input" aria-label="Rental start date">
+                            </div>
+                            <div class="filter-group">
+                                <label class="filter-label" for="end-date">End date</label>
+                                <input type="date" id="end-date" name="end_date" class="filter-input" aria-label="Rental end date">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <h2 class="filters-title">Filters</h2>
 
                 <form class="filters-form">
@@ -90,14 +111,6 @@
                             <input type="number" name="price_to" class="filter-input" placeholder="To ₱" min="0">
                         </div>
 
-                    </div>
-
-                    <div class="filter-group">
-
-                        <label class="filter-label"> Location </label>
-
-                        <input type="text" name="location" class="filter-input" placeholder="City or ZIP">
-                        
                     </div>
 
                     <button type="submit" class="btn btn-primary btn-block">Apply filters</button>
@@ -168,38 +181,92 @@
     </footer>
     
     <script>
-        // Items data
+        // Items data (pricePerDay in pesos)
         const items = [
-            { id: '1', name: '4-Person Camping Tent', category: 'outdoor', price: '₱200', image: '../assets/camping tent.jpg', brand: 'Green Outdoors Co.' },
-            { id: '2', name: 'DSLR Camera Kit', category: 'electronics', price: '₱1,200', image: '../assets/camera.webp', brand: 'Camera Brand' },
-            { id: '3', name: 'Cordless Power Drill', category: 'tools', price: '₱800', image: '../assets/istockphoto-184639599-612x612.jpg', brand: 'Tool Co.' },
-            { id: '4', name: 'Designer Handbag', category: 'fashion', price: '₱2,500', image: '../assets/designer bag.jpg', brand: 'Fashion Brand' },
-            { id: '5', name: 'Road Bike', category: 'outdoor', price: '₱1,800', image: '../assets/road bike.jpg', brand: 'Bike Co.' },
-            { id: '6', name: 'HD Projector', category: 'electronics', price: '₱1,500', image: '../assets/projector.jpg', brand: 'Projector Brand' },
-            { id: '7', name: '2-Person Kayak', category: 'outdoor', price: '₱3,500', image: '../assets/kayak.jpg', brand: 'Kayak Co.' },
-            { id: '8', name: 'Winter Sleeping Bag', category: 'outdoor', price: '₱1,200', image: '../assets/sleeping bag.webp', brand: 'Outdoor Gear' },
-            { id: '9', name: 'Men\'s Wool Blazer', category: 'fashion', price: '₱2,800', image: '../assets/blazer.jpg', brand: 'Fashion Co.' },
-            { id: '10', name: 'Electric Lawn Mower', category: 'tools', price: '₱800', image: '../assets/lawn mower.jpg', brand: 'Tool Brand' },
-            { id: '11', name: 'Camera Gimbal Stabilizer', category: 'electronics', price: '₱1,500', image: '../assets/gimbal.jpg', brand: 'Gimbal Co.' },
-            { id: '12', name: '60L Hiking Backpack', category: 'outdoor', price: '₱1,200', image: '../assets/backpack.jpg', brand: 'Backpack Brand' },
-            { id: '13', name: 'Evening Gown', category: 'fashion', price: '₱2,800', image: '../assets/evening gown.jpg', brand: 'Fashion Brand' },
-            { id: '14', name: 'Pressure Washer', category: 'tools', price: '₱8,500', image: '../assets/pressure washer.webp', brand: 'Tool Co.' },
-            { id: '15', name: '27" 4K Monitor', category: 'electronics', price: '₱15,000', image: '../assets/monitor.webp', brand: 'Monitor Brand' },
-            { id: '16', name: 'Portable Camping Stove', category: 'outdoor', price: '₱1,200', image: '../assets/camping stove.jpg', brand: 'Camping Gear' },
-            { id: '17', name: 'Formal Suit', category: 'fashion', price: '₱2,800', image: '../assets/suit.png', brand: 'Suit Brand' },
-            { id: '18', name: 'Circular Saw', category: 'tools', price: '₱8,500', image: '../assets/circular saw.webp', brand: 'Tool Co.' }
+            { id: '1', name: '4-Person Camping Tent', category: 'outdoor', pricePerDay: 200, image: '../assets/camping tent.jpg', brand: 'Green Outdoors Co.' },
+            { id: '2', name: 'DSLR Camera Kit', category: 'electronics', pricePerDay: 1200, image: '../assets/camera.webp', brand: 'Camera Brand' },
+            { id: '3', name: 'Cordless Power Drill', category: 'tools', pricePerDay: 800, image: '../assets/istockphoto-184639599-612x612.jpg', brand: 'Tool Co.' },
+            { id: '4', name: 'Designer Handbag', category: 'fashion', pricePerDay: 2500, image: '../assets/designer bag.jpg', brand: 'Fashion Brand' },
+            { id: '5', name: 'Road Bike', category: 'outdoor', pricePerDay: 1800, image: '../assets/road bike.jpg', brand: 'Bike Co.' },
+            { id: '6', name: 'HD Projector', category: 'electronics', pricePerDay: 1500, image: '../assets/projector.jpg', brand: 'Projector Brand' },
+            { id: '7', name: '2-Person Kayak', category: 'outdoor', pricePerDay: 3500, image: '../assets/kayak.jpg', brand: 'Kayak Co.' },
+            { id: '8', name: 'Winter Sleeping Bag', category: 'outdoor', pricePerDay: 1200, image: '../assets/sleeping bag.webp', brand: 'Outdoor Gear' },
+            { id: '9', name: 'Men\'s Wool Blazer', category: 'fashion', pricePerDay: 2800, image: '../assets/blazer.jpg', brand: 'Fashion Co.' },
+            { id: '10', name: 'Electric Lawn Mower', category: 'tools', pricePerDay: 800, image: '../assets/lawn mower.jpg', brand: 'Tool Brand' },
+            { id: '11', name: 'Camera Gimbal Stabilizer', category: 'electronics', pricePerDay: 1500, image: '../assets/gimbal.jpg', brand: 'Gimbal Co.' },
+            { id: '12', name: '60L Hiking Backpack', category: 'outdoor', pricePerDay: 1200, image: '../assets/backpack.jpg', brand: 'Backpack Brand' },
+            { id: '13', name: 'Evening Gown', category: 'fashion', pricePerDay: 2800, image: '../assets/evening gown.jpg', brand: 'Fashion Brand' },
+            { id: '14', name: 'Pressure Washer', category: 'tools', pricePerDay: 8500, image: '../assets/pressure washer.webp', brand: 'Tool Co.' },
+            { id: '15', name: '27" 4K Monitor', category: 'electronics', pricePerDay: 15000, image: '../assets/monitor.webp', brand: 'Monitor Brand' },
+            { id: '16', name: 'Portable Camping Stove', category: 'outdoor', pricePerDay: 1200, image: '../assets/camping stove.jpg', brand: 'Camping Gear' },
+            { id: '17', name: 'Formal Suit', category: 'fashion', pricePerDay: 2800, image: '../assets/suit.png', brand: 'Suit Brand' },
+            { id: '18', name: 'Circular Saw', category: 'tools', pricePerDay: 8500, image: '../assets/circular saw.webp', brand: 'Tool Co.' }
         ];
 
-        function renderListings(filteredItems) {
+        function formatPrice(amount) {
+            return '₱' + Number(amount).toLocaleString('en-PH');
+        }
+
+        function getPriceText(item, rentalDays) {
+            const days = Math.max(1, rentalDays);
+            const perDay = formatPrice(item.pricePerDay) + ' per day';
+            if (days === 1) return perDay;
+            const total = item.pricePerDay * days;
+            return perDay + ' · ' + formatPrice(total) + ' for ' + days + ' days';
+        }
+
+        function getRentalDaysFromDateRange() {
+            const startInput = document.getElementById('start-date');
+            const endInput = document.getElementById('end-date');
+            if (!startInput || !endInput) return 1;
+            const startVal = startInput.value;
+            const endVal = endInput.value;
+            if (!startVal || !endVal) return 1;
+            const start = new Date(startVal);
+            const end = new Date(endVal);
+            if (end < start) return 1;
+            const diffTime = end - start;
+            const days = Math.ceil(diffTime / (1000 * 60 * 60 * 24)) + 1;
+            return Math.max(1, days);
+        }
+
+        function syncDateRangeConstraints() {
+            const startInput = document.getElementById('start-date');
+            const endInput = document.getElementById('end-date');
+            if (!startInput || !endInput) return;
+            const today = new Date().toISOString().slice(0, 10);
+            startInput.min = today;
+            if (startInput.value) {
+                endInput.min = startInput.value;
+                if (endInput.value && endInput.value < startInput.value) endInput.value = startInput.value;
+            } else {
+                endInput.min = today;
+            }
+            if (endInput.value && startInput.value && endInput.value < startInput.value) {
+                startInput.value = endInput.value;
+            }
+        }
+
+        function renderListings(filteredItems, rentalDays) {
             const grid = document.querySelector('.listings-grid');
             grid.innerHTML = '';
+            const days = Math.max(1, parseInt(rentalDays, 10) || 1);
             if (filteredItems.length === 0) {
                 grid.innerHTML = '<p>No listings found.</p>';
                 return;
             }
+            const startInput = document.getElementById('start-date');
+            const endInput = document.getElementById('end-date');
+            const startDate = startInput ? startInput.value : '';
+            const endDate = endInput ? endInput.value : '';
+
             filteredItems.forEach(item => {
+                const priceText = getPriceText(item, days);
                 const card = document.createElement('a');
-                card.href = `product.html?id=${item.id}`;
+                let href = `product.html?id=${item.id}`;
+                if (startDate) href += `&start_date=${encodeURIComponent(startDate)}`;
+                if (endDate) href += `&end_date=${encodeURIComponent(endDate)}`;
+                card.href = href;
                 card.className = 'listing-card';
                 card.innerHTML = `
                     <div class="listing-card-image">
@@ -208,7 +275,7 @@
                     <div class="listing-card-body">
                         <h3 class="listing-card-title">${item.name}</h3>
                         <p class="listing-card-meta">${item.category.charAt(0).toUpperCase() + item.category.slice(1)}</p>
-                        <p class="listing-card-price">Price <strong>${item.price}</strong></p>
+                        <p class="listing-card-price">${priceText}</p>
                     </div>
                 `;
                 grid.appendChild(card);
@@ -222,6 +289,7 @@
             const priceTo = parseInt(urlParams.get('price_to')) || Infinity;
             const location = urlParams.get('location') || '';
             const q = urlParams.get('q') || '';
+            const rentalDays = getRentalDaysFromDateRange();
 
             let filtered = items;
 
@@ -230,56 +298,73 @@
             }
 
             filtered = filtered.filter(item => {
-                const itemPrice = parseInt(item.price.replace(/[₱$,]/g, '').replace(/,/g, ''));
-                return itemPrice >= priceFrom && itemPrice <= priceTo;
+                const itemPrice = item.pricePerDay;
+                return itemPrice >= priceFrom && (priceTo === 0 || priceTo === Infinity || itemPrice <= priceTo);
             });
 
             if (q) {
                 filtered = filtered.filter(item => item.name.toLowerCase().includes(q.toLowerCase()) || item.brand.toLowerCase().includes(q.toLowerCase()));
             }
 
-            renderListings(filtered);
+            renderListings(filtered, rentalDays);
         }
 
         // On load, filter and render
         document.addEventListener('DOMContentLoaded', function() {
-            filterItems();
-            // Set filter values from URL
             const urlParams = new URLSearchParams(window.location.search);
             document.querySelector('select[name="category"]').value = urlParams.get('category') || '';
             document.querySelector('input[name="price_from"]').value = urlParams.get('price_from') || '';
             document.querySelector('input[name="price_to"]').value = urlParams.get('price_to') || '';
-            document.querySelector('input[name="location"]').value = urlParams.get('location') || '';
+            const whereInput = document.getElementById('where-location');
+            if (whereInput) whereInput.value = urlParams.get('location') || '';
             document.querySelector('input[name="q"]').value = urlParams.get('q') || '';
+            const startDateInput = document.getElementById('start-date');
+            const endDateInput = document.getElementById('end-date');
+            if (startDateInput) startDateInput.value = urlParams.get('start_date') || '';
+            if (endDateInput) endDateInput.value = urlParams.get('end_date') || '';
+            syncDateRangeConstraints();
 
-            // Add event listeners for real-time filtering
+            filterItems();
+
             document.querySelector('select[name="category"]').addEventListener('change', updateFilters);
             document.querySelector('input[name="price_from"]').addEventListener('input', updateFilters);
             document.querySelector('input[name="price_to"]').addEventListener('input', updateFilters);
-            document.querySelector('input[name="location"]').addEventListener('input', updateFilters);
+            if (whereInput) whereInput.addEventListener('input', updateFilters);
             document.querySelector('input[name="q"]').addEventListener('input', updateFilters);
+            if (startDateInput) {
+                startDateInput.addEventListener('change', function() { syncDateRangeConstraints(); updateFilters(); });
+                startDateInput.addEventListener('input', function() { syncDateRangeConstraints(); updateFilters(); });
+            }
+            if (endDateInput) {
+                endDateInput.addEventListener('change', function() { syncDateRangeConstraints(); updateFilters(); });
+                endDateInput.addEventListener('input', function() { syncDateRangeConstraints(); updateFilters(); });
+            }
         });
 
         function updateFilters() {
             const category = document.querySelector('select[name="category"]').value;
             const priceFrom = document.querySelector('input[name="price_from"]').value;
             const priceTo = document.querySelector('input[name="price_to"]').value;
-            const location = document.querySelector('input[name="location"]').value;
+            const locationInput = document.getElementById('where-location');
+            const location = locationInput ? locationInput.value : '';
             const q = document.querySelector('input[name="q"]').value;
+            const startDateInput = document.getElementById('start-date');
+            const endDateInput = document.getElementById('end-date');
+            const startDate = startDateInput ? startDateInput.value : '';
+            const endDate = endDateInput ? endDateInput.value : '';
 
-            // Build URL
             const params = new URLSearchParams();
             if (category) params.set('category', category);
             if (priceFrom) params.set('price_from', priceFrom);
             if (priceTo) params.set('price_to', priceTo);
             if (location) params.set('location', location);
             if (q) params.set('q', q);
+            if (startDate) params.set('start_date', startDate);
+            if (endDate) params.set('end_date', endDate);
 
-            // Update URL without reload
             const newUrl = params.toString() ? `listing.html?${params.toString()}` : 'listing.html';
             window.history.pushState({}, '', newUrl);
 
-            // Filter and render
             filterItems();
         }
 

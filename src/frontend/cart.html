@@ -34,15 +34,22 @@
             <h1 class="page-title"> Your cart </h1>
 
             <div class="cart-layout">
-            <div class="cart-items" style="max-height: 400px; overflow-y: auto;">
-            </div>
+                <div class="cart-main">
+                    <div class="cart-items"></div>
+
+                    <section class="cart-saved-section" id="cart-saved-section" aria-label="Saved for later">
+                        <h2 class="cart-saved-title">Saved for later</h2>
+                        <div class="cart-saved-grid" id="cart-saved-grid"></div>
+                    </section>
+                </div>
 
                 <aside class="cart-summary">
-                    <h2 class="cart-summary-title"> Summary </h2>
-                    <ul class="order-items">
-                    </ul>
-                    <a href="checkout.html" class="btn btn-primary btn-lg btn-block"> Proceed to checkout </a>
-                    <a href="listing.html" class="cart-continue"> Continue shopping </a>
+                    <h2 class="cart-summary-title">Order summary</h2>
+                    <div class="cart-summary-rental" id="cart-summary-rental"></div>
+                    <div class="cart-summary-items" id="cart-summary-items"></div>
+                    <dl class="cart-summary-totals" id="cart-summary-totals"></dl>
+                    <a href="checkout.html" class="btn btn-primary btn-lg btn-block">Proceed to checkout</a>
+                    <a href="listing.html" class="cart-continue">Continue shopping</a>
                 </aside>
 
             </div>
@@ -50,107 +57,208 @@
     </main>
 
     <script>
-        // Local data for items
-        const items = [
-            { id: '1', name: '4-Person Camping Tent', category: 'Outdoor', price: '₱200', image: '../assets/camping tent.jpg', brand: 'Green Outdoors Co.', description: 'Spacious 4-person tent, waterproof and easy to set up. Perfect for weekend trips. Well maintained and cleaned after each rental.' },
-            { id: '2', name: 'DSLR Camera Kit', category: 'Electronics', price: '₱1200', image: '../assets/camera.webp', brand: 'Camera Brand', description: 'Professional DSLR camera kit with lenses and accessories.' },
-            { id: '3', name: 'Cordless Power Drill', category: 'Tools', price: '₱800', image: '../assets/istockphoto-184639599-612x612.jpg', brand: 'Tool Co.', description: 'Powerful cordless power drill for all your DIY needs.' },
-            { id: '4', name: 'Designer Handbag', category: 'Fashion', price: '₱2500', image: '../assets/designer bag.jpg', brand: 'Fashion Brand', description: 'Elegant designer handbag, perfect for any occasion.' },
-            { id: '5', name: 'Road Bike', category: 'Outdoor', price: '₱1800', image: '../assets/road bike.jpg', brand: 'Bike Co.', description: 'High-performance road bike for cycling enthusiasts.' },
-            { id: '6', name: 'HD Projector', category: 'Electronics', price: '₱1500', image: '../assets/projector.jpg', brand: 'Projector Brand', description: 'High-definition projector for home entertainment.' },
-            { id: '7', name: '2-Person Kayak', category: 'Outdoor', price: '₱3500', image: '../assets/kayak.jpg', brand: 'Kayak Co.', description: 'Durable 2-person kayak for water adventures.' },
-            { id: '8', name: 'Winter Sleeping Bag', category: 'Outdoor', price: '₱1200', image: '../assets/sleeping bag.webp', brand: 'Outdoor Gear', description: 'Warm winter sleeping bag for cold weather camping.' },
-            { id: '9', name: 'Men\'s Wool Blazer', category: 'Fashion', price: '₱2800', image: '../assets/blazer.jpg', brand: 'Fashion Co.', description: 'Stylish men\'s wool blazer for formal occasions.' },
-            { id: '10', name: 'Electric Lawn Mower', category: 'Tools', price: '₱800', image: '../assets/lawn mower.jpg', brand: 'Tool Brand', description: 'Efficient electric lawn mower for garden maintenance.' },
-            { id: '11', name: 'Camera Gimbal Stabilizer', category: 'Electronics', price: '₱1500', image: '../assets/gimbal.jpg', brand: 'Gimbal Co.', description: 'Professional camera gimbal for smooth video recording.' },
-            { id: '12', name: '60L Hiking Backpack', category: 'Outdoor', price: '₱1200', image: '../assets/backpack.jpg', brand: 'Backpack Brand', description: 'Spacious hiking backpack for long treks.' },
-            { id: '13', name: 'Evening Gown', category: 'Fashion', price: '₱2800', image: '../assets/evening gown.jpg', brand: 'Fashion Brand', description: 'Elegant evening gown for special events.' },
-            { id: '14', name: 'Pressure Washer', category: 'Tools', price: '₱8500', image: '../assets/pressure washer.webp', brand: 'Tool Co.', description: 'High-pressure washer for cleaning tasks.' },
-            { id: '15', name: '27" 4K Monitor', category: 'Electronics', price: '₱15000', image: '../assets/monitor.webp', brand: 'Monitor Brand', description: 'Ultra-high-definition 27-inch monitor.' },
-            { id: '16', name: 'Portable Camping Stove', category: 'Outdoor', price: '₱1200', image: '../assets/camping stove.jpg', brand: 'Camping Gear', description: 'Compact portable camping stove for outdoor cooking.' },
-            { id: '17', name: 'Formal Suit', category: 'Fashion', price: '₱2800', image: '../assets/suit.png', brand: 'Suit Brand', description: 'Classic formal suit for professional settings.' },
-            { id: '18', name: 'Circular Saw', category: 'Tools', price: '₱8500', image: '../assets/circular saw.webp', brand: 'Tool Co.', description: 'Powerful circular saw for woodworking.' }
-        ];
+        function formatPrice(amount) {
+            return '₱' + Number(amount).toLocaleString('en-PH');
+        }
+
+        function formatDate(isoDate) {
+            if (!isoDate) return '';
+            const d = new Date(isoDate);
+            return d.toLocaleDateString('en-PH', { month: 'short', day: 'numeric', year: 'numeric' });
+        }
 
         function loadCart() {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
-            const cartItems = document.querySelector('.cart-items');
-            const orderItems = document.querySelector('.order-items');
-            let total = 0;
-            let itemCount = 0;
+            const cartItemsEl = document.querySelector('.cart-items');
+            const summaryRentalEl = document.getElementById('cart-summary-rental');
+            const summaryItemsEl = document.getElementById('cart-summary-items');
+            const summaryTotalsEl = document.getElementById('cart-summary-totals');
 
-            cartItems.innerHTML = '';
-            orderItems.innerHTML = '';
+            cartItemsEl.innerHTML = '';
+            if (summaryRentalEl) summaryRentalEl.innerHTML = '';
+            if (summaryItemsEl) summaryItemsEl.innerHTML = '';
+            if (summaryTotalsEl) summaryTotalsEl.innerHTML = '';
 
             if (cart.length === 0) {
-                cartItems.innerHTML = '<p>Your cart is empty.</p>';
-                orderItems.innerHTML = '';
+                cartItemsEl.innerHTML = '<p class="cart-empty">Your cart is empty.</p>';
+                loadSavedSection();
                 return;
             }
 
+            let subtotal = 0;
+            let totalDaysUsed = 0;
+            let firstStart = null, firstEnd = null;
+
             cart.forEach((item, index) => {
-                // Ensure correct price
-                item.priceNum = parseInt(item.price.toString().replace(/[₱$,]/g, ''));
-                const itemTotal = item.priceNum * item.quantity;
-                total += itemTotal;
-                itemCount += item.quantity;
+                const days = item.rental_days != null ? item.rental_days : 1;
+                const pricePerDay = item.pricePerDay != null ? item.pricePerDay : parseInt(String(item.price || item.priceNum || '0').replace(/[₱$,]/g, ''), 10);
+                const qty = item.quantity || 1;
+                const itemTotal = pricePerDay * days * qty;
+                subtotal += itemTotal;
+                if (item.start_date) firstStart = firstStart || item.start_date;
+                if (item.end_date) firstEnd = firstEnd || item.end_date;
+                totalDaysUsed += days * qty;
+
+                const linkParams = new URLSearchParams({ id: item.id });
+                if (item.start_date) linkParams.set('start_date', item.start_date);
+                if (item.end_date) linkParams.set('end_date', item.end_date);
 
                 const cartItem = document.createElement('article');
                 cartItem.className = 'cart-item';
+                const dateLine = (item.start_date && item.end_date) ? `<p class="cart-item-dates">${formatDate(item.start_date)} – ${formatDate(item.end_date)} (${days} day${days !== 1 ? 's' : ''})</p>` : `<p class="cart-item-dates">${days} day${days !== 1 ? 's' : ''}</p>`;
+                const today = new Date().toISOString().slice(0, 10);
+                const startVal = item.start_date || today;
+                const endVal = item.end_date || today;
                 cartItem.innerHTML = `
-
                     <div class="cart-item-image">
                         <img src="${item.image}" alt="${item.name}" width="160" height="120">
                     </div>
-
-                    <div class="cart-item-details">
-
-                        <h2 class="cart-item-title"><a href="product.html?id=${item.id}">${item.name}</a></h2>
-
+                    <div class="cart-item-info">
+                        <h2 class="cart-item-title"><a href="product.html?${linkParams.toString()}">${item.name}</a></h2>
                         <p class="cart-item-brand">${item.brand}</p>
-
-                        <p class="cart-item-price">₱${itemTotal}</p>
-                    
-                        <button class="cart-item-remove" onclick="removeItem(${index})">Remove</button>
-                        
+                        <p class="cart-item-dates">${(item.start_date && item.end_date) ? formatDate(item.start_date) + ' – ' + formatDate(item.end_date) + ' · ' : ''}<span class="cart-item-days">${days} day${days !== 1 ? 's' : ''}</span></p>
+                        <div class="cart-item-edit-dates">
+                            <span class="cart-item-edit-label">Change dates</span>
+                            <div class="cart-item-edit-fields">
+                                <input type="date" class="cart-item-date-input" data-index="${index}" data-type="start" value="${startVal}" min="${today}" aria-label="Start date">
+                                <input type="date" class="cart-item-date-input" data-index="${index}" data-type="end" value="${endVal}" min="${startVal}" aria-label="End date">
+                                <button type="button" class="cart-item-update-dates btn btn-signup" data-index="${index}">Update</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cart-item-price-block">
+                        <p class="cart-item-price-detail">${formatPrice(pricePerDay)}/day × ${days}d${qty > 1 ? ' × ' + qty : ''}</p>
+                        <p class="cart-item-price">${formatPrice(itemTotal)}</p>
+                        <button type="button" class="cart-item-remove" onclick="removeItem(${index})">Remove</button>
                     </div>
                 `;
-                cartItems.appendChild(cartItem);
+                cartItemsEl.appendChild(cartItem);
 
-                for (let i = 0; i < item.quantity; i++) {
-                    const li = document.createElement('li');
-                    li.textContent = `${item.name} - ₱${item.priceNum}`;
-                    orderItems.appendChild(li);
+                if (summaryItemsEl) {
+                    const row = document.createElement('div');
+                    row.className = 'cart-summary-item-row';
+                    row.innerHTML = `
+                        <span class="cart-summary-item-name">${item.name}${qty > 1 ? ' × ' + qty : ''}</span>
+                        <span class="cart-summary-item-value">${formatPrice(pricePerDay)}/day × ${days}d = ${formatPrice(itemTotal)}</span>
+                    `;
+                    summaryItemsEl.appendChild(row);
                 }
             });
 
-            const serviceFee = Math.round(total * 0.1); // 10% service fee
-            const finalTotal = total + serviceFee;
+            if (summaryRentalEl && (firstStart || firstEnd)) {
+                summaryRentalEl.innerHTML = `
+                    <div class="cart-summary-rental-block">
+                        <span class="cart-summary-rental-label">Rental period</span>
+                        <span class="cart-summary-rental-value">${formatDate(firstStart)} – ${formatDate(firstEnd)}</span>
+                        <span class="cart-summary-rental-days">${cart.reduce((acc, i) => acc + (i.rental_days || 1) * (i.quantity || 1), 0)} day total</span>
+                    </div>
+                `;
+            }
 
-            // Add subtotal and total to the list
-            const subtotalLi = document.createElement('li');
-            subtotalLi.textContent = `Subtotal (${itemCount} item${itemCount > 1 ? 's' : ''}): ₱${total}`;
-            subtotalLi.style.fontSize = '1.2em';
-            subtotalLi.style.fontWeight = 'bold';
-            orderItems.appendChild(subtotalLi);
+            const serviceFee = Math.round(subtotal * 0.1);
+            const finalTotal = subtotal + serviceFee;
 
-            const serviceLi = document.createElement('li');
-            serviceLi.textContent = `Service Fee (10%): ₱${serviceFee}`;
-            orderItems.appendChild(serviceLi);
+            if (summaryTotalsEl) {
+                summaryTotalsEl.innerHTML = `
+                    <div class="cart-summary-row cart-summary-subtotal">
+                        <dt>Subtotal</dt>
+                        <dd>${formatPrice(subtotal)}</dd>
+                    </div>
+                    <div class="cart-summary-row cart-summary-fee">
+                        <dt>Service fee (10%)</dt>
+                        <dd>${formatPrice(serviceFee)}</dd>
+                    </div>
+                    <div class="cart-summary-row cart-summary-grand-total">
+                        <dt>Total</dt>
+                        <dd>${formatPrice(finalTotal)}</dd>
+                    </div>
+                `;
+            }
 
-            const totalLi = document.createElement('li');
-            totalLi.textContent = `Total: ₱${finalTotal}`;
-            totalLi.style.fontSize = '1.2em';
-            totalLi.style.fontWeight = 'bold';
-            orderItems.appendChild(totalLi);
-
-            // Save corrected cart
+            loadSavedSection();
             localStorage.setItem('cart', JSON.stringify(cart));
         }
 
-        function updateDuration(index, newDuration) {
-            const cart = JSON.parse(localStorage.getItem('cart'));
-            cart[index].duration = parseInt(newDuration);
+        function attachCartItemListeners() {
+            const cartItemsEl = document.querySelector('.cart-items');
+            if (!cartItemsEl) return;
+            cartItemsEl.addEventListener('click', onCartItemClick);
+        }
+
+        function onCartItemClick(e) {
+            const btn = e.target.closest('.cart-item-update-dates');
+            if (!btn) return;
+            const index = parseInt(btn.getAttribute('data-index'), 10);
+            const cartItem = btn.closest('.cart-item');
+            const startInput = cartItem.querySelector('.cart-item-date-input[data-type="start"]');
+            const endInput = cartItem.querySelector('.cart-item-date-input[data-type="end"]');
+            if (startInput && endInput) updateItemDates(index, startInput.value, endInput.value);
+        }
+
+        function loadSavedSection() {
+            const saved = JSON.parse(localStorage.getItem('savedItems')) || [];
+            const section = document.getElementById('cart-saved-section');
+            const grid = document.getElementById('cart-saved-grid');
+            if (!section || !grid) return;
+            if (saved.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            section.style.display = 'block';
+            grid.innerHTML = '';
+            saved.forEach(function(item) {
+                const pricePerDay = item.pricePerDay != null ? item.pricePerDay : parseInt(String(item.price || item.priceNum || '0').replace(/[₱$,]/g, ''), 10);
+                const card = document.createElement('div');
+                card.className = 'cart-saved-card';
+                card.innerHTML = `
+                    <div class="cart-saved-card-image">
+                        <img src="${item.image}" alt="${item.name}" width="120" height="90">
+                    </div>
+                    <div class="cart-saved-card-body">
+                        <h3 class="cart-saved-card-title">${item.name}</h3>
+                        <p class="cart-saved-card-price">${formatPrice(pricePerDay)} per day</p>
+                        <a href="product.html?id=${item.id}" class="cart-saved-card-view">View</a>
+                        <button type="button" class="cart-saved-card-add btn btn-primary" data-id="${item.id}">Add to cart</button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+            grid.querySelectorAll('.cart-saved-card-add').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    const id = btn.getAttribute('data-id');
+                    const item = saved.find(function(i) { return i.id === id; });
+                    if (!item) return;
+                    const today = new Date().toISOString().slice(0, 10);
+                    const cart = JSON.parse(localStorage.getItem('cart')) || [];
+                    const pricePerDay = item.pricePerDay != null ? item.pricePerDay : parseInt(String(item.price || '0').replace(/[₱$,]/g, ''), 10);
+                    const existing = cart.find(function(c) { return c.id === item.id && c.start_date === today && c.end_date === today; });
+                    if (existing) {
+                        existing.quantity = (existing.quantity || 1) + 1;
+                    } else {
+                        cart.push({
+                            ...item,
+                            quantity: 1,
+                            pricePerDay: pricePerDay,
+                            start_date: today,
+                            end_date: today,
+                            rental_days: 1
+                        });
+                    }
+                    localStorage.setItem('cart', JSON.stringify(cart));
+                    loadCart();
+                });
+            });
+        }
+
+        function updateItemDates(index, startDate, endDate) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            if (index < 0 || index >= cart.length) return;
+            const start = new Date(startDate);
+            const end = new Date(endDate);
+            const days = end < start ? 1 : Math.max(1, Math.ceil((end - start) / (1000 * 60 * 60 * 24)) + 1);
+            cart[index].start_date = startDate;
+            cart[index].end_date = endDate;
+            cart[index].rental_days = days;
             localStorage.setItem('cart', JSON.stringify(cart));
             loadCart();
         }
@@ -185,7 +293,10 @@
             }
         });
 
-        window.onload = loadCart;
+        window.onload = function() {
+            loadCart();
+            attachCartItemListeners();
+        };
     </script>
 </body>
 </html>

@@ -888,6 +888,71 @@ a.btn {
     font-family: "Lexend Deca", sans-serif;
 }
 
+.product-price-per-day {
+    margin-bottom: 0.35rem;
+    color: var(--dark-text);
+}
+
+.product-price-total {
+    margin-top: 0.5rem;
+    color: var(--primary-blue);
+    font-weight: 500;
+}
+
+.product-when-section {
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: rgba(26, 43, 117, 0.06);
+    border-radius: var(--neo-radius);
+    border-left: 4px solid var(--primary-blue);
+}
+
+.product-when-title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    color: var(--primary-blue);
+    font-family: "Lexend Deca", sans-serif;
+}
+
+.product-when-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.product-when-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.product-when-label {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--dark-text);
+}
+
+.product-when-input {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--neo-shadow-dark);
+    border-radius: var(--neo-radius);
+    font-size: 0.95rem;
+    background: var(--neo-bg);
+    box-shadow: var(--neo-pressed);
+}
+
+.product-when-input:focus {
+    outline: none;
+    box-shadow: var(--neo-pressed), 0 0 0 2px var(--primary-blue);
+}
+
+@media (max-width: 480px) {
+    .product-when-fields {
+        grid-template-columns: 1fr;
+    }
+}
+
 .pricing-table {
     list-style: none;
     margin-bottom: 1.5rem;
