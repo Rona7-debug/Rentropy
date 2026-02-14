@@ -33,46 +33,6 @@
 
             <div class="cart-layout">
                 <div class="cart-items">
-                    <article class="cart-item">
-                        <div class="cart-item-image">
-                            <img src="https://placehold.co/160x120/7d8ba8/ffffff?text=Tent" alt="Camping Tent" width="160" height="120">
-                        </div>
-                        <div class="cart-item-details">
-                            <h2 class="cart-item-title"><a href="product.html?id=1">4-Person Camping Tent</a></h2>
-                            <p class="cart-item-brand">Green Outdoors Co.</p>
-                            <div class="cart-item-duration">
-                                <label>Duration</label>
-                                <select class="duration-select duration-select--sm">
-                                    <option value="1">1 day</option>
-                                    <option value="3" selected>3 days</option>
-                                    <option value="7">1 week</option>
-                                    <option value="14">2 weeks</option>
-                                </select>
-                            </div>
-                            <p class="cart-item-price">$32</p>
-                        </div>
-                        <a href="#" class="cart-item-remove" aria-label="Remove">×</a>
-                    </article>
-
-                    <article class="cart-item">
-                        <div class="cart-item-image">
-                            <img src="https://placehold.co/160x120/7d8ba8/ffffff?text=Drill" alt="Power Drill" width="160" height="120">
-                        </div>
-                        <div class="cart-item-details">
-                            <h2 class="cart-item-title"><a href="product.html?id=3">Cordless Power Drill</a></h2>
-                            <p class="cart-item-brand">ToolShare Local</p>
-                            <div class="cart-item-duration">
-                                <label>Duration</label>
-                                <select class="duration-select duration-select--sm">
-                                    <option value="1" selected>1 day</option>
-                                    <option value="3">3 days</option>
-                                    <option value="7">1 week</option>
-                                </select>
-                            </div>
-                            <p class="cart-item-price">$8</p>
-                        </div>
-                        <a href="#" class="cart-item-remove" aria-label="Remove">×</a>
-                    </article>
                 </div>
 
                 <aside class="cart-summary">
@@ -80,10 +40,8 @@
                     <dl class="cart-summary-rows">
                         <dt>Subtotal (2 items)</dt>
                         <dd>$40</dd>
-                        <dt>Service fee</dt>
-                        <dd>$4</dd>
                         <dt class="cart-summary-total">Total</dt>
-                        <dd class="cart-summary-total">$44</dd>
+                        <dd class="cart-summary-total">$40</dd>
                     </dl>
                     <a href="checkout.html" class="btn btn-primary btn-lg btn-block">Proceed to checkout</a>
                     <a href="listing.html" class="cart-continue">Continue shopping</a>
@@ -102,5 +60,100 @@
             <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
         </div>
     </footer>
+
+    <script>
+        // Local data for items
+        const items = [
+            { id: '1', name: '4-Person Camping Tent', category: 'Outdoor', price: 200, image: '../assets/camping tent.jpg', brand: 'Green Outdoors Co.', description: 'Spacious 4-person tent, waterproof and easy to set up. Perfect for weekend trips. Well maintained and cleaned after each rental.' },
+            { id: '2', name: 'DSLR Camera Kit', category: 'Electronics', price: 1200, image: '../assets/camera.webp', brand: 'Camera Brand', description: 'Professional DSLR camera kit with lenses and accessories.' },
+            { id: '3', name: 'Cordless Power Drill', category: 'Tools', price: 800, image: '../assets/istockphoto-184639599-612x612.jpg', brand: 'Tool Co.', description: 'Powerful cordless power drill for all your DIY needs.' },
+            { id: '4', name: 'Designer Handbag', category: 'Fashion', price: 2500, image: '../assets/designer bag.jpg', brand: 'Fashion Brand', description: 'Elegant designer handbag, perfect for any occasion.' },
+            { id: '5', name: 'Road Bike', category: 'Outdoor', price: 1800, image: '../assets/road bike.jpg', brand: 'Bike Co.', description: 'High-performance road bike for cycling enthusiasts.' },
+            { id: '6', name: 'HD Projector', category: 'Electronics', price: 1500, image: '../assets/projector.jpg', brand: 'Projector Brand', description: 'High-definition projector for home entertainment.' },
+            { id: '7', name: '2-Person Kayak', category: 'Outdoor', price: 3500, image: '../assets/kayak.jpg', brand: 'Kayak Co.', description: 'Durable 2-person kayak for water adventures.' },
+            { id: '8', name: 'Winter Sleeping Bag', category: 'Outdoor', price: 1200, image: '../assets/sleeping bag.webp', brand: 'Outdoor Gear', description: 'Warm winter sleeping bag for cold weather camping.' },
+            { id: '9', name: 'Men\'s Wool Blazer', category: 'Fashion', price: 2800, image: '../assets/blazer.jpg', brand: 'Fashion Co.', description: 'Stylish men\'s wool blazer for formal occasions.' },
+            { id: '10', name: 'Electric Lawn Mower', category: 'Tools', price: 800, image: '../assets/lawn mower.jpg', brand: 'Tool Brand', description: 'Efficient electric lawn mower for garden maintenance.' },
+            { id: '11', name: 'Camera Gimbal Stabilizer', category: 'Electronics', price: 1500, image: '../assets/gimbal.jpg', brand: 'Gimbal Co.', description: 'Professional camera gimbal for smooth video recording.' },
+            { id: '12', name: '60L Hiking Backpack', category: 'Outdoor', price: 1200, image: '../assets/backpack.jpg', brand: 'Backpack Brand', description: 'Spacious hiking backpack for long treks.' },
+            { id: '13', name: 'Evening Gown', category: 'Fashion', price: 2800, image: '../assets/evening gown.jpg', brand: 'Fashion Brand', description: 'Elegant evening gown for special events.' },
+            { id: '14', name: 'Pressure Washer', category: 'Tools', price: 8500, image: '../assets/pressure washer.webp', brand: 'Tool Co.', description: 'High-pressure washer for cleaning tasks.' },
+            { id: '15', name: '27" 4K Monitor', category: 'Electronics', price: 15000, image: '../assets/monitor.webp', brand: 'Monitor Brand', description: 'Ultra-high-definition 27-inch monitor.' },
+            { id: '16', name: 'Portable Camping Stove', category: 'Outdoor', price: 1200, image: '../assets/camping stove.jpg', brand: 'Camping Gear', description: 'Compact portable camping stove for outdoor cooking.' },
+            { id: '17', name: 'Formal Suit', category: 'Fashion', price: 2800, image: '../assets/suit.png', brand: 'Suit Brand', description: 'Classic formal suit for professional settings.' },
+            { id: '18', name: 'Circular Saw', category: 'Tools', price: 8500, image: '../assets/circular saw.webp', brand: 'Tool Co.', description: 'Powerful circular saw for woodworking.' }
+        ];
+
+        function loadCart() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.querySelector('.cart-items');
+            let total = 0;
+            let itemCount = 0;
+
+            cartItems.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p>Your cart is empty.</p>';
+                // Update summary
+                document.querySelector('.cart-summary-rows dt:first-child').textContent = 'Subtotal (0 items)';
+                document.querySelector('.cart-summary-rows dd:first-child').textContent = '$0';
+                document.querySelector('.cart-summary-rows dt:last-child').textContent = 'Total';
+                document.querySelector('.cart-summary-rows dd:last-child').textContent = '$0';
+                return;
+            }
+
+            cart.forEach((item, index) => {
+                // Ensure correct price
+                item.priceNum = parseInt(item.price.replace(/[$,]/g, ''));
+                const itemTotal = item.priceNum * item.quantity;
+                total += itemTotal;
+                itemCount += item.quantity;
+
+                // Add to cart items
+                const cartItem = document.createElement('article');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-image">
+                        <img src="${item.image}" alt="${item.name}" width="160" height="120">
+                    </div>
+                    <div class="cart-item-details">
+                        <h2 class="cart-item-title"><a href="product.html?id=${item.id}">${item.name}</a></h2>
+                        <p class="cart-item-brand">${item.brand}</p>
+                        <p class="cart-item-price">$${itemTotal}</p>
+                        <button class="cart-item-remove" onclick="removeItem(${index})">Remove</button>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+
+            const serviceFee = 0; // No service fee
+            const finalTotal = total + serviceFee;
+
+            // Update summary
+            document.querySelector('.cart-summary-rows dt:first-child').textContent = `Subtotal (${itemCount} item${itemCount > 1 ? 's' : ''})`;
+            document.querySelector('.cart-summary-rows dd:first-child').textContent = `$${total}`;
+            document.querySelector('.cart-summary-rows dt:last-child').textContent = 'Total';
+            document.querySelector('.cart-summary-rows dd:last-child').textContent = `$${finalTotal}`;
+
+            // Save corrected cart
+            localStorage.setItem('cart', JSON.stringify(cart));
+        }
+
+        function updateDuration(index, newDuration) {
+            const cart = JSON.parse(localStorage.getItem('cart'));
+            cart[index].duration = parseInt(newDuration);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        function removeItem(index) {
+            const cart = JSON.parse(localStorage.getItem('cart'));
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadCart();
+        }
+
+        window.onload = loadCart;
+    </script>
 </body>
 </html>
