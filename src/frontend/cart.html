@@ -171,6 +171,29 @@
             loadCart();
         }
 
+        // Check login status and hide/show buttons
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentUser = localStorage.getItem('currentUser');
+            const signUpBtn = document.querySelector('.btn-signup');
+            const loginBtn = document.querySelector('.btn-login');
+            const headerActions = document.querySelector('.header-actions');
+            if (currentUser) {
+                // User is logged in, hide login and signup buttons, add profile icon
+                if (signUpBtn) signUpBtn.style.display = 'none';
+                if (loginBtn) loginBtn.style.display = 'none';
+                // Add profile icon beside cart
+                const cartLink = document.querySelector('.header-cart');
+                if (cartLink) {
+                    const profileLink = document.createElement('a');
+                    profileLink.href = 'dashboard.html';
+                    profileLink.className = 'header-profile';
+                    profileLink.setAttribute('aria-label', 'Profile');
+                    profileLink.textContent = '👤';
+                    cartLink.insertAdjacentElement('afterend', profileLink);
+                }
+            }
+        });
+
         window.onload = loadCart;
     </script>
 </body>
