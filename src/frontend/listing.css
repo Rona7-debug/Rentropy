@@ -22,6 +22,10 @@
     --shadow-hover: var(--neo-raised-hover);
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -69,7 +73,7 @@ img {
     transition: opacity 0.2s ease;
 }
 
-body:not(.hero-page) .header {
+body:not(.hero-page):not(.no-nav-bg) .header {
     background: var(--neo-bg);
     box-shadow: var(--neo-raised);
 }
@@ -723,6 +727,94 @@ a.btn {
 
 .listings-grid--page {
     grid-template-columns: repeat(3, 1fr);
+}
+
+/* Search bubble overlay – appears on scroll as small transparent pill at top */
+.search-bubble-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: center;
+    padding: 0.75rem 1rem;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    opacity: 0;
+    transform: translateY(-120%);
+}
+
+.search-bubble-overlay--visible {
+    pointer-events: auto;
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.search-bubble-form {
+    width: 100%;
+    max-width: 20rem;
+    display: flex;
+    justify-content: center;
+}
+
+.search-bubble {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-width: 12rem;
+    background: rgba(224, 229, 236, 0.75);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 9999px;
+    padding: 0.35rem 0.35rem 0.35rem 1rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.search-bubble-input {
+    flex: 1;
+    min-width: 0;
+    padding: 0.5rem 0.5rem 0.5rem 0;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.9rem;
+    color: var(--dark-text);
+}
+
+.search-bubble-input::placeholder {
+    color: rgba(0, 0, 0, 0.45);
+}
+
+.search-bubble-input:focus {
+    outline: none;
+}
+
+.search-bubble-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.25rem;
+    height: 2.25rem;
+    flex-shrink: 0;
+    background: var(--accent-blue);
+    border: none;
+    cursor: pointer;
+    color: var(--light-text);
+    border-radius: 50%;
+    box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.15);
+    transition: filter 0.2s, box-shadow 0.2s;
+}
+
+.search-bubble-btn:hover {
+    filter: brightness(1.1);
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.search-bubble .search-icon {
+    width: 1rem;
+    height: 1rem;
 }
 
 /* ============================================
