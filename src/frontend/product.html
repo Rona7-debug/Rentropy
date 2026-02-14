@@ -81,7 +81,7 @@
                         <form action="cart.html" method="get" class="add-to-cart-form">
                             <button type="submit" class="btn btn-primary btn-lg btn-block">Add to cart</button>
                         </form>
-                        <button type="button" class="btn btn-signup btn-block">Save for later</button>
+                        <button type="button" class="btn btn-signup btn-block">Save</button>
                     </div>
                 </div>
             </div>
@@ -123,6 +123,45 @@
                 }
                 localStorage.setItem('cart', JSON.stringify(cart));
                 window.location.href = 'cart.html';
+            }
+        }
+
+        function saveForLater() {
+            const currentUser = localStorage.getItem('currentUser');
+            if (!currentUser) {
+                alert('Please log in to save items for later.');
+                return;
+            }
+            const item = items.find(i => i.id === itemId);
+            if (item) {
+                let savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+                if (savedItems.find(s => s.id === itemId)) {
+                    alert('Item already saved!');
+                    return;
+                }
+                savedItems.push(item);
+                localStorage.setItem('savedItems', JSON.stringify(savedItems));
+                alert('Item saved for later!');
+                updateSaveButton(true);
+            }
+        }
+
+        function unsave() {
+            let savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+            savedItems = savedItems.filter(s => s.id !== itemId);
+            localStorage.setItem('savedItems', JSON.stringify(savedItems));
+            alert('Item removed from saved!');
+            updateSaveButton(false);
+        }
+
+        function updateSaveButton(isSaved) {
+            const button = document.querySelector('.product-actions .btn-signup');
+            if (isSaved) {
+                button.textContent = 'Unsave';
+                button.onclick = unsave;
+            } else {
+                button.textContent = 'Save';
+                button.onclick = saveForLater;
             }
         }
 
@@ -179,6 +218,10 @@
                 const button = form.querySelector('button[type="submit"]');
                 button.type = 'button';
                 button.onclick = () => addToCart(itemId);
+
+                // Check if item is saved and update button
+                const savedItems = JSON.parse(localStorage.getItem('savedItems')) || [];
+                updateSaveButton(savedItems.some(s => s.id === itemId));
             }
         }
 
