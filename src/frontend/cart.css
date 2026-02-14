@@ -983,12 +983,21 @@ a.btn {
 }
 
 .cart-item-remove {
-    font-size: 1.5rem;
-    color: #999;
-    line-height: 1;
+    background: var(--neo-bg);
+    border: none;
+    border-radius: var(--neo-radius);
+    padding: 0.5rem 1rem;
+    box-shadow: var(--neo-raised);
+    color: var(--dark-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: box-shadow 0.2s ease, color 0.2s ease;
+    margin-top: 0.5rem;
 }
 
 .cart-item-remove:hover {
+    box-shadow: var(--neo-raised-hover);
     color: #c00;
 }
 

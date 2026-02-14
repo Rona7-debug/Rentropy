@@ -113,28 +113,13 @@
                 <form class="listing-toolbar" action="listing.html" method="get">
 
                     <div class="search-bar listing-search">
-                        <input type="search" name="q" class="search-input" placeholder="Search listings..." value="" aria-label="Search" list="items">
-                        <datalist id="items">
-                            <option value="4-Person Camping Tent">
-                            <option value="DSLR Camera Kit">
-                            <option value="Cordless Power Drill">
-                            <option value="Designer Handbag">
-                            <option value="Road Bike">
-                            <option value="HD Projector">
-                            <option value="2-Person Kayak">
-                            <option value="Winter Sleeping Bag">
-                            <option value="Men's Wool Blazer">
-                            <option value="Electric Lawn Mower">
-                            <option value="Camera Gimbal Stabilizer">
-                            <option value="60L Hiking Backpack">
-                            <option value="Evening Gown">
-                            <option value="Pressure Washer">
-                            <option value="27&quot; 4K Monitor">
-                            <option value="Portable Camping Stove">
-                            <option value="Formal Suit">
-                            <option value="Circular Saw">
+                        <input type="search" name="q" class="search-input" placeholder="Search listings or filter by category…" value="" aria-label="Search listings or filter by category" list="categories">
+                        <datalist id="categories">
+                            <option value="outdoor">
+                            <option value="electronics">
+                            <option value="tools">
+                            <option value="fashion">
                         </datalist>
-
                         <button type="submit" class="search-btn" aria-label="Search">
                             
                             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -257,7 +242,6 @@
             document.querySelector('input[name="price_from"]').addEventListener('input', updateFilters);
             document.querySelector('input[name="price_to"]').addEventListener('input', updateFilters);
             document.querySelector('input[name="location"]').addEventListener('input', updateFilters);
-            document.querySelector('input[name="q"]').addEventListener('input', updateFilters);
         });
 
         function updateFilters() {

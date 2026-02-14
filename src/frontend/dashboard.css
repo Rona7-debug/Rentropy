@@ -1193,6 +1193,7 @@ a.btn {
     padding: 1.5rem;
     background: var(--neo-bg);
     box-shadow: var(--neo-raised);
+    min-height: 100vh;
 }
 
 .dashboard-profile {
