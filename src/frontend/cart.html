@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="cart.css">
     <title>Cart – RENTROPY</title>
@@ -18,44 +21,33 @@
             <a href="index.html" class="nav-link">Home</a>
             <a href="listing.html" class="nav-link">Listings</a>
             <a href="about.html" class="nav-link">About Us</a>
-            <a href="about.html#how-it-works" class="nav-link">How It Works</a>
         </nav>
         <div class="header-actions">
             <a href="login.html" class="btn btn-signup">Sign Up</a>
-            <a href="login.html" class="btn btn-login">Loginv</a>
+            <a href="login.html" class="btn btn-login">Login</a>
             <a href="cart.html" class="header-cart header-cart--active" aria-label="Cart">🛒</a>
         </div>
     </header>
 
     <main class="page-main cart-page">
         <div class="container">
-            <h1 class="page-title">Your cart</h1>
+            <h1 class="page-title"> Your cart </h1>
 
             <div class="cart-layout">
-<div class="cart-items" style="max-height: 400px; overflow-y: auto;">
-                </div>
+            <div class="cart-items" style="max-height: 400px; overflow-y: auto;">
+            </div>
 
                 <aside class="cart-summary">
-                    <h2 class="cart-summary-title">Summary</h2>
+                    <h2 class="cart-summary-title"> Summary </h2>
                     <ul class="order-items">
                     </ul>
-                    <a href="checkout.html" class="btn btn-primary btn-lg btn-block">Proceed to checkout</a>
-                    <a href="listing.html" class="cart-continue">Continue shopping</a>
+                    <a href="checkout.html" class="btn btn-primary btn-lg btn-block"> Proceed to checkout </a>
+                    <a href="listing.html" class="cart-continue"> Continue shopping </a>
                 </aside>
+
             </div>
         </div>
     </main>
-
-    <footer class="footer">
-        <div class="container footer-inner">
-            <nav class="footer-nav">
-                <a href="about.html" class="footer-link">About Us</a>
-                <a href="about.html#contact" class="footer-link">Contact</a>
-                <a href="#terms" class="footer-link">Terms of Service</a>
-            </nav>
-            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
-        </div>
-    </footer>
 
     <script>
         // Local data for items
@@ -103,25 +95,30 @@
                 total += itemTotal;
                 itemCount += item.quantity;
 
-                // Add to cart items
                 const cartItem = document.createElement('article');
                 cartItem.className = 'cart-item';
                 cartItem.innerHTML = `
+
                     <div class="cart-item-image">
                         <img src="${item.image}" alt="${item.name}" width="160" height="120">
                     </div>
+
                     <div class="cart-item-details">
+
                         <h2 class="cart-item-title"><a href="product.html?id=${item.id}">${item.name}</a></h2>
+
                         <p class="cart-item-brand">${item.brand}</p>
+
                         <p class="cart-item-price">₱${itemTotal}</p>
-                        <button class="cart-item-remove" onclick="removeItem(${index})" style="background: #ff4444; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Remove</button>
+                    
                         <button onclick="duplicateItem(${index})">Duplicate</button>
+
                         <button class="cart-item-remove" onclick="removeItem(${index})">Remove</button>
+                        
                     </div>
                 `;
                 cartItems.appendChild(cartItem);
 
-                // Add to order summary
                 for (let i = 0; i < item.quantity; i++) {
                     const li = document.createElement('li');
                     li.textContent = `${item.name} - ₱${item.priceNum}`;
