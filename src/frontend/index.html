@@ -219,7 +219,7 @@
                 <a href="about.html" class="footer-link">About Us</a>
             </nav>
 
-            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
+            <p class="footer-copyright">&copy; 2026 RENTROPY. All rights reserved.</p>
         </div>
     </footer>
 
@@ -235,17 +235,16 @@
             updateNavOpacity();
         })();
 
-        // Check login status and hide/show buttons
         document.addEventListener('DOMContentLoaded', function() {
             const currentUser = localStorage.getItem('currentUser');
             const signUpBtn = document.querySelector('.btn-signup');
             const loginBtn = document.querySelector('.btn-login');
             const headerActions = document.querySelector('.header-actions');
             if (currentUser) {
-                // User is logged in, hide login and signup buttons, add profile icon
+                
                 if (signUpBtn) signUpBtn.style.display = 'none';
                 if (loginBtn) loginBtn.style.display = 'none';
-                // Add profile icon beside cart
+                
                 const cartLink = document.querySelector('.header-cart');
                 if (cartLink) {
                     const profileLink = document.createElement('a');

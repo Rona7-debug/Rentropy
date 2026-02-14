@@ -5,23 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dashboard.css">
     <title>My Dashboard – RENTROPY</title>
 </head>
 <body>
-    <!--
-    Dashboard Documentation:
-    - This page serves as the user dashboard for RENTROPY, displaying personal information and rental activities.
-    - Header: Contains logo, dashboard link, cart, and logout button. Navigation links (Home, Listings, etc.) have been removed for a cleaner dashboard view.
-    - Sidebar: Sticky navigation with user profile info and links to sections. Stretches full height for better layout.
-    - Sections: Tabbed interface controlled by JavaScript. Only one section visible at a time.
-      - Profile: Editable user information (name, email, phone).
-      - My Rentals: Displays current rented items with status (Active/Completed), dates, and provider.
-      - Saved Items: Shows reserved/favorited items for future rental consideration.
-    - JavaScript: Handles section switching, URL hash updates, and default display (Profile on load).
-    - Footer: Standard site footer with links and copyright.
-    -->
+
     <header class="header">
         <a href="index.html" class="logo">
             <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
@@ -58,7 +49,6 @@
                 </aside>
 
                 <div class="dashboard-content">
-                    <!-- Profile Section: Displays and allows editing of user personal information -->
                     <section id="profile" class="dashboard-section">
                         <h2 class="dashboard-section-title">Profile</h2>
                         <form class="profile-form">
@@ -78,15 +68,12 @@
                         </form>
                     </section>
 
-                    <!-- My Rentals Section: Displays current rented items with rental details and status -->
                     <section id="rentals" class="dashboard-section">
                         <h2 class="dashboard-section-title">My rentals</h2>
                         <div class="dashboard-cards">
-                            <!-- Rentals will be loaded dynamically -->
                         </div>
                     </section>
 
-                    <!-- Saved Items Section: Stores reserved/favorited items for future rental consideration. Dynamically loaded from localStorage. -->
                     <section id="saved" class="dashboard-section">
                         <h2 class="dashboard-section-title">Saved items</h2>
                         <div class="listings-grid listings-grid--sm">
@@ -111,18 +98,15 @@
                         </div>
                     </section>
 
-                    <!-- History Section: Displays past transactions -->
                     <section id="history" class="dashboard-section">
                         <h2 class="dashboard-section-title">History</h2>
                         <div class="dashboard-cards">
-                            <!-- Past transactions will be loaded dynamically -->
                         </div>
                     </section>
                 </div>
             </div>
         </div>
 
-        <!-- Rental details modal -->
         <div id="rental-details-modal" class="rental-modal" aria-hidden="true" role="dialog" aria-labelledby="rental-modal-title">
             <div class="rental-modal-backdrop"></div>
             <div class="rental-modal-content">
@@ -140,23 +124,24 @@
     <footer class="footer">
         <div class="container footer-inner">
             <nav class="footer-nav">
+
+                <a href="index.html" class="footer-link">Home</a>
+                <a href="listing.html" class="footer-link">Listings</a>
                 <a href="about.html" class="footer-link">About Us</a>
-                <a href="about.html#contact" class="footer-link">Contact</a>
-                <a href="#terms" class="footer-link">Terms of Service</a>
             </nav>
-            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
+
+            <p class="footer-copyright">&copy; 2026 RENTROPY. All rights reserved.</p>
         </div>
     </footer>
+    
     <script>
-        // Function to show a section and update active link
         function showSection(sectionId) {
-            // Hide all sections
+
             document.querySelectorAll('.dashboard-section').forEach(section => {
                 section.style.display = 'none';
             });
-            // Show the selected section
             document.getElementById(sectionId).style.display = 'block';
-            // Update active link
+            
             document.querySelectorAll('.dashboard-nav-link').forEach(link => {
                 link.classList.remove('active');
             });
