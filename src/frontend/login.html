@@ -54,5 +54,73 @@
             </div>
         </div>
     </main>
+    <script>
+        // Initialize default user if none exist
+        let users = JSON.parse(localStorage.getItem('users')) || {};
+        if (Object.keys(users).length === 0) {
+            users['test@example.com'] = 'password';
+            localStorage.setItem('users', JSON.stringify(users));
+        }
+
+        // Handle tab switching
+        function showPanel(panel) {
+            document.querySelectorAll('.auth-panel').forEach(p => p.style.display = 'none');
+            document.getElementById(panel).style.display = 'block';
+        }
+
+        // Check hash on load
+        window.addEventListener('load', function() {
+            const hash = window.location.hash.substring(1);
+            if (hash === 'signup') {
+                showPanel('signup');
+            } else {
+                showPanel('login');
+            }
+        });
+
+        // Handle tab clicks
+        document.querySelectorAll('.auth-tab').forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = this.getAttribute('href').split('#')[1];
+                window.location.hash = '#' + target;
+                showPanel(target);
+            });
+        });
+
+        // Handle signup form
+        document.querySelector('#signup .auth-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            
+            let users = JSON.parse(localStorage.getItem('users')) || {};
+            if (users[email]) {
+                alert('User already exists!');
+                return;
+            }
+            users[email] = password;
+            localStorage.setItem('users', JSON.stringify(users));
+            alert('Account created successfully! Please log in.');
+            window.location.hash = '#login';
+            showPanel('login');
+        });
+
+        // Handle login form
+        document.querySelector('#login .auth-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            let users = JSON.parse(localStorage.getItem('users')) || {};
+            if (users[email] && users[email] === password) {
+                localStorage.setItem('currentUser', email);
+                alert('Login successful!');
+                window.location.href = 'dashboard.html'; // Redirect to dashboard
+            } else {
+                alert('Invalid email or password!');
+            }
+        });
+    </script>
 </body>
 </html>
