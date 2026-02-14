@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>4-Person Camping Tent – RENTROPY</title>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
+        </a>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About Us</a>
+            <a href="about.html#how-it-works" class="nav-link">How It Works</a>
+        </nav>
+        <div class="header-actions">
+            <a href="login.html" class="btn btn-signup">Sign Up</a>
+            <a href="login.html" class="btn btn-login">Login</a>
+            <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
+        </div>
+    </header>
+
+    <main class="page-main product-page">
+        <div class="container">
+            <nav class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span aria-hidden="true">/</span>
+                <a href="listing.html">Listings</a>
+                <span aria-hidden="true">/</span>
+                <span>4-Person Camping Tent</span>
+            </nav>
+
+            <div class="product-layout">
+                <div class="product-gallery">
+                    <div class="product-image-main">
+                        <img src="https://placehold.co/800x520/7d8ba8/ffffff?text=Camping+Tent" alt="4-Person Camping Tent" width="800" height="520">
+                    </div>
+                    <div class="product-image-thumbs">
+                        <button type="button" class="thumb active"><img src="https://placehold.co/120x80/7d8ba8/ffffff?text=1" alt=""></button>
+                        <button type="button" class="thumb"><img src="https://placehold.co/120x80/7d8ba8/ffffff?text=2" alt=""></button>
+                        <button type="button" class="thumb"><img src="https://placehold.co/120x80/7d8ba8/ffffff?text=3" alt=""></button>
+                    </div>
+                </div>
+
+                <div class="product-detail">
+                    <h1 class="product-title">4-Person Camping Tent</h1>
+                    <p class="product-category">Outdoor Gear</p>
+
+                    <div class="product-brand">
+                        <div class="product-brand-avatar">G</div>
+                        <div>
+                            <p class="product-brand-name">Green Outdoors Co.</p>
+                            <a href="#" class="product-brand-link">View brand profile</a>
+                        </div>
+                    </div>
+
+                    <p class="product-desc">Spacious 4-person tent, waterproof and easy to set up. Perfect for weekend trips. Well maintained and cleaned after each rental.</p>
+
+                    <div class="product-pricing">
+                        <h2 class="product-pricing-title">Pricing by duration</h2>
+                        <ul class="pricing-table">
+                            <li><span>1 day</span><strong>$12</strong></li>
+                            <li><span>3 days</span><strong>$32</strong> <small>($10.67/day)</small></li>
+                            <li><span>1 week</span><strong>$70</strong> <small>($10/day)</small></li>
+                            <li><span>2 weeks</span><strong>$120</strong> <small>($8.57/day)</small></li>
+                        </ul>
+                    </div>
+
+                    <div class="product-actions">
+                        <form action="cart.html" method="get" class="add-to-cart-form">
+                            <div class="duration-select-wrap">
+                                <label for="duration">Rental duration</label>
+                                <select id="duration" name="duration" class="duration-select">
+                                    <option value="1">1 day – $12</option>
+                                    <option value="3">3 days – $32</option>
+                                    <option value="7">1 week – $70</option>
+                                    <option value="14">2 weeks – $120</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-lg btn-block">Add to cart</button>
+                        </form>
+                        <button type="button" class="btn btn-signup btn-block">Save for later</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <nav class="footer-nav">
+                <a href="about.html" class="footer-link">About Us</a>
+                <a href="about.html#contact" class="footer-link">Contact</a>
+                <a href="#terms" class="footer-link">Terms of Service</a>
+            </nav>
+            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>

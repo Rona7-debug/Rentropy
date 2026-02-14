@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <title>Checkout – RENTROPY</title>
+</head>
+<body>
+    <header class="header">
+        <a href="index.html" class="logo">
+            <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
+        </a>
+        <nav class="nav">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About Us</a>
+            <a href="about.html#how-it-works" class="nav-link">How It Works</a>
+        </nav>
+        <div class="header-actions">
+            <a href="dashboard.html" class="btn btn-signup">Dashboard</a>
+            <a href="login.html" class="btn btn-login">Logout</a>
+            <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
+        </div>
+    </header>
+
+    <main class="page-main checkout-page">
+        <div class="container">
+            <h1 class="page-title">Checkout</h1>
+            <nav class="breadcrumb checkout-steps">
+                <span class="step step--done">Cart</span>
+                <span aria-hidden="true">→</span>
+                <span class="step step--current">Address &amp; payment</span>
+                <span aria-hidden="true">→</span>
+                <span class="step">Confirm</span>
+            </nav>
+
+            <form class="checkout-form" action="checkout.html?step=confirm" method="get">
+                <div class="checkout-layout">
+                    <div class="checkout-fields">
+                        <section class="checkout-block">
+                            <h2 class="checkout-block-title">Delivery address</h2>
+                            <div class="form-row">
+                                <label class="form-label">Street address</label>
+                                <input type="text" name="street" class="form-input" placeholder="123 Main St" required>
+                            </div>
+                            <div class="form-row form-row--2">
+                                <div>
+                                    <label class="form-label">City</label>
+                                    <input type="text" name="city" class="form-input" placeholder="City" required>
+                                </div>
+                                <div>
+                                    <label class="form-label">ZIP / Postal code</label>
+                                    <input type="text" name="zip" class="form-input" placeholder="ZIP" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <label class="form-label">Country</label>
+                                <input type="text" name="country" class="form-input" placeholder="Country" value="United States" required>
+                            </div>
+                        </section>
+
+                        <section class="checkout-block">
+                            <h2 class="checkout-block-title">Payment</h2>
+                            <p class="checkout-placeholder">Payment integration placeholder. Connect Stripe, PayPal, or your preferred provider here.</p>
+                            <div class="payment-placeholder">
+                                <div class="form-row">
+                                    <label class="form-label">Card number</label>
+                                    <input type="text" class="form-input" placeholder="4242 4242 4242 4242" disabled>
+                                </div>
+                                <div class="form-row form-row--2">
+                                    <div>
+                                        <label class="form-label">Expiry</label>
+                                        <input type="text" class="form-input" placeholder="MM/YY" disabled>
+                                    </div>
+                                    <div>
+                                        <label class="form-label">CVC</label>
+                                        <input type="text" class="form-input" placeholder="123" disabled>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+
+                    <aside class="checkout-order">
+                        <h2 class="checkout-order-title">Order summary</h2>
+                        <ul class="checkout-order-items">
+                            <li>4-Person Camping Tent · 3 days <strong>$32</strong></li>
+                            <li>Cordless Power Drill · 1 day <strong>$8</strong></li>
+                        </ul>
+                        <dl class="checkout-order-totals">
+                            <dt>Subtotal</dt>
+                            <dd>$40</dd>
+                            <dt>Service fee</dt>
+                            <dd>$4</dd>
+                            <dt class="checkout-order-total">Total</dt>
+                            <dd class="checkout-order-total">$44</dd>
+                        </dl>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Confirm order</button>
+                    </aside>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container footer-inner">
+            <nav class="footer-nav">
+                <a href="about.html" class="footer-link">About Us</a>
+                <a href="about.html#contact" class="footer-link">Contact</a>
+                <a href="#terms" class="footer-link">Terms of Service</a>
+            </nav>
+            <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
