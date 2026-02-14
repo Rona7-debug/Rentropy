@@ -7,6 +7,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="listing.css">
+        <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Inria+Sans:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&family=Lora:ital,wght@0,400..700;1,400..700&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <title> Browse Listings </title>
 </head>
 <body class="no-nav-bg">
@@ -14,84 +16,125 @@
         <a href="index.html" class="logo">
             <img src="../assets/logo.png" alt="RENTROPY" class="logo-img">
         </a>
+
         <nav class="nav">
             <a href="index.html" class="nav-link">Home</a>
             <a href="listing.html" class="nav-link nav-link--active">Listings</a>
             <a href="about.html" class="nav-link">About Us</a>
             <a href="about.html#how-it-works" class="nav-link">How It Works</a>
         </nav>
+
         <div class="header-actions">
             <a href="login.html" class="btn btn-signup">Sign Up</a>
             <a href="login.html" class="btn btn-login">Login</a>
             <a href="cart.html" class="header-cart" aria-label="Cart">🛒</a>
         </div>
+
     </header>
 
     <div class="search-bubble-overlay" id="search-bubble" aria-hidden="true">
         <form class="search-bubble-form" action="listing.html" method="get">
+
             <div class="search-bubble">
                 <input type="search" name="q" class="search-bubble-input" placeholder="Search listings..." aria-label="Search">
+
                 <button type="submit" class="search-bubble-btn" aria-label="Search">
+
                     <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="11" cy="11" r="8"/>
                         <path d="m21 21-4.35-4.35"/>
                     </svg>
+
                 </button>
+
             </div>
+
         </form>
     </div>
 
     <main class="page-main">
         <div class="container page-layout">
-            <h1 class="listing-page-title">All product listings</h1>
+
+            <h1 class="listing-page-title"> All product listings </h1>
+
             <aside class="filters-sidebar">
+
                 <h2 class="filters-title">Filters</h2>
+
                 <form class="filters-form">
                     <div class="filter-group">
+
                         <label class="filter-label">Category</label>
+                        
                         <select name="category" class="filter-select">
-                            <option value="">All categories</option>
-                            <option value="outdoor">Outdoor Gear</option>
-                            <option value="fashion">Fashion</option>
-                            <option value="tools">Tools</option>
-                            <option value="electronics">Electronics</option>
+
+                            <option value=""> All categories </option>
+
+                            <option value="outdoor"> Outdoor Gear </option>
+
+                            <option value="fashion"> Fashion </option>
+
+                            <option value="tools"> Tools </option>
+
+                            <option value="electronics"> Electronics </option>
+
                         </select>
+
                     </div>
+
                     <div class="filter-group">
+
                         <label class="filter-label">Price per day</label>
+
                         <select name="price" class="filter-select">
+
                             <option value="">Any</option>
-                            <option value="0-10">$0 – $10</option>
-                            <option value="10-25">$10 – $25</option>
-                            <option value="25-50">$25 – $50</option>
-                            <option value="50+">$50+</option>
+                            
+                            <option value="0-10">₱0 – ₱100</option>
+
+                            <option value="10-25">₱100– ₱250</option>
+
+                            <option value="25-50">₱250 – ₱500</option>
+
+                            <option value="50+">₱500+</option>
                         </select>
+
                     </div>
+
                     <div class="filter-group">
-                        <label class="filter-label">Location</label>
+
+                        <label class="filter-label"> Location </label>
+
                         <input type="text" name="location" class="filter-input" placeholder="City or ZIP">
+                        
                     </div>
+
                     <button type="submit" class="btn btn-primary btn-block">Apply filters</button>
+
                     <a href="listing.html" class="btn btn-signup btn-block">Clear</a>
+
                 </form>
+
             </aside>
 
             <div class="listing-content">
-                <p class="listing-page-desc">Search, filter, and browse everything available to rent.</p>
+
                 <form class="listing-toolbar" action="listing.html" method="get">
+
                     <div class="search-bar listing-search">
                         <input type="search" name="q" class="search-input" placeholder="Search listings..." value="" aria-label="Search">
+
                         <button type="submit" class="search-btn" aria-label="Search">
+                            
                             <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <circle cx="11" cy="11" r="8"/>
                                 <path d="m21 21-4.35-4.35"/>
                             </svg>
+
                         </button>
+
                     </div>
-                    <div class="view-toggle">
-                        <button type="button" class="view-btn view-btn--grid active" aria-pressed="true" aria-label="Grid view">▦</button>
-                        <button type="button" class="view-btn view-btn--list" aria-pressed="false" aria-label="List view">≡</button>
-                    </div>
+                    
                 </form>
 
                 <div class="listings-grid listings-grid--page" data-view="grid">
@@ -101,8 +144,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">4-Person Camping Tent</h3>
-                            <p class="listing-card-meta">Outdoor · Nearby</p>
-                            <p class="listing-card-price">Rent per day <strong>from $12</strong></p>
+                            <p class="listing-card-meta">Outdoor </p>
+                            <p class="listing-card-price">Price <strong>from ₱200</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=2" class="listing-card">
@@ -111,8 +154,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">DSLR Camera Kit</h3>
-                            <p class="listing-card-meta">Electronics · Downtown</p>
-                            <p class="listing-card-price">Rent per day <strong>from $25</strong></p>
+                            <p class="listing-card-meta">Electronics</p>
+                            <p class="listing-card-price">Price <strong>from ₱1,200</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=3" class="listing-card">
@@ -121,8 +164,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Cordless Power Drill</h3>
-                            <p class="listing-card-meta">Tools · Westside</p>
-                            <p class="listing-card-price">Rent per day <strong>from $8</strong></p>
+                            <p class="listing-card-meta">Tools</p>
+                            <p class="listing-card-price">Price <strong>from ₱800</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=4" class="listing-card">
@@ -131,8 +174,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Designer Handbag</h3>
-                            <p class="listing-card-meta">Fashion · Midtown</p>
-                            <p class="listing-card-price">Rent per day <strong>from $15</strong></p>
+                            <p class="listing-card-meta">Fashion</p>
+                            <p class="listing-card-price">Price <strong>from ₱2,500</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=5" class="listing-card">
@@ -141,8 +184,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Road Bike</h3>
-                            <p class="listing-card-meta">Outdoor · Parkside</p>
-                            <p class="listing-card-price">Rent per day <strong>from $18</strong></p>
+                            <p class="listing-card-meta">Outdoor</p>
+                            <p class="listing-card-price">Price <strong>from ₱1,800</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=6" class="listing-card">
@@ -151,8 +194,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">HD Projector</h3>
-                            <p class="listing-card-meta">Electronics · Central</p>
-                            <p class="listing-card-price">Rent per day <strong>from $22</strong></p>
+                            <p class="listing-card-meta">Electronics</p>
+                            <p class="listing-card-price">Price <strong>from ₱1,500</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=7" class="listing-card">
@@ -161,8 +204,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">2-Person Kayak</h3>
-                            <p class="listing-card-meta">Outdoor · Lakeside</p>
-                            <p class="listing-card-price">Rent per day <strong>from $35</strong></p>
+                            <p class="listing-card-meta">Outdoor</p>
+                            <p class="listing-card-price">Price <strong>from ₱3,500</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=8" class="listing-card">
@@ -171,8 +214,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Winter Sleeping Bag</h3>
-                            <p class="listing-card-meta">Outdoor · Parkside</p>
-                            <p class="listing-card-price">Rent per day <strong>from $10</strong></p>
+                            <p class="listing-card-meta">Outdoor</p>
+                            <p class="listing-card-price">Price <strong>from ₱1,200</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=9" class="listing-card">
@@ -181,8 +224,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Men's Wool Blazer</h3>
-                            <p class="listing-card-meta">Fashion · Downtown</p>
-                            <p class="listing-card-price">Rent per day <strong>from $12</strong></p>
+                            <p class="listing-card-meta">Fashion</p>
+                            <p class="listing-card-price">Price <strong>from ₱2,800</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=10" class="listing-card">
@@ -191,8 +234,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Electric Lawn Mower</h3>
-                            <p class="listing-card-meta">Tools · Westside</p>
-                            <p class="listing-card-price">Rent per day <strong>from $28</strong></p>
+                            <p class="listing-card-meta">Tools</p>
+                            <p class="listing-card-price">Price <strong>from ₱800</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=11" class="listing-card">
@@ -201,8 +244,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Camera Gimbal Stabilizer</h3>
-                            <p class="listing-card-meta">Electronics · Central</p>
-                            <p class="listing-card-price">Rent per day <strong>from $18</strong></p>
+                            <p class="listing-card-meta">Electronics</p>
+                            <p class="listing-card-price">Price <strong>from ₱1,500</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=12" class="listing-card">
@@ -211,8 +254,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">60L Hiking Backpack</h3>
-                            <p class="listing-card-meta">Outdoor · Midtown</p>
-                            <p class="listing-card-price">Rent per day <strong>from $9</strong></p>
+                            <p class="listing-card-meta">Outdoor</p>
+                            <p class="listing-card-price">Price <strong>from ₱1,200</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=13" class="listing-card">
@@ -221,8 +264,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Evening Gown</h3>
-                            <p class="listing-card-meta">Fashion · Downtown</p>
-                            <p class="listing-card-price">Rent per day <strong>from $25</strong></p>
+                            <p class="listing-card-meta">Fashion</p>
+                            <p class="listing-card-price">Price <strong>from ₱2,800</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=14" class="listing-card">
@@ -231,8 +274,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Pressure Washer</h3>
-                            <p class="listing-card-meta">Tools · Westside</p>
-                            <p class="listing-card-price">Rent per day <strong>from $32</strong></p>
+                            <p class="listing-card-meta">Tools</p>
+                            <p class="listing-card-price">Price <strong>from ₱8,500</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=15" class="listing-card">
@@ -241,8 +284,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">27" 4K Monitor</h3>
-                            <p class="listing-card-meta">Electronics · Central</p>
-                            <p class="listing-card-price">Rent per day <strong>from $15</strong></p>
+                            <p class="listing-card-meta">Electronics</p>
+                            <p class="listing-card-price">Price <strong>from ₱15,000</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=16" class="listing-card">
@@ -251,8 +294,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Portable Camping Stove</h3>
-                            <p class="listing-card-meta">Outdoor · Lakeside</p>
-                            <p class="listing-card-price">Rent per day <strong>from $8</strong></p>
+                            <p class="listing-card-meta">Outdoor</p>
+                            <p class="listing-card-price">Price <strong>from ₱1,200</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=17" class="listing-card">
@@ -261,8 +304,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Formal Suit</h3>
-                            <p class="listing-card-meta">Fashion · Midtown</p>
-                            <p class="listing-card-price">Rent per day <strong>from $22</strong></p>
+                            <p class="listing-card-meta">Fashion</p>
+                            <p class="listing-card-price">Price <strong>from ₱2,800</strong></p>
                         </div>
                     </a>
                     <a href="product.html?id=18" class="listing-card">
@@ -271,8 +314,8 @@
                         </div>
                         <div class="listing-card-body">
                             <h3 class="listing-card-title">Circular Saw</h3>
-                            <p class="listing-card-meta">Tools · Westside</p>
-                            <p class="listing-card-price">Rent per day <strong>from $14</strong></p>
+                            <p class="listing-card-meta">Tools</p>
+                            <p class="listing-card-price">Price <strong>from ₱8,500</strong></p>
                         </div>
                     </a>
                 </div>
@@ -283,13 +326,17 @@
     <footer class="footer">
         <div class="container footer-inner">
             <nav class="footer-nav">
+
+                <a href="index.html" class="footer-link">Home</a>
+                <a href="listing.html" class="footer-link">Listings</a>
                 <a href="about.html" class="footer-link">About Us</a>
-                <a href="about.html#contact" class="footer-link">Contact</a>
-                <a href="#terms" class="footer-link">Terms of Service</a>
+                <a href="about.html#how-it-works" class="footer-link">How It Works</a>
             </nav>
+
             <p class="footer-copyright">&copy; 2025 RENTROPY. All rights reserved.</p>
         </div>
     </footer>
+    
     <script>
         (function () {
             var header = document.querySelector('.header');
