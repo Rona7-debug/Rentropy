@@ -1653,6 +1653,44 @@ a.btn {
     margin-top: 0.25rem;
 }
 
+.auth-form .form-row--checkbox {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 0.25rem;
+}
+
+.auth-form .form-checkbox-label {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--dark-text);
+    cursor: pointer;
+}
+
+.auth-form .form-checkbox-label input[type="checkbox"] {
+    margin-top: 0.2rem;
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--primary-blue);
+}
+
+.auth-form .form-checkbox-label a {
+    color: var(--accent-blue);
+}
+
+.auth-form .form-checkbox-label a:hover {
+    text-decoration: underline;
+}
+
+.auth-form .form-error {
+    display: block;
+    width: 100%;
+    font-size: 0.85rem;
+    color: #c00;
+}
+
 .auth-note {
     font-size: 0.8rem;
     color: #888;

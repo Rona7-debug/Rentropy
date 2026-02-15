@@ -50,7 +50,14 @@
                         <label class="form-label" for="signup-password">Password</label>
                         <input type="password" id="signup-password" name="password" class="form-input" placeholder="At least 8 characters" required autocomplete="new-password" minlength="8">
                     </div>
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">Sign up</button>
+                    <div class="form-row form-row--checkbox">
+                        <label class="form-checkbox-label">
+                            <input type="checkbox" id="signup-terms" name="terms" required aria-describedby="signup-terms-error">
+                            <span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms and Conditions</a></span>
+                        </label>
+                        <span id="signup-terms-error" class="form-error" role="alert" aria-live="polite"></span>
+                    </div>
+                    <button type="submit" id="signup-submit" class="btn btn-primary btn-lg btn-block" disabled>Sign up</button>
                 </form>
             </div>
         </div>
@@ -89,9 +96,22 @@
             });
         });
 
+        // Terms checkbox: enable Sign up button only when checked
+        const termsCheckbox = document.getElementById('signup-terms');
+        const signupSubmitBtn = document.getElementById('signup-submit');
+        if (termsCheckbox && signupSubmitBtn) {
+            termsCheckbox.addEventListener('change', function() {
+                signupSubmitBtn.disabled = !this.checked;
+            });
+        }
+
         // Handle signup form
         document.querySelector('#signup .auth-form').addEventListener('submit', function(e) {
             e.preventDefault();
+            if (!document.getElementById('signup-terms').checked) {
+                alert('You must agree to the Terms and Conditions to create an account.');
+                return;
+            }
             const email = document.getElementById('signup-email').value;
             const password = document.getElementById('signup-password').value;
             
